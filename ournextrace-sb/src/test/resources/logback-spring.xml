@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 
+    <property name="LOGS" value="./logs" />
+ 
+    <appender name="Console"
+        class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger{35} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+ 
+
+    <root level="info">
+       	<appender-ref ref="Console" />
+    </root>
+    
+	<logger name="com.ijudy" level="debug" additivity="false">
+			<appender-ref ref="Console" />
+	</logger>
+
+	<logger name="org.springframework" level="info" additivity="false">
+			<appender-ref ref="Console" />
+	</logger>
+
+    <logger name="org.springframework.boot.test" level="info" additivity="false">
+        <appender-ref ref="Console" />
+    </logger>
+
+    <logger name="org.hibernate" level="info" additivity="false">
+        <appender-ref ref="Console" />
+    </logger>
+</configuration>

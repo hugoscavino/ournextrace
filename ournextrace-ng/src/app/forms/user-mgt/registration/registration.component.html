@@ -1,0 +1,84 @@
+<p-toast position="bottom-center"></p-toast>
+  <form [formGroup]="registrationForm">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12 ui-g-nopad">
+              <div class="ui-g-4 ui-md-2 ui-sm-3 ui-xl-1 label">
+                  Email
+              </div>
+              <div class="ui-g-8 ui-md-9 ui-sm-9 ui-xl-9 value">
+                  <input type="text" 
+                  pInputText 
+                  placeholder="your email address" 
+                  formControlName="email"
+                  autocomplete="username"
+                  (keyup)="getUserExists()"
+                  >  
+              </div>
+        </div>
+        <div class="ui-g-12 ui-g-nopad">
+            <p-message severity="error"  text="Sorry that email is already taken. Consider the password reset if you forgo" *ngIf="emailTaken"></p-message>
+            <p-message severity="error"  text="Sorry that email is already exists. Consider using the social login with Google or Facebook" *ngIf="userExists"></p-message>
+            <p-message severity="error" text="enter a valid email" *ngIf="!registrationForm.controls['email'].valid&&registrationForm.controls['email'].dirty"></p-message>
+        </div>
+        <div class="ui-g-12 ui-g-nopad">
+            <div class="ui-g-4 ui-md-2 ui-sm-3 ui-xl-1 label">
+                Password
+            </div>
+            <div class="ui-g-8 ui-md-9 ui-sm-9 ui-xl-9 value">
+                <input 
+                pPassword 
+                type="password" 
+                placeholder="your password" 
+                autocomplete="new-password" 
+                formControlName="password" 
+                />
+            </div>
+        </div>
+        <div class="ui-g-12 ui-g-nopad">
+            <p-message severity="error" text="Must be a min of 8 and max of 14 chars" 
+            *ngIf="!registrationForm.controls['password'].valid&&registrationForm.controls['password'].dirty"></p-message>
+            <p-message severity="error" text="Needs One Lower Case Character" 
+            *ngIf="!hasLower()&&registrationForm.controls['password'].dirty"></p-message>
+            <p-message severity="error" text="Needs One Upper Case Character" 
+            *ngIf="!hasUpper()&&registrationForm.controls['password'].dirty"></p-message>
+            <p-message severity="error" text="Needs One Number" 
+            *ngIf="!hasNumber()&&registrationForm.controls['password'].dirty"></p-message>
+            <p-message severity="error" text="Needs Special Character" 
+            *ngIf="!hasSpecial()&&registrationForm.controls['password'].dirty"></p-message>
+        </div>
+        <div class="ui-g-12 ui-g-nopad">
+            <div class="ui-g-4 ui-md-2 ui-sm-3 ui-xl-1 label ">
+                Confirm
+            </div>
+            <div class="ui-g-8 ui-md-9 ui-sm-9 ui-xl-9 value">
+                <input pPassword type="password" 
+                placeholder="check password"
+                autocomplete="new-password" 
+                formControlName="confirmPassword"/>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-g-nopad">
+            <p-message severity="error" text="Passwords must match password" 
+            *ngIf="!getPasswordsMatch()&&registrationForm.controls['password'].dirty"></p-message>
+        </div>
+        <div class="ui-g-12 ui-g-nopad">
+            <div class="ui-g-6" style="text-align: center;">
+                  <button pButton style="font-size: 18px;width:auto;" type="button" class="ui-button-secondary" label="Cancel" (click)="cancel($event)" ></button>
+              </div>
+              <div class="ui-g-6" style="text-align: center;">
+                    <button pButton style="font-size: 18px;width:auto;" type="button" label="Register" (click)="onRegister($event)" [disabled]="!validForm()"></button>
+                </div>
+            </div>
+          <div class="ui-g-12 center-div">
+            <p-captcha siteKey="6LeCLI8UAAAAAA6hQxR-Fx3Bx1CJkgUmAHzX0zxQ" (onResponse)="showResponse($event)" ></p-captcha>
+            </div>
+            <div class="ui-g-12 ">
+                <p-card styleClass="ui-card-shadow">
+                        <p-header>
+                            Password Complexity Requirements
+                        </p-header>
+                        {{passwordPolicy}}
+                </p-card>
+            </div>
+      </div>
+  </form>

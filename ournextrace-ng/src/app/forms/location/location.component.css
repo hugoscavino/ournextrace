@@ -1,0 +1,29 @@
+.label {
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+}
+.panelTitle{
+    border-top: solid 3px #DC0025;
+    background:seashell;
+    border-bottom: solid 3px #DC0025;
+}
+
+.panelBody {
+    background: #f5f5f5;
+}
+.panelBottom{
+    border-bottom: solid 3px #DC0025;
+    background: #f5f5f5;
+}
+.value {
+    text-align: left;
+    font-size: 16px;
+    color: darkgray;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+}
+
+.next-step {
+    color: #5cb85c;
+}

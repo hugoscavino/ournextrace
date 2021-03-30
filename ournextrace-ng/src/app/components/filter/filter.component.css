@@ -1,0 +1,26 @@
+.filterPanel {
+  background-color: white;
+}
+.bottomBorder {
+  border-bottom-color: dimgray;
+  border-bottom-style: solid;
+}
+.filterTitle {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color:black;
+  font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+}
+
+.container {
+    display: flex;
+}
+  
+.push-right {
+    margin-left: auto;
+    padding: 5px;
+}
+  
+.item {
+  padding: 5px;
+}

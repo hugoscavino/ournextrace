@@ -1,0 +1,68 @@
+.topGetToKnowUs {
+    background-image: url("/assets/img/about_us_bkg.jpeg");
+    background-size:  cover;     /* <------ */
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 10%; 
+}
+
+.bottomAboutUs {
+    background-color: black
+}
+
+.topGetToKnowUsTitle {
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.topGetToKnowUsMenu {
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    color: white;
+    font-size: 1.5rem;
+    text-align: end;
+}
+
+.aboutUsBlockContent {
+    padding: 5px 8%;
+}
+
+h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color:black;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color:black;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.aboutUsContent {
+    font-size: 1rem;
+    font-weight: normal;
+    color: dimgrey;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    text-align: left;
+}
+
+.smallTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+.smallText {
+    font-size: 1.0rem;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    text-align: center;
+}

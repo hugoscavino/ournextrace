@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	background-image: url('https://www.ournextrace.com/assets/img/top_banner.png');
+	background-color: #cccccc; /* Used if the image is unavailable */
+  	background-position: center; /* Center the image */
+  	background-repeat: no-repeat; /* Do not repeat the image */
+  	background-size: cover; /* Resize the background image to cover the entire container */
+  	padding: 20px 10px;
+  	
+}
+
+.header {
+	overflow: hidden;
+	background-color: white;
+	padding: 20px 10px;
+}
+
+.error-msg {
+	background-color: white;
+}
+
+.header a {
+	float: left;
+	color: black;
+	text-align: center;
+	padding: 10px;
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 50px;
+	border-radius: 4px;
+}
+
+.header a.logo {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.header a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+.header a.active {
+	background-color: dodgerblue;
+	color: white;
+}
+
+.header-right {
+	float: right;
+}
+
+@media screen and (max-width: 500px) {
+	.header a {
+		float: none;
+		display: block;
+		text-align: left;
+	}
+	.header-right {
+		float: none;
+	}
+}
+</style>
+<title>Our Next Race Error Page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+	<div class="page-wrap d-flex flex-row align-items-center">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12 text-center">
+					<div class="cover"></div>
+					<div class="header">
+					  	<a href="#default" class="logo" >Our Next Race</a>
+					  	<div class="header-right">
+					    	<a class="active" href="/">Home</a>
+					  </div>
+					</div>
+				</div>
+				<div class="col-md-12 text-center error-msg">
+					<div class="cover">
+						<h1>Apologies For this Server Error.</h1>
+						<p>Please go back to our home page to restart your race experience. An error message has been recorded.</p>
+						<a href="/" class="btn btn-link">Home</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

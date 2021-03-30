@@ -1,0 +1,6 @@
+/dist
+/node
+/node_modules/*
+/target
+/src/google*.html
+/src/environments/*

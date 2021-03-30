@@ -1,0 +1,62 @@
+<ijudy-steps [display]=displaySteps [activeIndex]=activeIndex></ijudy-steps>
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+        <form [formGroup]="raceForm" (ngSubmit)="onSubmit()">
+                <div class="newRace">
+                    <div class="ui-g-12 eventListMainTitle ui-g-nopad newRace-row">
+                        <div class="ui-g-2 label">Name*</div>
+                        <div class="ui-g-8 event-name">
+                            <input type="text" pInputText placeholder="Name of Race" formControlName="raceName">  
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-g-nopad newRace-row">
+                        <div class="ui-g-2 label">Date*</div>
+                        <div class="ui-g-8 event-date" >
+                            <p-calendar [minDate]="minDateValue" formControlName="raceDate" dateFormat="yy-mm-dd"
+                                        placeholder="When is the Race?" [touchUI]="true" [readonlyInput]="true"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-g-nopad newRace-row">
+                        <div class="ui-g-2 label">Type*</div>
+                        <div class="ui-g-8">
+                                <p-multiSelect  [options]="raceTypes" filter=false filterPlaceHolder="Choose..." defaultLabel="Choose Race Types" 
+                                                formControlName="selectedRaceTypes" optionLabel="name" dataKey="id" showToggleAll=true>
+                                </p-multiSelect>
+                        </div>
+                    </div>          
+                    <div class="ui-g-12 ui-g-nopad newRace-row">
+                        <div class="ui-g-2 label">Details</div>
+                        <div class="ui-g-8 event-desc" >
+                            <textarea formControlName="raceDescription" 
+                                        [cols]="30" pInputTextarea 
+                                        autoResize="autoResize">
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-g-nopad newRace-row">
+                            <div class="ui-g-2 label">
+                                Web site
+                            </div>
+                            <div class="ui-g-8 event-url" >
+                            <div class="ui-inputgroup">
+                                <input type="text" pInputText placeholder="e.g http://www.race.com/" formControlName="raceUrl">      
+                            </div>
+                            </div>
+                    </div>
+                    <div class="ui-g-12 button-panel ui-g-nopad">
+                        <div class="ui-g-6" style="text-align: center;">
+                            <button  iconPos="left" (click)="cancel($event)" style="width:auto;" 
+                                    pButton type="button" icon="fas fa-arrow-left" 
+                                    class="ui-button-rounded ui-button-secondary"  label="Cancel"></button>
+                        </div>
+                        <div class="ui-g-6" style="text-align: center;">
+                            <button iconPos="right" (click)="onSubmit()" style="width:auto;" 
+                                    pButton type="button" icon="fas fa-arrow-right"
+                                    class="ui-button-rounded ui-button-success" label="Next"></button>
+                        </div>
+                    </div>
+            </div>
+
+        </form>
+    </div>
+</div>

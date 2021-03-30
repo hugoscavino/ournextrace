@@ -1,0 +1,18 @@
+<!---
+interface SelectItem {
+    label?: string;
+    value: any;
+    styleClass?: string;
+    icon?: string;
+    title?: string;
+    disabled?: boolean;
+}
+-->
+<p-dropdown   
+    #select  
+    [options]="options"
+    [(ngModel)]="selectItem"
+    optionLabel="label"
+    appendTo="body"
+    onChange="onSelectChange($event)"
+    ></p-dropdown>

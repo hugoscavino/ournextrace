@@ -1,0 +1,5 @@
+In order to personalize your experience we will store your information (email, zip code)
+to help us better respond to your individual needs. If you authenticate with 
+a social provider we will only use email and optionally your zip code to allow
+storage of the race information. No personal data, including passwords, will ever be 
+used sold or provided to third parties. Your data is your data.

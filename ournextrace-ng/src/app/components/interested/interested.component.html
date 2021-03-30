@@ -1,0 +1,6 @@
+<span *ngIf=!readonly>
+    <p-splitButton #SplitButton label="{{menuLabel}}" (onClick)="selectInterest($event)" icon="{{menuIcon}}" styleClass="{{menuStyle}}" [model]="menuItems"></p-splitButton>
+</span>
+<span *ngIf=readonly>
+    <p-button icon="{{menuIcon}}" (onClick)="addToCal($event)" iconPos="left" styleClass="{{menuStyle}}" label="{{menuLabel}}"></p-button>
+</span>

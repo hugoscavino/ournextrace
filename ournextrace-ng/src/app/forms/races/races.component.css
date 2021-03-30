@@ -1,0 +1,259 @@
+a {
+    text-decoration: underline;
+    text-decoration: #3d3d3d;
+}
+
+.button-left {  
+    float: right;
+    padding: 10px;
+}
+:host >>> .ui-dataview-emptymessage{
+    display: none;
+}
+:host >>> .ui-dataview .ui-dataview-content {
+    padding: 0.5em 0em;
+    border: 1px solid white;
+}
+
+:host >>> .p-dataview .p-dataview-header{
+    border: 1px solid white;
+    border-bottom: 1px solid lightgray;
+    background-color: white;
+}
+
+:host >>> .p-dataview.p-dataview-list .p-dataview-content > .p-grid > div {
+    padding-top: 10px;
+    border: 1px solid white;
+}
+.race-separator {
+    display: block;
+    margin: 0.5em 0em 0em 0em ;
+    padding: 0; 
+}
+
+.col-header {
+    font-size: 14px;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    color: #e31837;
+    text-transform: uppercase;
+    cursor: grab;
+}
+
+.my-races {
+    text-align: right;
+}
+
+.race-header {
+    padding-top: 3px;
+    height: 38px;
+}
+
+.search-box{
+    padding-top: 3px;
+    padding-bottom: 0px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.quick-button {
+    text-align: center;
+    color: #007ad9;
+    font-weight: bold;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.quick-button:hover {
+    text-align: center;
+    color: midnightblue;
+    font-weight: bold;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.li-going {
+    color:green;
+    font-weight: 600;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.li-not-going {
+    color:black;
+    font-weight: 600;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    font-size: 14px;    
+}
+
+
+.filter-icon {
+    cursor: grab;
+}
+
+.ticket{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.race-title {
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    color: #3d3d3d;
+    line-height: 19px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.private-icon {
+    color: midnightblue;
+    text-align: center;
+    line-height: 16px;
+    padding-top: 1em;
+}
+
+.race-location {
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    color: #3d3d3d;
+    line-height: 19px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.paid {
+    padding-top: 5px;
+    text-align: left;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.dayOfWeek {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 18px;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    color:black;
+}
+.month {
+    text-align: center;
+    font-size: 17px;
+    line-height: 20px;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color:black;
+}
+.date {
+    text-align: center;
+    font-size: 24px;
+    line-height: 28px;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color:#e31837;
+}
+
+.cancelled {
+    text-align: center;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color:#e31837;
+}
+.hidden_date{
+    color:white;
+    visibility: hidden;
+    font-size: 6px;
+}
+
+.year {
+    text-align: center;
+    font-size: 14px;
+    line-height: 16px;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    color:black;
+}
+
+.attending-race {
+    border: 1px solid lightgray;
+    background-color: beige;
+}
+.not-attending-race {
+    border: 1px solid lightgray;
+}
+.race-info{
+    padding-left: 5px;
+}
+
+.interested {
+    padding-top: 10px;
+    padding-right: 10px;
+    color: rgb(240, 169, 37);
+    text-align: left;
+    font-weight: bold;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+}
+
+.attending {
+    color: green;
+    padding-top: 10px;
+    padding-right: 10px;
+    text-align: left;
+    font-weight: bold;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+}
+
+.registered {
+    padding-top: 10px;
+    padding-right: 10px;
+    text-align: left;
+    font-weight: bold;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+}
+
+.volunteering {
+    padding-top: 10px;
+    text-align: left;
+    font-weight: bold;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+}
+.hotel {
+    font-weight: bold;
+    padding-top: 10px;
+    text-align: left;
+    font-size: 14px;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+}
+
+.edit-details {
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    float: right;
+    font-size: 22px;
+    line-height: 24px;
+    padding-top: 5px;
+    padding-right: 5px;    
+    cursor: pointer;
+}
+
+
+.filteredText {
+    padding-top: 5px;
+    color: #007ad9;
+    font-size: 12px;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    font-weight: normal;
+}
+
+.unFilteredText {
+    padding-top: 5px;
+    color: black;
+    font-size: 12px;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    font-weight: normal;
+}
+
+.input-search {
+    width: 100%;
+    height: 36px;
+    padding-inline-start: 5px;
+}

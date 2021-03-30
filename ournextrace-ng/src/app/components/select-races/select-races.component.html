@@ -1,0 +1,10 @@
+    <p-multiSelect  
+        [options]="raceTypes" 
+        [(ngModel)]="selectedRaceTypes" 
+        dataKey="id"
+        optionLabel="name"
+        [defaultLabel] = "defaultLabel"
+        [filterPlaceHolder]="filterPlaceHolder"
+        (onChange)=raceTypesSelected($event)
+        ></p-multiSelect >
+        

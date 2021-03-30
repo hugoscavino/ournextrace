@@ -1,0 +1,40 @@
+<p-toast position="bottom-center"></p-toast>
+  <form [formGroup]="contactForm">
+    <div class="p-grid">
+        <div class="p-col-12 ">
+            <p-message severity="error" text="enter a valid email" *ngIf="!contactForm.controls['email'].valid&&contactForm.controls['email'].dirty"></p-message>
+        </div>
+        <div class="p-col-12 ">
+              <p-editor id="message" formControlName="message" [style]="{'height':'180px'}">
+                  <p-header>
+                      <span class="ql-formats">
+                           <button class="ql-bold"></button>
+                           <button class="ql-italic"></button>
+                           <button class="ql-underline"></button>
+                      </span>
+                      <span class="btn-label">Tell Us Something</span>
+                  </p-header>
+              </p-editor>
+        </div>
+
+        <div class="p-col-1"></div>
+        <div class="p-col-4 p-text-center">
+            <button pButton type="button" class="ui-button-secondary" label="Cancel" 
+                    (click)="cancel($event)" ></button>
+        </div>
+        <div class="p-col-1"></div>
+
+        <div class="p-col-1"></div>
+        <div class="p-col-4 p-text-center">
+            <button pButton type="button" label="Send" style="width:auto;" 
+                    (click)="onContactUs($event)" [disabled]="!validForm()"></button>
+        </div>
+        <div class="p-col-1"></div>
+
+        <div class="p-col-12" style="padding: 10px;">
+            <div style="margin: 0 auto;width: 300px;">
+                <p-captcha style="width:auto;" siteKey="6LeCLI8UAAAAAA6hQxR-Fx3Bx1CJkgUmAHzX0zxQ" (onResponse)="showResponse($event)"></p-captcha>
+            </div>
+        </div>
+      </div>
+  </form>

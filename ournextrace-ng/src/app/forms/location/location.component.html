@@ -1,0 +1,132 @@
+<ijudy-steps [display]=displaySteps [activeIndex]=activeIndex></ijudy-steps>
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+    <div class="ui-g ui-fluid">
+
+            <div *ngIf='!addLocationOnly' class="ui-g-12 panelTitle">
+                    <div class="ui-g-3 label">
+                      Existing Location
+                    </div>
+                    <div class="ui-g-7">
+                        <p-dropdown [options]="addresses" [filter]="true"
+                            optionLabel="location" dataKey="id" showClear=true 
+                            autoDisplayFirst=true 
+                            [style]="{'width':'100%'}" 
+                            formControlName="addressId">
+                        </p-dropdown>
+                    </div>
+                    <div class="ui-g-2 label" (click)="chooseExistingLocation()">
+                        <span>Finish&nbsp;
+                            <i class="fas fa-check-circle fa-2x next-step"></i>
+                        </span>
+                    </div>
+            </div>
+            <div class="ui-g-12 panelBody">
+                <div class="ui-g-3 label">
+                    Add New Location*
+                </div>
+                <div class="ui-g-9 ">
+                    <input type="text" pInputText placeholder="Enter Location" id="location" formControlName="location">  
+                </div>
+            </div>
+            <div class="ui-g-12 panelBody">
+                <div class="ui-g-3 label">
+                    Street
+                </div>
+                <div class="ui-g-9 ">
+                    <input type="text" pInputText placeholder="Enter Street Name" id="street" formControlName="street">  
+                </div>
+            </div>
+            <div class="ui-g-12 panelBody">
+                <div class="ui-g-3 label">
+                    City
+                </div>
+                <div class="ui-g-9">
+                    <input type="text" pInputText placeholder="Enter City" id="city" formControlName="city">
+                </div>
+            </div>          
+            <div class="ui-g-12 panelBody">
+                <div class="ui-g-3 label">
+                    State
+                </div>
+                <div class="ui-g-4 " >
+                    <p-dropdown 
+                        [options]="states" 
+                        editable="true"
+                        [filter]="true" 
+                        filterBy="label,value"
+                        formControlName="state" 
+                        placeholder="Select State">
+                    </p-dropdown>
+                </div>
+                </div>
+            <div class="ui-g-12 panelBody">
+                    <div class="ui-g-3 label">
+                    Zip
+                </div>
+                <div class="ui-g-4 " >
+                    <input type="text" pInputText placeholder="Enter Zip" id="zip" formControlName="zip">  
+                </div>
+            </div>            
+            <div class="ui-g-12 panelBody">
+                <div class="ui-g-3 label">
+                    Country
+                </div>
+                <div class="ui-g-8 " >
+                    <p-dropdown 
+                        [options]="countries" 
+                        editable="true"
+                        [filter]="true" 
+                        filterBy="label,value"
+                        formControlName="country" 
+                        placeholder="Select Country">
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="ui-g-12 panelBody">
+                    <div class="ui-g-3 label">
+                        Phone
+                    </div>
+                    <div class="ui-g-9 event-url" >
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fas fa-phone-square fa-1x"></i>
+                            </span>
+                            <p-inputMask
+                                mask="(999) 999-9999" placeholder="(999) 999-9999" formControlName="phone">
+                            </p-inputMask>
+                        </div>
+                    </div>
+            </div>
+            <div class="ui-g-12 panelBottom">
+                <div class="ui-g-3 label">Notes</div>
+                <div class="ui-g-9 notes" >
+                    <textarea 
+                        formControlName="notes" 
+                        [cols]="30" 
+                        pInputTextarea 
+                        autoResize="autoResize">
+                        </textarea>
+                </div>
+            </div>
+          <div class="ui-g-12 button-panel ui-g-nopad">
+              <div class="ui-g-6" style="text-align: center;">
+                  <button style="font-size: 18px;width:auto;"  iconPos="left" (click)="cancel($event)"
+                        pButton type="button" icon="fas fa-arrow-left" 
+                        class="ui-button-rounded ui-button-danger" label=Cancel></button>
+              </div>
+              <div *ngIf='!addLocationOnly' class="ui-g-6"  style="text-align: center;">
+                <button style="font-size: 18px;" iconPos="left" (click)="onSubmit()"
+                        pButton type="button" icon="fas fa-map-marked-alt"
+                        class="ui-button-rounded ui-button-success" 
+                        [disabled]=!locationChosen()
+                        label="Finish"></button>
+              </div>
+              <div *ngIf='addLocationOnly' class="ui-g-6"  style="text-align: center;">
+                <button style="font-size: 18px;width:auto;" iconPos="left" (click)="onSubmit()"
+                    pButton type="button" icon="fas fa-map-marked-alt"
+                    class="ui-button-rounded ui-button-success" label="Add"></button>
+              </div>
+
+          </div>
+    </div>
+</form>

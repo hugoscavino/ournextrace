@@ -1,0 +1,12 @@
+https://www.ournextrace.com
+
+************
+Hello Admins,
+************
+
+$email sent us a message
+
+Message : $message
+
+© 2019 ournextrace.com All rights reserved.
+www.ijudy.com

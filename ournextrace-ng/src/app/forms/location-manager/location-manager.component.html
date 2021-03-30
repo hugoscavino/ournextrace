@@ -1,0 +1,166 @@
+<p-confirmDialog header="Delete Race" icon="pi pi-exclamation-triangle" appendTo="body"></p-confirmDialog>
+<p-table #tt 
+        [columns]="cols" 
+        [value]="locations" 
+        [paginator]="true" 
+        [rows]="10" 
+        [globalFilterFields]="['id','location']" 
+        [resizableColumns]="true"
+      >
+  <ng-template pTemplate="caption">
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12 ">
+          <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="50" placeholder="Global Filter" (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+      </div>
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-1 ">
+            <button type="button" pButton icon="fas fa-file-export" iconPos="left" label="All Data" (click)="tt.exportCSV()" style="float:left"></button>
+        </div>
+        <div class="ui-g-1 ">
+            <button type="button" pButton icon="fas fa-sync" iconPos="left" label="Refresh" (click)="refreshData()" style="float:left"></button>
+        </div>
+        <div class="ui-g-9 "></div>
+        <div class="ui-g-1 ">
+          <button type="button" pButton icon="fas fa-file-export" iconPos="left" label="Selection" (click)="tt.exportCSV({selectionOnly:true})" 
+          style="float:right"></button>
+        </div>
+      </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn>
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+    </tr>
+</ng-template>
+  <ng-template pTemplate="body" let-location let-rowIndex="rowIndex">
+      <tr>
+
+          <!-- Col 1 Location -->
+          <td [pEditableColumn]="location" [pEditableColumnField]="'location'" class="ui-resizable-column" title="{{location.location}}">
+              <p-cellEditor>
+                  <ng-template pTemplate="input">
+                      <input type="text" [(ngModel)]="location.location" (onChange)="onComponentEditComplete($event, location, 'location', rowIndex)"> 
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                      {{location.location}}
+                  </ng-template>
+              </p-cellEditor>
+          </td>
+          
+          <!-- Col 2 Street -->
+          <td [pEditableColumn]="location" [pEditableColumnField]="'street'" class="ui-resizable-column">
+            <p-cellEditor>
+                <ng-template pTemplate="input">
+                    <input type="text" [(ngModel)]="location.street">
+                </ng-template>
+                <ng-template pTemplate="output">
+                    {{location.street}}
+                </ng-template>
+            </p-cellEditor>
+        </td>
+
+        <!-- Col 3 - city -->
+        <td [pEditableColumn]="location" [pEditableColumnField]="'city'" >
+            <p-cellEditor>
+                <ng-template pTemplate="input">
+                    <input type="text" [(ngModel)]="location.city">
+                </ng-template>
+                <ng-template pTemplate="output">
+                    {{location.city}}
+                </ng-template>
+            </p-cellEditor>
+        </td>
+
+        <!-- Col 4 - state -->
+        <td [pEditableColumn]="location" [pEditableColumnField]="'state'" class="ui-resizable-column">
+            <p-cellEditor>
+                <ng-template pTemplate="input">
+                    <input type="text" [(ngModel)]="location.state">
+                </ng-template>
+                <ng-template pTemplate="output">
+                    {{location.state}}
+                </ng-template>
+            </p-cellEditor>
+        </td>
+
+        <!-- Col 5 zip -->
+        <td [pEditableColumn]="location" [pEditableColumnField]="'zip'" class="ui-resizable-column"> 
+            <p-cellEditor>
+                <ng-template pTemplate="input">
+                    <input type="text" [(ngModel)]="location.zip">
+                </ng-template>
+                <ng-template pTemplate="output">
+                    {{location.zip}}
+                </ng-template>
+            </p-cellEditor>
+        </td>
+        <!-- Col 7 country -->
+        <td [pEditableColumn]="location" [pEditableColumnField]="'country'" >
+            <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input type="text" [(ngModel)]="location.country">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{location.country}}
+                    </ng-template>
+            </p-cellEditor>            
+        </td>
+
+        <!-- Col 7 phone -->
+        <td [pEditableColumn]="location" [pEditableColumnField]="'phone'" class="ui-resizable-column"> 
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <p-inputMask mask="(999) 999-9999" [(ngModel)]="location.phone" placeholder="(999) 999-9999"></p-inputMask>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{location.phone}}
+                    </ng-template>
+                </p-cellEditor>
+        </td>
+        <!-- Col 8 notes -->
+        <td [pEditableColumn]="location" [pEditableColumnField]="'notes'" class="ui-resizable-column"> 
+            <p-cellEditor>
+                <ng-template pTemplate="input">
+                    <textarea [rows]="5" [cols]="30"[(ngModel)]="location.notes" pInputTextarea autoResize="autoResize"></textarea>
+                </ng-template>
+                <ng-template pTemplate="output">
+                    {{location.notes}}
+                </ng-template>
+            </p-cellEditor>
+    </td>
+        <!-- Col 8 Author -->
+        <td [pEditableColumn]="location" [pEditableColumnField]="'authorId'" >
+            <p-cellEditor>
+                <ng-template pTemplate="input">
+                    <p-dropdown 
+                        [options]="users"
+                        [(ngModel)]="location.authorId" 
+                        (onChange)="onComponentEditComplete($event, location, 'authorId', rowIndex)" 
+                        dataKey="id" 
+                        optionLabel="name" 
+                        filter="true"
+                        [style]="{'width':'100%'}" 
+                        appendTo="body">
+                    </p-dropdown>
+                </ng-template>
+                <ng-template pTemplate="output">
+                       <span *ngFor="let user of users; let i = index">
+                            <span *ngIf="user.id === location.authorId" title="Author ID : {{location.authorId}}">
+                                {{user.name}}
+                            </span>
+                       </span>
+                </ng-template>
+            </p-cellEditor>            
+        </td>
+        
+        <!-- Col 9 Actions -->
+        <td>
+            <button type="text" (click)="confirm(location.id)" pButton icon="fas fa-calendar-times" label="Delete"></button>
+        </td>
+      </tr>
+  </ng-template>
+</p-table>

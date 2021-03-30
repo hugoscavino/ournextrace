@@ -1,0 +1,33 @@
+hr {
+    border-top: 1px solid red;
+}
+
+.label {
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Arial,sans-serif;
+}
+
+.value {
+    text-align: left;
+    font-size: 16px;
+    color: darkgray;
+    font-family: Arial,sans-serif;
+}
+
+:host >>> .ui-card-header{
+    padding-top: 15px;
+    text-align: center;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+:host >>> .ui-card-content{
+   font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+   font-weight: normal;
+}
+
+.button-panel{
+    background:lightgray;
+}

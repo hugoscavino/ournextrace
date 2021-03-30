@@ -1,0 +1,108 @@
+<p-confirmDialog header="Delete My Race from Schedule" icon="pi pi-exclamation-triangle" appendTo="body"></p-confirmDialog>
+<p-toast key="error" sticky=true></p-toast>
+<div *ngIf=myRace class="ui-g">
+    <div class="ui-g-12 ui-g-nopad ">
+        <div class="ui-g-12 ui-g-nopad raceName">
+          {{myRace.race.name}} 
+        </div>
+        <div class="ui-g-12 ui-g-nopad race-date" >
+            {{myRace.race.date | date : 'EEE, LLL d y'}}
+        </div>
+        <div class="ui-g-12 ui-g-nopad race-location" >
+          {{myRace.race.address.location}}
+        </div>
+        <div class="ui-g-12 race-description">
+          <p-accordion>
+            <p-accordionTab header="Race Details...(Click for More)" [selected]="false">
+              {{myRace.race.description}}
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        <div class="ui-g-12 ui-g-nopad race-types-list">
+          <ul>
+              <li *ngFor="let raceType of allRaceTypes; let i = index">
+                {{raceType.name}}
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
+<form [formGroup]="raceForm" (ngSubmit)="onSubmit()">
+  <div class="ui-g race-form">
+    
+      <div class="ui-g-12 ">
+          <div class="ui-g-4 label ">
+            Status
+          </div>
+          <div class="ui-g-8">
+            <ijudy-interested [showDelete]=false [(raceStatus)]=attendingStatus></ijudy-interested>
+          </div>
+      </div>
+      <div class="ui-g-12 ">
+          <div class="ui-g-4 label">
+            Registered Race Types
+          </div>
+          <div class="ui-g-8 ui-xl-4 ui-sm-8 race-types">
+              <p-multiSelect [options]="allRaceTypes" 
+                             [filter]=false 
+                             filterPlaceHolder="Choose..." 
+                             defaultLabel="Chosen Race Types" 
+                             formControlName="selectedRaceTypes" 
+                             optionLabel="name" 
+                             dataKey="id" 
+                             [showToggleAll]=false></p-multiSelect>
+            </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4 label">
+            Day I Signed Up
+        </div>
+        <div class="ui-g-8 ui-xl-4 ui-sm-8 ui-inputgroup">
+            <p-calendar [minDate]="minDateValue" formControlName="raceRegDate" [touchUI]="true" dateFormat="yy-mm-dd"  [showIcon]="true"></p-calendar>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4 label">
+            Staying
+          </div>
+          <div class="ui-g-4 ui-xl-4 ui-sm-8 ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fas fa-hotel"></i></span>
+            <input type="text" pInputText placeholder="Hotel Name" formControlName="raceHotel" class="race-hotel">         
+          </div>
+      </div>
+      <div class="ui-g-12">
+            <p-editor formControlName="notes" [style]="{'height':'180px'}">
+                <p-header>
+                    <span class="ql-formats">
+                         <button class="ql-bold"></button>
+                         <button class="ql-italic"></button>
+                         <button class="ql-underline"></button>
+                    </span>
+                    <span class="btn-label">Your Race Notes</span>
+                </p-header>
+            </p-editor>
+        </div>
+      <div class="ui-g-12 button-panel">
+          <div class="ui-g-4" style="text-align: center;">
+              <button style="width:auto;" iconPos="left" (click)="cancel($event)"
+                    pButton type="button" icon="fas fa-arrow-left" 
+                    class="ui-button-rounded ui-button-secondary" label="Back"></button>
+          </div>
+
+          <div *ngIf="isEditMode()" class="ui-g-4" style="text-align: center;">
+              <button style="width:auto;" iconPos="right" (click)="deleteMyRace($event)"
+                    pButton type="button" icon="fas fa-times-circle" 
+                    class="ui-button-rounded ui-button-danger" label=Delete></button>
+
+          </div>
+          <div class="ui-g-4" style="text-align: center;">
+            <button style="width:auto;" *ngIf="isEditMode()" iconPos="right" (click)="onSubmit()" pButton type="button" 
+                      icon="fas fa-edit" class="ui-button-rounded ui-button-success" label=Update></button>
+            <!-- Step Mode -->
+            <button *ngIf="isStepMode()" iconPos="right" (click)="onSubmit()" pButton type="button" 
+                    icon="fas fa-arrow-right" class="ui-button-rounded ui-button-success" label=Next></button>
+          </div>
+      </div>
+
+  </div>
+</form>

@@ -1,0 +1,18 @@
+<div class="ui-fluid">
+
+    <p-autoComplete 
+            [(ngModel)]="address" 
+            field="location"
+            dataKey="id"
+            [suggestions]="results" 
+            (completeMethod)="search($event)"
+            (onSelect)=onSelect($event)
+            [minLength]="1" 
+            placeholder="Choose Location" 
+            autoHighlight=true
+            [style]="{'width':'270px'}" 
+            [inputStyle]="{'width':'100%'}"
+        >
+    </p-autoComplete>
+
+</div>

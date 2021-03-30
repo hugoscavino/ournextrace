@@ -1,0 +1,12 @@
+
+:host >>> .ui-button.ui-state-default.ui-button-info{
+    background-color: #DCDCDC!important;
+    border: 1px solid #DCDCDC!important;;
+    color: black!important;;
+
+}
+:host >>> .ui-buttonset.ui-button-info > .ui-button.ui-state-default {
+    background-color: #DCDCDC!important;
+    border: 1px solid #DCDCDC!important;;
+    color: black!important;;
+}

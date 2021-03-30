@@ -1,0 +1,18 @@
+.on {
+    font-size: 2.5em;
+    color: green;
+}
+.off{
+    font-size: 2.5em;
+    color: darkgray;
+}
+.container
+{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+.item
+{
+     width: 200px;
+}

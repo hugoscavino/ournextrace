@@ -1,0 +1,83 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast position="bottom-center" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" [baseZIndex]="5000"></p-toast>
+<ijudy-login [visible]=displayLogin></ijudy-login>
+<ijudy-filter [(visible)]=filterVisible></ijudy-filter>
+<ijudy-sidebar [(visible)]="displaySideMenu"></ijudy-sidebar>
+<div *ngIf=racesViews>
+    <p-dataView #dv 
+                [value]="racesViews" 
+                [paginator]="false" 
+                [rows]="10"
+                filterBy="myRaceStatus,race.name,race.raceDateDesc,race.address.location"
+                [style]="{'border': '1px solid white'}"
+                >
+        <p-header >
+            <div class="p-grid" >
+                <div class="p-col-1">
+                    <i class="fas fa-search" style="line-height: 1.25;"></i>
+                </div>
+                <div class="p-col-10 ">
+                    <input  #filter_input pInputText type="search" 
+                            class="input-search" 
+                            (keyup)="dv.filter($event.target.value)" 
+                            placeholder="Search for a Race" >
+                </div>
+                <div *ngIf=!user class="p-col-1" title="Sign In" (click)="register()">
+                    <div><i class="fas fa-sign-in-alt fa-2x"></i></div>
+                </div>
+                <div *ngIf=user class="p-col-1" title="Sign In" (click)="showSideMenu()">
+                    <div><i class="fas fa-user-cog fa-2x"></i></div>
+                </div>
+            </div>
+            <div class="p-grid" >
+                    <div class="p-col-3 col-header" (click)="onSortDateClicked($event);">
+                        Date
+                    </div>
+                    <div class="p-col-3 col-header" (click)="onSortNameClicked($event);">
+                        Name
+                    </div>
+                    <div  class="p-col-3 col-header" >
+                        Location
+                    </div>
+                    <div  class="p-col-3 col-header" >
+                        Like
+                    </div>
+                </div>
+        </p-header>                
+        <ng-template let-myRace pTemplate="listItem" >
+            
+            <div class="p-col-3 " title="{{myRace.race.raceDateDesc}}">
+                <div class="dayOfWeek">{{myRace.race.date | date : 'EEE'}}</div>
+                <div class="month">{{myRace.race.date | date : 'LLL'}}</div>
+                <div class="date">{{myRace.race.date | date : 'd'}}</div>
+                <div class="year">{{myRace.race.date | date : 'y'}}</div>
+                <div *ngIf="myRace.race.cancelled" class="cancelled" 
+                        title="Race has been cancelled or postponed. Reach out to the race site for more details">
+                        Cancelled&nbsp;<i class="fas fa-ban"></i></div>
+                <span class="hidden_date">{{myRace.race.raceDateDesc}}</span>
+            </div>
+            <div class="p-col-3 ">
+                <a [routerLink]="['/view-race', myRace.race.id]">
+                    {{myRace.race.name}}
+                </a>
+                <ul>
+                    <li><a href="{{myRace.race.url}}" target="_blank">Web Site <i class="fas fa-globe-americas"></i></a></li>
+                    <li *ngFor="let raceType of myRace.race.raceTypes; let i = index" title="{{raceType.desc}}">
+                        {{raceType.name}}
+                    </li>
+                </ul>
+           </div>
+            <div class="p-col-3 ">
+                <span class="race-location">
+                    {{myRace.race.address.location}}
+                </span>
+            </div>
+            <div class="p-col-3" (click)=raceLiked(myRace.race.id) id="race_id_{myRace.race.id}">
+                <span class="fa-stack" style="vertical-align: top;font-size: 1rem;color: #007ad9;">
+                    <i class="far fa-circle fa-stack-2x"></i>
+                    <i class="far fa-heart fa-stack-1x"></i>
+                </span>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

@@ -1,0 +1,62 @@
+<p-sidebar [(visible)]="visible" styleClass="ui-sidebar-lg" position="right">
+    <div class="ui-g" class="filterPanel">
+                <div class="ui-g-12" class="bottomBorder">
+                    <div class="ui-g-12" class="filterTitle">Race Filters</div>
+                </div>
+                <div class="ui-g-2 ui-xl-2 ui-lg-2 ui-md-4 ui-sm-12 filterTitle">Race Types</div>
+                <div class="ui-g-3 ui-xl-4 ui-lg-3 ui-md-8 ui-sm-12 ">
+                    <ijudy-select-races (raceTypesSelectedChange)=filtersChanged($event) [(selectedRaceTypes)]=selectedRaceTypes></ijudy-select-races>
+                </div>
+                <div class="ui-g-12 ui-g-nopad bottomBorder"></div>
+                <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12 " style="padding-left: 10px;">
+                    <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-3 ui-sm-3 ui-g-nopad filterTitle">Start Date</div>
+                    <div class="ui-g-6 ui-xl-8 ui-lg-6 ui-md-5 ui-sm-4 ui-g-nopad">
+                        <p-calendar 
+                            [(ngModel)]="nativeMinDate" 
+                            dateFormat="yy/mm/dd" 
+                            [monthNavigator]="true" 
+                            [yearNavigator]="true" 
+                            yearRange="2019:2030"
+                            (onMonthChange)="yearMonthChanged($event, true)"
+                            (onYearChange)="yearMonthChanged($event, true)"
+                            (onSelect)=filtersChanged($event)
+                            ></p-calendar>
+                    </div>
+                </div>
+                <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
+                        <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-3 ui-sm-3 ui-g-nopad filterTitle">End&nbsp; Date</div>
+                        <div class="ui-g-6 ui-xl-8 ui-lg-6 ui-md-5 ui-sm-4 ui-g-nopad">
+                            <p-calendar 
+                                [(ngModel)]="nativeMaxDate" 
+                                dateFormat="yy/mm/dd" 
+                                [monthNavigator]="true" 
+                                [yearNavigator]="true" 
+                                yearRange="2019:2030"
+                                (onMonthChange)="yearMonthChanged($event, false)"
+                                (onYearChange)="yearMonthChanged($event, false)"
+                                (onSelect)=filtersChanged($event)
+                                >
+                            </p-calendar>
+                        </div>
+                </div>
+                <div class="ui-g-12 ui-g-nopad bottomBorder"></div>
+                <div class="ui-g-12 ui-g-nopad">
+                    <div class="ui-g-6" style="text-align: center;">
+                        <button 
+                            (click)="onReset($event)"
+                            pButton type="button" 
+                            style="width:auto;" 
+                            class="ui-button-rounded ui-button-warning" 
+                            label="Reset"></button>
+                    </div>
+                    <div class="ui-g-6" style="text-align: center;">
+                        <button 
+                            (click)="onHide($event)"
+                            pButton type="button" 
+                            style="width:auto;" 
+                            class="ui-button-rounded ui-button-primary" 
+                            label="Done"></button>
+                    </div>
+                </div>    
+    </div>
+</p-sidebar>
