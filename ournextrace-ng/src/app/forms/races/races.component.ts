@@ -59,24 +59,19 @@ export class RacesComponent implements OnInit {
   public viewOptions: SelectItem[];
   public viewKey: string;
 
-  public sortToggle: string;
+  public sortDateToggle: string;
+  public sortNameToggle: string;
+  public sortLocationToggle: string;
+  public filterLikeToggle: string;
 
   public emptyMessage: string;
 
-  public dateFilters: any;
-
   public user: User;
   public userFound = false;
-  public racesNameSortSelected = true;
-  public racesNameSortSelectedByAlpha = false;
 
   public displaySideMenu = false;
-  public dateSortSelected = false;
-  public dateSortSelectedAlpha = false;
 
-  public myRacesSelected = false;
 
-  public selectedRedirectUrl: string;
   public raceStateObs$: Observable<RaceAppState>;
   public raceReducerSubscription: Subscription;
 
@@ -90,121 +85,27 @@ export class RacesComponent implements OnInit {
                 this.raceStateObs$ = store.pipe(select(moduleKeyName));
   }
 
-  public static resetMyRaceStatus(racesViews: MyRace[], raceId: number): void {
-    const racesToDelete: MyRace[] = racesViews.filter( OneRace => OneRace.race.id === raceId );
-    for (const myRace of racesToDelete) {
-      myRace.myRaceStatus = RaceStatus.NOT_ASSIGNED;
-    }
-  }
-
-  public static filterJustMyRaces(racesViews: MyRace[]): MyRace[] {
-      const filtered: MyRace[] = racesViews.filter( OneRace => OneRace.myRaceStatus !== RaceStatus.NOT_ASSIGNED );
-      return filtered;
-  }
-
-  private static filterByRacesTypeCallBack(element: MyRace, index: number, array: MyRace[]): boolean {
-    if (element.race.raceTypes) {
-      const filter = this as unknown as RaceType[];
-      for (const raceType of element.race.raceTypes) {
-          for (const filterRaceType of filter) {
-            if (raceType.name === filterRaceType.name) {
-              return true;
-            }
-          }
-      }
-    }
-    return false;
-  }
-
-  public static filterMyRacesByRaceType(raceViews: MyRace[], raceTypes: RaceType[]): MyRace[] {
-    if (raceViews) {
-      const filteredViews = raceViews.filter(this.filterByRacesTypeCallBack, raceTypes);
-      return filteredViews;
-    }
-  }
-
-
   ngOnInit() {
 
-    this.sortToggle = 'race';
+    this.sortDateToggle     = 'date';
+    this.sortNameToggle     = 'name';
+    this.sortLocationToggle = 'loc';
+    this.filterLikeToggle   = 'like';
+
 
     this.raceReducerSubscription = this.raceStateObs$.pipe(
         map((state: RaceAppState) => {
               this.user       = state.user;
-              this.userFound  = this.user !== null;
-              this.selectedRedirectUrl = state.redirectUrl;
-              if (state.filters) {
-                // console.log('getMyRaces with filter : ' + JSON.stringify(state.filters));
-                this.getMyRaces(state.filters);
-              } else {
-                this.selectedRaceTypes  = undefined;
-                // console.log('getMyRaces with no filter');
-                if (this.originalRaceViews) {
-                  this.racesViews = this.originalRaceViews;
-                } else {
-                  // go to db
-                  this.getMyRacesUnFiltered();
-                }
-              }
+              this.userFound  = state.user !== null;
+              this.getMyRaces();
           }
         )
       ).subscribe();
 
   }
 
-/**
- * Load the list of Races publicly visible
- *
- */
-public getMyRaces(filters: ISearchFilters) {
 
-  if (filters === undefined) {
-    return;
-  }
-
-  this.selectedRaceTypes  = filters.selectedRaceTypes;
-
-  let beginDateStr = moment().format(IJudyConstants.ISO_DATE_FMT);
-  let endDateStr = moment().add(1, 'year').format(IJudyConstants.ISO_DATE_FMT);
-  if (filters.minDate && filters.maxDate) {
-    beginDateStr      = moment(filters.minDate).format(IJudyConstants.ISO_DATE_FMT);
-    endDateStr        = moment(filters.maxDate).format(IJudyConstants.ISO_DATE_FMT);
-  }
-
-  this.myRacesService.getMyRaces(beginDateStr, endDateStr).subscribe(
-      (races: MyRace[]) => {
-
-        this.originalRaceViews = races;
-
-        const myRaces = RacesComponent.filterJustMyRaces(this.originalRaceViews);
-        const myRacesExist = myRaces !== undefined && myRaces.length > 0;
-        this.dateSortSelected  = false;
-
-        if (myRacesExist) {
-              this.racesNameSortSelected  = false;
-              this.myRacesSelected        = true;
-              this.racesViews = myRaces;
-        } else {
-            if (this.selectedRaceTypes && this.selectedRaceTypes.length > 0) {
-              this.racesViews = RacesComponent.filterMyRacesByRaceType(races, this.selectedRaceTypes);
-              this.racesNameSortSelected  = true;
-              this.myRacesSelected        = false;
-            } else {
-              this.racesNameSortSelected  = false;
-              this.myRacesSelected        = true;
-              this.racesViews = races;
-            }
-        }
-
-      },
-      err => {
-        console.error(err);
-        this.errorHandler.handleError(err);
-      }
-    );
-}
-
-public getMyRacesUnFiltered() {
+public getMyRaces() {
 
     const beginDateStr = moment().format(IJudyConstants.ISO_DATE_FMT);
     const endDateStr = moment().add(1, 'year').format(IJudyConstants.ISO_DATE_FMT);
@@ -221,213 +122,111 @@ public getMyRacesUnFiltered() {
       );
   }
 
-  public isAssigned(myRace: IMyRace): boolean {
-      if (this.user) {
-        const isMyRace = (myRace.myRaceStatus !== RaceStatus.NOT_ASSIGNED);
-        return isMyRace;
-      }
-      return false;
-  }
-
-  public isOwner(myRace: IMyRace): boolean {
-    if (this.user) {
-      const isOwner = (myRace.race.author.id !== this.user.id);
-      return isOwner;
-    }
-    return false;
-}
-
-  public registeredForRaceType(myRace: IMyRace, raceType: IRaceType) {
-    const myRaceTypes = myRace.raceTypes;
-    if ( myRaceTypes ) {
-      myRaceTypes.forEach(
-        (myRaceType: IRaceType) => {
-            if (myRaceType.id === raceType.id) {
-                return true;
-            }
-          }
-      );
-
-    }
-    return false;
-  }
-
-  public isPrivateRace(myRace: MyRace): boolean {
-      const isPrivate = this.user && (myRace.race.public === false) && (this.user.id === myRace.race.author.id);
-      return isPrivate;
-  }
-  public onDateClicked(event: any) {
-
-    if (this.selectedRaceTypes === undefined || this.selectedRaceTypes.length === 0) {
-      this.racesViews = this.originalRaceViews;
-    } else {
-      this.racesViews = RacesComponent.filterMyRacesByRaceType(this.originalRaceViews, this.selectedRaceTypes);
-    }
-
-  }
-
   public onSortDateClicked(event: any) {
 
-    if (this.selectedRaceTypes === undefined || this.selectedRaceTypes.length === 0) {
-      this.racesViews = this.originalRaceViews;
-    } else {
-      this.racesViews = RacesComponent.filterMyRacesByRaceType(this.originalRaceViews, this.selectedRaceTypes);
-    }
-
-    if (this.sortToggle.indexOf('!') === 0) {
-      this.dateSortSelectedAlpha = false;
-      this.sortToggle = this.sortToggle.substring(1, this.sortToggle.length);
+    if (this.sortDateToggle.indexOf('!') === 0) {
+      this.sortDateToggle = this.sortDateToggle.substring(1, this.sortDateToggle.length);
       this.racesViews = _.sortBy( this.racesViews, function(raceViews) {
                                   return raceViews.race.date;
                                 });
     } else {
-      this.dateSortSelectedAlpha = true;
-      this.sortToggle = '!' + this.sortToggle;
+      this.sortDateToggle = '!' + this.sortDateToggle;
       this.racesViews = _.sortBy( this.racesViews, function(raceViews) {
                                   return raceViews.race.date;
                               }).reverse();
     }
 
-    this.dateSortSelected     = true;
-    this.racesNameSortSelected = false;
-    this.myRacesSelected  = false;
-
+ 
 }
 
-public onNameClicked(event: any) {
-
-  if (this.selectedRaceTypes === undefined || this.selectedRaceTypes.length === 0) {
-    this.racesViews = this.originalRaceViews;
-  } else {
-    this.racesViews = RacesComponent.filterMyRacesByRaceType(this.originalRaceViews, this.selectedRaceTypes);
-  }
-
-  this.dateSortSelected     = false;
-  this.racesNameSortSelected = true;
-  this.myRacesSelected  = false;
-
-}
 
 public onSortNameClicked(event: any) {
 
-  if (this.selectedRaceTypes === undefined || this.selectedRaceTypes.length === 0) {
-    this.racesViews = this.originalRaceViews;
-  } else {
-    this.racesViews = RacesComponent.filterMyRacesByRaceType(this.originalRaceViews, this.selectedRaceTypes);
-  }
-
-  if (this.sortToggle.indexOf('!') === 0) {
-    this.racesNameSortSelectedByAlpha = false;
-    this.sortToggle = this.sortToggle.substring(1, this.sortToggle.length);
-    this.racesViews = _.sortBy( this.racesViews, function(raceViews) {
+    if (this.sortNameToggle.indexOf('!') === 0) {
+      this.sortNameToggle = this.sortNameToggle.substring(1, this.sortNameToggle.length);
+      this.racesViews = _.sortBy( this.racesViews, function(raceViews) {
+                                      return raceViews.race.name.toLocaleLowerCase();
+                                  });
+    } else {
+      this.sortNameToggle = '!' + this.sortNameToggle;
+      this.racesViews = _.sortBy( this.racesViews, function(raceViews) {
                                     return raceViews.race.name.toLocaleLowerCase();
-                                });
-  } else {
-    this.racesNameSortSelectedByAlpha = true;
-    this.sortToggle = '!' + this.sortToggle;
-    this.racesViews = _.sortBy( this.racesViews, function(raceViews) {
-                                  return raceViews.race.name.toLocaleLowerCase();
-                                }).reverse();
+                                  }).reverse();
+    }
   }
 
+  public onSortLocationClicked(event: any) {
 
-}
-
-public register() {
-  this.displayLogin = true;
-}
-
-public showSideMenu(){
-  this.displaySideMenu = true;
-}
-
-/**
- * Add a race to potentially share with
- * community it is made private initially
- */
- public onAddRace() {
-    if (this.userNotLoaded() ) {
-      this.displayLogin = true;
+    if (this.sortLocationToggle.indexOf('!') === 0) {
+      this.sortLocationToggle = this.sortLocationToggle.substring(1, this.sortLocationToggle.length);
+      this.racesViews = _.sortBy( this.racesViews, function(raceViews) {
+                                      return raceViews.race.address.location.toLocaleLowerCase();
+                                  });
     } else {
-      const url = IJudyConstants.ADD_RACE_URI_STEP;
-      this.router.navigate([url, 0]);
+      this.sortLocationToggle = '!' + this.sortLocationToggle;
+      this.racesViews = _.sortBy( this.racesViews, function(raceViews) {
+                                    return raceViews.race.address.location.toLocaleLowerCase();
+                                  }).reverse();
     }
- }
+  }
 
-/**
- * Add a Race to My Calendar
- * @param raceId from the UI list
- */
-public addMyRace(raceId: number) {
+  public register() {
+    this.displayLogin = true;
+  }
 
-    this.store.dispatch(SetFormEditMode());
-    const addUrl     = IJudyConstants.ADD_MY_RACE_URI + '/' + raceId;
+  public showSideMenu(){
+    this.displaySideMenu = true;
+  }
+
+  public raceLikedClicked(myRace: MyRace) {
 
     if (this.userNotLoaded() ) {
-      this.store.dispatch(SetRedirectUrl({redirectUrl: addUrl}));
       this.displayLogin = true;
     } else {
       this.displayLogin = false;
-      const editUrl = IJudyConstants.EDIT_MY_RACE_URI + '/' + raceId;
-      this.myRacesService.getMyRaceCheck(raceId).then(
-        (found: boolean) => {
-            if (found) {
-              this.router.navigate([editUrl]);
-            } else {
-              this.router.navigate([addUrl]);
-            }
-        }
-      );
-    }
+      if (myRace.myRaceStatus === RaceStatus.INTERESTED){
+        myRace.myRaceStatus = RaceStatus.NOT_ASSIGNED;
+      } else {
+        myRace.myRaceStatus = RaceStatus.INTERESTED;
+      }
+      this.likeUnLikeTheRace(myRace);
 
+    }   
   }
 
-  public raceLiked(raceId: number) {
-
-    const addUrl     = IJudyConstants.ADD_MY_RACE_URI + '/' + raceId;
-
-    if (this.userNotLoaded() ) {
-      this.store.dispatch(SetRedirectUrl({redirectUrl: addUrl}));
-      this.displayLogin = true;
-    } else {
-      this.displayLogin = false;
-      const myRace = this.toMyRace(raceId);
-      this.myRacesService.likeRace(myRace).subscribe(
-        (myRace) => {
-            this.messageService.add(
-              {severity: 'success',
-              summary: 'Add Race to Schedule',
-              detail: myRace.race.name + ' liked'});
-              this.router.navigate([IJudyConstants.RACES_URI]);
-        },
-        error => {
-            if (error instanceof HttpErrorResponse) {
-                const httpErrorCode = error.status;
-                switch (httpErrorCode) {
-                    case HttpStatusCode.CONFLICT:
-                    this.messageService.add(
-                        {severity: 'warn',
-                        summary: 'My Races',
-                        detail: 'Race already liked'});
-                        this.router.navigate([IJudyConstants.RACES_URI]);
-                        break;
-                    default:
-                        throw error;
-                }
-            }
-        }
-      );
-    }
-        
-
-  }
-
-  private toMyRace(raceId: number): MyRace {
-    const myRace = new MyRace();
-    myRace.race = new Race();
-    myRace.race.id      = raceId;
-    myRace.myRaceStatus = RaceStatus.INTERESTED;
-    return myRace;
+  private likeUnLikeTheRace(myRace: MyRace){
+    console.info('Setting Like to ' + myRace.myRaceStatus)
+    this.myRacesService.likeUnLikeRace(myRace).subscribe(
+      (myRace) => {
+          this.getMyRaces();
+          var summaryMsg = 'UnLiked a Race';
+          var detailMsg = myRace.race.name + ' unLiked'; 
+          if (myRace.myRaceStatus === RaceStatus.INTERESTED){
+            summaryMsg = 'Liked a Race';
+            detailMsg = myRace.race.name + ' liked'
+          }
+          this.messageService.add(
+            {severity: 'success',
+            summary: summaryMsg,
+            detail: detailMsg});
+      },
+      error => {
+          if (error instanceof HttpErrorResponse) {
+              const httpErrorCode = error.status;
+              switch (httpErrorCode) {
+                  case HttpStatusCode.CONFLICT:
+                  this.messageService.add(
+                      {severity: 'warn',
+                      summary: 'Liked Races',
+                      detail: 'Race likeness not changed'});
+                      this.router.navigate([IJudyConstants.RACES_URI]);
+                      break;
+                  default:
+                      throw error;
+              }
+          }
+      }
+    );
   }
 
   public userNotLoaded(): boolean {
@@ -435,97 +234,21 @@ public addMyRace(raceId: number) {
     return userNotFound;
   }
 
-  public updateMyRace(raceId: string) {
-    if (this.user ) {
-      this.router.navigate([IJudyConstants.EDIT_MY_RACE_URI + '/' + raceId, {editMode : 'edit'}]);
-    } else {
-      this.displayLogin = true;
-    }
-  }
-
-  public updateRaceStatus(raceStatus: RaceStatus, raceId: number) {
-
-    if (this.userFound) {
-      if (raceStatus === RaceStatus.NOT_ASSIGNED) {
-        this.router.navigate([IJudyConstants.EDIT_MY_RACE_URI + '/' + raceId, {editMode : 'edit'}]);
-      } else {
-        if (raceStatus === RaceStatus.DELETE_ME) {
-          // delete the race
-          // optional prompt
-          this.deleteMyRace(raceId);
-        } else {
-          this.myRacesService.updateRaceStatus(raceId, raceStatus).subscribe(
-            (myRace: IMyRace) => {
-                  const msg = 'Now ' + RaceStatusPrettyPrinter.toPrettyString(raceStatus) + ' for ' + myRace.race.name;
-                  this.messageService.add({severity: 'success', summary: 'Status Updated', detail: msg});
-              }
-            );
-          }
-        }
-    } else {
-      console.error('User not set');
-    }
-  }
-
-  public deleteMyRace(raceId: number) {
-    this.confirmationService.confirm({
-        message: 'Are you sure that you want to remove this race from your plan?',
-        accept: () => {
-          this.deleteMyRaceApi(raceId);
-          RacesComponent.resetMyRaceStatus(this.originalRaceViews, raceId);
-          if (this.myRacesSelected) {
-            this.onApplyJustMyRacesFilter();
-          }
-        }
-      });
-  }
-
-  public deleteMyRaceApi(raceId: number) {
-        this.myRacesService.deleteMyRace(raceId).subscribe(
-          (result: IMyRace) => {
-              this.messageService.add(
-                {
-                  severity: 'success',
-                  summary: 'My Race',
-                  detail: 'Deleted ' + result.race.name + ' from your plan'}
-                );
-          },
-          (error) => {
-            this.messageService.add(
-              {
-                severity: 'error',
-                summary: 'My Race',
-                detail: 'Could not delete race from your race plan - ' + error}
-              );
-        }
-        );
-  }
-
-
-  public onRemoveFilters() {
-        this.racesViews = this.originalRaceViews;
-        this.raceTypeFilter = undefined;
-  }
-
-
-  public filterClicked(event: any) {
-      this.filterVisible = true;
-  }
-
+  
   public onApplyJustMyRacesFilter(event?: any) {
 
-    this.racesViews = RacesComponent.filterJustMyRaces(this.originalRaceViews);
-
-    if (this.sortToggle.indexOf('!') === 0) {
-      this.sortToggle = this.sortToggle.substring(1, this.sortToggle.length);
-      this.racesViews = _.sortBy( this.racesViews, function(raceViews) {
-                                      return raceViews.race.name.toLocaleLowerCase();
-                                  });
+    if (this.filterLikeToggle.indexOf('!') === 0) {
+      this.filterLikeToggle = this.filterLikeToggle.substring(1, this.filterLikeToggle.length);
+      this.racesViews = RacesComponent.filterJustMyRaces(this.originalRaceViews);
     } else {
-      this.sortToggle = '!' + this.sortToggle;
-      this.racesViews = _.sortBy( this.racesViews, function(raceViews) {
-                                    return raceViews.race.name.toLocaleLowerCase();
-                                  }).reverse();
+      this.filterLikeToggle = '!' + this.filterLikeToggle;
+      this.racesViews = this.originalRaceViews;
     }
+
+  }
+
+  public static filterJustMyRaces(racesViews: MyRace[]): MyRace[] {
+    const filtered: MyRace[] = racesViews.filter( OneRace => OneRace.myRaceStatus !== RaceStatus.NOT_ASSIGNED );
+    return filtered;
   }
 }

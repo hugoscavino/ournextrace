@@ -9,6 +9,8 @@ import * as moment from 'moment';
 
 
 const CACHE_SIZE = 1;
+const myRacesRootUrl = '/api/v2/myRaces';
+const myRaceRootUrl  = '/api/v2/myRace';
 
 @Injectable()
 export class MyRacesService {
@@ -25,7 +27,7 @@ export class MyRacesService {
      * @param endDate Optional Date must be in ISO yyyy-MM-DD format
      */
     public getMyRaces(beginDate?: string, endDate?: string): Observable<MyRace[]> {
-        const url = '/api/v2/myRaces';
+        
 
         // Initialize Params Object
         let params = new HttpParams();
@@ -35,7 +37,7 @@ export class MyRacesService {
             params = params.append('beginDate', beginDate);
             params = params.append('endDate', endDate);
         }
-        return this.http.get<MyRace[]>(url, {params: params}).pipe(
+        return this.http.get<MyRace[]>(myRacesRootUrl, {params: params}).pipe(
             map(myRaces => {
                     myRaces.map(
                         (oneMyRace: MyRace) => {
@@ -58,14 +60,12 @@ export class MyRacesService {
      * @param myRace
      */
     public saveMyRace(myRace: IMyRace): Observable<IMyRace> {
-        const url = '/api/v2/myRace';
-        return this.http.post<IMyRace>(url, myRace);
+        return this.http.post<IMyRace>(myRaceRootUrl, myRace);
     }
     
-    public likeRace(myRace: IMyRace): Observable<IMyRace>  {
+    public likeUnLikeRace(myRace: IMyRace): Observable<IMyRace>  {
         // console.log('Updating : ' + JSON.stringify(raceView));
-        const url = '/api/v2/myRace';
-        return this.http.post<IMyRace>(url, myRace);
+        return this.http.post<IMyRace>(myRaceRootUrl, myRace);
     }
 
     /**
@@ -85,7 +85,7 @@ export class MyRacesService {
      */
     public deleteMyRace(raceId: number): Observable<IMyRace> {
         // console.log('Deleting : ' + raceId);
-        const url = '/api/v2/myRace/' + raceId;
+        const url = myRaceRootUrl + '/' + raceId;
         return this.http.delete<IMyRace>(url);
     }
 
@@ -95,8 +95,7 @@ export class MyRacesService {
      */
     public updateMyRace(raceView: MyRace): Observable<MyRace>  {
         // console.log('Updating : ' + JSON.stringify(raceView));
-        const url = '/api/myRace';
-        return this.http.put<MyRace>(url, raceView);
+        return this.http.put<MyRace>(myRaceRootUrl, raceView);
     }
 
 
@@ -107,12 +106,12 @@ export class MyRacesService {
      * @param raceView
      */
     public getMyRace(raceId: number): Observable<MyRace>  {
-        const url = '/api/v2/myRace/' + raceId;
+        const url = myRaceRootUrl + "/" + raceId;
         return this.http.get<MyRace>(url);
     }
 
     public async getMyRaceCheck(raceId: number): Promise<boolean> {
-        const url = '/api/v2/myRace/' + raceId;
+        const url = myRaceRootUrl + "/" + raceId;
         const found =  await this.http.get<MyRace>(url).toPromise().then(
             (myRace: IMyRace) => {
                 // console.log('Found My Race : ' + myRace.race.name);
