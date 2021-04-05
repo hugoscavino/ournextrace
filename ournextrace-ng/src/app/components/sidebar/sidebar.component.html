@@ -1,6 +1,6 @@
 <p-toast position="bottom-center"></p-toast>
 
-<p-sidebar [(visible)]="visible" styleClass="ui-sidebar-md" position="right">
+<p-sidebar [(visible)]="visible" styleClass="P-sidebar-md" position="right">
         <div class="p-grid">
 
           <div class="p-col-1"></div>
@@ -17,20 +17,15 @@
           <div class="p-col-11 ijudy-link" (click)="routeToContactUs()">
             Contact Us
           </div>
+          
+          <div *ngIf="adminLoaded" class="p-col-1"></div>
+          <div *ngIf="adminLoaded" class="p-col-11 ijudy-link" (click)="routeToAddRace()">
+            Add Race
+          </div>
 
           <div class="p-col-1"></div>
           <div class="p-col-11 ijudy-link" (click)="logoff()">
               Logoff
-          </div>
-          
-          <div class="p-col-4 p-text-center" (click)="routeToHomePage()">
-            <a href="https://twitter.com/ournextrace" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
-          </div>
-          <div class="p-col-4 p-text-center" (click)="routeToHomePage()">
-            <a href="https://www.facebook.com/ournextrace/" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
-          </div>
-          <div class="p-col-4 p-text-center" (click)="routeToHomePage()">
-            <a href="https://www.instagram.com/ournextrace/" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
           </div>
       </div>
 

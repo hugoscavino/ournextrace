@@ -32,10 +32,8 @@ export class ViewRaceComponent implements OnInit {
 
   public race: IRace;
   public myRace: IMyRace;
-  public displayLogin = false;
 
   public selectedRaceId: number;
-  public user: User;
   public raceStateObs$: Observable<RaceAppState>;
   public raceReducerSubscription: Subscription;
 
@@ -72,32 +70,22 @@ export class ViewRaceComponent implements OnInit {
 
   public loadRace() {
 
-     if (this.user) {
-        this.myRacesService.getMyRace(this.selectedRaceId).subscribe(
-                                      (myRace: IMyRace) => {
-                                        this.myRace = myRace;
-                                        this.race = myRace.race;
-                                      });
-      } else {
-          this.raceService.getRace(this.selectedRaceId).subscribe(
-            race => {
-              this.race = race;
-                    this.gtag.event('race_view', {
-                      method: 'view_race',
-                      event_category: 'race_crud',
-                      event_label: 'Viewed race ' + this.race.name
-                    });
-                  },
-            err => {
-                    this.errorHandler.handleError(err);
-                  }
-          );
-      }
+        this.raceService.getRace(this.selectedRaceId).subscribe(
+          race => {
+            this.race = race;
+                  this.gtag.event('race_view', {
+                    method: 'view_race',
+                    event_category: 'race_crud',
+                    event_label: 'Viewed race ' + this.race.name
+                  });
+                },
+          err => {
+                  this.errorHandler.handleError(err);
+                }
+        );
+
   }
 
-  public editRace() {
-    this.router.navigate([IJudyConstants.UPDATE_RACE_URI, this.selectedRaceId]);
-  }
 
   /**
     * Go back to main page
@@ -106,44 +94,5 @@ export class ViewRaceComponent implements OnInit {
   public cancel(event: any) {
      this.router.navigate([IJudyConstants.RACES_URI]);
   }
-  public isNotAssigned(): boolean {
-    return (this.isAssigned() === false);
-  }
-  public isAssigned(): boolean {
-    if (this.myRace) {
-      return this.myRace.myRaceStatus !== RaceStatus.NOT_ASSIGNED;
-    } else {
-      return false;
-    }
-  }
 
-  public addMyRace() {
-    const url = IJudyConstants.ADD_MY_RACE_URI + '/' + this.selectedRaceId;
-    this.store.dispatch(SetFormEditMode());
-
-    if (this.myRace ) {
-      this.router.navigate([url, this.selectedRaceId]);
-    } else {
-      this.store.dispatch(SetRedirectUrl({redirectUrl: url}));
-      this.displayLogin = true;
-    }
- }
-
- public updateRaceStatus(raceStatus: RaceStatus, raceId: number) {
-    if (this.userLoaded()) {
-      this.myRacesService.updateRaceStatus(raceId, raceStatus).subscribe(
-        (myRace) => {
-              const msg = 'Race status updated to ' + myRace.myRaceStatus;
-              this.messageService.add({severity: 'success', summary: 'Status Updated', detail: msg});
-          }
-      );
-    } else {
-      console.error('User not set');
-    }
-  }
-
-  private userLoaded(): boolean {
-    const userFound = this.user !== null && this.user !== undefined || this.user.user === true;
-    return userFound;
-  }
 }

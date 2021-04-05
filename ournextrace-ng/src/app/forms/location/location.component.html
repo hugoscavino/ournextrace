@@ -1,12 +1,14 @@
 <ijudy-steps [display]=displaySteps [activeIndex]=activeIndex></ijudy-steps>
+<div class="p-grid ">
+    <div class="p-col-12"></div>
+</div>
 <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
-    <div class="ui-g ui-fluid">
 
-            <div *ngIf='!addLocationOnly' class="ui-g-12 panelTitle">
-                    <div class="ui-g-3 label">
+            <div *ngIf='!addLocationOnly' class="p-grid panelTitle">
+                    <div class="p-col-2 label">
                       Existing Location
                     </div>
-                    <div class="ui-g-7">
+                    <div class="p-col-8">
                         <p-dropdown [options]="addresses" [filter]="true"
                             optionLabel="location" dataKey="id" showClear=true 
                             autoDisplayFirst=true 
@@ -14,119 +16,119 @@
                             formControlName="addressId">
                         </p-dropdown>
                     </div>
-                    <div class="ui-g-2 label" (click)="chooseExistingLocation()">
+                    <div class="p-col-2 label" (click)="chooseExistingLocation()">
                         <span>Finish&nbsp;
                             <i class="fas fa-check-circle fa-2x next-step"></i>
                         </span>
                     </div>
             </div>
-            <div class="ui-g-12 panelBody">
-                <div class="ui-g-3 label">
-                    Add New Location*
+            <div class="p-grid panelBody">
+                <div class="p-col-2 label">
+                    New Location*
                 </div>
-                <div class="ui-g-9 ">
-                    <input type="text" pInputText placeholder="Enter Location" id="location" formControlName="location">  
+                <div class="p-col-8">
+                    <input type="text" pInputText placeholder="Enter Location" id="location" formControlName="location" style="width: 80%;">  
                 </div>
+                <div class="p-col-2"></div>
             </div>
-            <div class="ui-g-12 panelBody">
-                <div class="ui-g-3 label">
-                    Street
+            <div class="p-grid panelBody">
+                <div class="p-col-2 label">Street</div>
+                <div class="p-col-8 ">
+                    <input type="text" pInputText placeholder="Enter Street Name" id="street" formControlName="street" style="width: 80%;">  
                 </div>
-                <div class="ui-g-9 ">
-                    <input type="text" pInputText placeholder="Enter Street Name" id="street" formControlName="street">  
-                </div>
+                <div class="p-col-2"></div>
             </div>
-            <div class="ui-g-12 panelBody">
-                <div class="ui-g-3 label">
-                    City
+            <div class="p-grid panelBody">
+                <div class="p-col-2 label">City</div>
+                <div class="p-col-8">
+                    <input type="text" pInputText placeholder="Enter City" id="city" formControlName="city" style="width: 80%;">
                 </div>
-                <div class="ui-g-9">
-                    <input type="text" pInputText placeholder="Enter City" id="city" formControlName="city">
-                </div>
+                <div class="p-col-2"></div>
             </div>          
-            <div class="ui-g-12 panelBody">
-                <div class="ui-g-3 label">
-                    State
-                </div>
-                <div class="ui-g-4 " >
+            <div class="p-grid panelBody">
+                <div class="p-col-2 label">State</div>
+                <div class="p-col-8 " >
                     <p-dropdown 
                         [options]="states" 
                         editable="true"
                         [filter]="true" 
                         filterBy="label,value"
                         formControlName="state" 
-                        placeholder="Select State">
+                        placeholder="Select State"
+                        [style]="{'width':'80%'}" >
                     </p-dropdown>
                 </div>
+                <div class="p-col-2"></div>
+            </div>
+            <div class="p-grid panelBody">
+                <div class="p-col-2 label">Zip</div>
+                <div class="p-col-8 " >
+                    <input type="text" pInputText placeholder="Enter Zip" id="zip" formControlName="zip" style="width: 80%;">  
                 </div>
-            <div class="ui-g-12 panelBody">
-                    <div class="ui-g-3 label">
-                    Zip
-                </div>
-                <div class="ui-g-4 " >
-                    <input type="text" pInputText placeholder="Enter Zip" id="zip" formControlName="zip">  
-                </div>
+                <div class="p-col-2 label"></div>
+
             </div>            
-            <div class="ui-g-12 panelBody">
-                <div class="ui-g-3 label">
+            <div class="p-grid panelBody">
+                <div class="p-col-2 label">
                     Country
                 </div>
-                <div class="ui-g-8 " >
+                <div class="p-col-8 " >
                     <p-dropdown 
                         [options]="countries" 
                         editable="true"
                         [filter]="true" 
                         filterBy="label,value"
                         formControlName="country" 
-                        placeholder="Select Country">
+                        placeholder="Select Country"
+                        [style]="{'width':'80%'}" >
                     </p-dropdown>
                 </div>
+                <div class="p-col-2"></div>
+
             </div>
-            <div class="ui-g-12 panelBody">
-                    <div class="ui-g-3 label">
-                        Phone
-                    </div>
-                    <div class="ui-g-9 event-url" >
-                        <div class="ui-inputgroup">
-                            <span class="ui-inputgroup-addon">
-                                <i class="fas fa-phone-square fa-1x"></i>
-                            </span>
-                            <p-inputMask
-                                mask="(999) 999-9999" placeholder="(999) 999-9999" formControlName="phone">
-                            </p-inputMask>
-                        </div>
-                    </div>
+            <div class="p-grid panelBody">
+                <div class="p-col-2 label">
+                    Phone
+                </div>
+                <div class="p-col-8 event-url" >
+                    <p-inputMask
+                        mask="(999) 999-9999" placeholder="(999) 999-9999" formControlName="phone" style="width: 80%;">
+                    </p-inputMask>
+                </div>
+                <div class="p-col-2"></div>
             </div>
-            <div class="ui-g-12 panelBottom">
-                <div class="ui-g-3 label">Notes</div>
-                <div class="ui-g-9 notes" >
+
+            <div class="p-grid panelBottom">
+                <div class="p-col-2 label">Notes</div>
+                <div class="p-col-8 notes" >
                     <textarea 
                         formControlName="notes" 
                         [cols]="30" 
                         pInputTextarea 
-                        autoResize="autoResize">
-                        </textarea>
+                        autoResize="autoResize" style="width: 80%;">
+                    </textarea>
                 </div>
+                <div class="p-col-2"></div>
             </div>
-          <div class="ui-g-12 button-panel ui-g-nopad">
-              <div class="ui-g-6" style="text-align: center;">
-                  <button style="font-size: 18px;width:auto;"  iconPos="left" (click)="cancel($event)"
-                        pButton type="button" icon="fas fa-arrow-left" 
-                        class="ui-button-rounded ui-button-danger" label=Cancel></button>
+          <div class="p-grid button-panel p-mt-3">
+                <div class="p-col-2" ></div>
+                <div class="p-col-4 p-text-center" >
+                  <button style="font-size: 18px;width:auto;" (click)="cancel($event)"
+                        pButton type="button"  
+                        class="p-button-rounded p-button-danger" label=Cancel></button>
               </div>
-              <div *ngIf='!addLocationOnly' class="ui-g-6"  style="text-align: center;">
-                <button style="font-size: 18px;" iconPos="left" (click)="onSubmit()"
-                        pButton type="button" icon="fas fa-map-marked-alt"
-                        class="ui-button-rounded ui-button-success" 
+              <div *ngIf='!addLocationOnly' class="p-col-4 p-text-center">
+                <button style="font-size: 18px;"  (click)="onSubmit()"
+                        pButton type="button" 
+                        class="p-button-rounded p-button-success " 
                         [disabled]=!locationChosen()
                         label="Finish"></button>
               </div>
-              <div *ngIf='addLocationOnly' class="ui-g-6"  style="text-align: center;">
-                <button style="font-size: 18px;width:auto;" iconPos="left" (click)="onSubmit()"
-                    pButton type="button" icon="fas fa-map-marked-alt"
+              <div *ngIf='addLocationOnly' class="p-col-4 p-text-center" >
+                <button style="font-size: 18px;width:auto;" (click)="onSubmit()"
+                    pButton type="button" 
                     class="ui-button-rounded ui-button-success" label="Add"></button>
               </div>
-
+              <div class="p-col-2" ></div>
           </div>
-    </div>
 </form>

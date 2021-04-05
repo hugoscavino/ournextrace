@@ -109,7 +109,7 @@ export class AddRaceComponent implements OnInit {
             event_label: 'Added race ' + this.race.name
           });
 
-          const url = IJudyConstants.ADD_MY_RACE_URI + '/' + this.race.id;
+          const url = IJudyConstants.LOCATION_URI  + '/' + this.race.id;
           this.router.navigate([url, { mode: 'step'}]);
         },
 

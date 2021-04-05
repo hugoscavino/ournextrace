@@ -1,77 +1,68 @@
-<ijudy-login [visible]=displayLogin></ijudy-login>
-<div class="ui-g">
-        <div class="ui-g-12 race-name" title="{{race.description}}">
+<div class="p-grid">
+        <div class="p-col-12 race-name" title="{{race.description}}">
           {{race.name}}
         </div>
-        <div class="ui-g-12 race-date ui-g-nopad" >
+        <div class="p-col-12 race-date " >
             {{race.date | date : 'EEE, LLL d y'}}
         </div>
-        <div class="ui-g-12 race-description">
+        <div class="p-col-12 race-description">
           <p-accordion>
             <p-accordionTab header="Race Details (Click for More...)" [selected]="false">
               {{race.description}}
             </p-accordionTab>
           </p-accordion>
         </div>
-        <div class="ui-g-12 race-details">
-          <div class="ui-g-12 ui-g-nopad">
-              <div class="ui-g-3 label">
-                Race Types
-              </div>
-              <div class="ui-g-9 race-body">
-                  <ul> 
-                      <li *ngFor="let raceType of race.raceTypes; let i = index"  title="{{raceType.desc}}">
-                        {{ raceType.name }}
-                      </li>
-                  </ul>
-             </div>
-          </div> 
-          <div class="ui-g-12 ui-g-nopad">
-            <div class="ui-g-3 label">
-              Web Site
-            </div>
-            <div class="ui-g-9 race-body">
-                <a href="{{race.url}}" target="_blank">Link to Race</a>
-           </div>
-        </div>                    
-          <div class="ui-g-12 ui-g-nopad">
-            <div class="ui-g-3 label">
-                  Location
-            </div>
-            <div class="ui-g-9 race-body" >
-                    <div class="ui-g-12 ui-g-nopad">
-                      <a href="https://www.google.com/maps/search/?api=1&query={{race.address.location}}" target="_new">
-                        <span>{{race.address.location}}</span>
-                      </a>
-                    </div>
-                    <div class="ui-g-12 ui-g-nopad">
-                      <span>{{race.address.street}}</span>
-                    </div>
-                    <div class="ui-g-12 ui-g-nopad">
-                      <span>{{race.address.city}}, {{race.address.state}}  {{race.address.zip}}</span>
-                    </div>
-                    <div class="ui-g-12 ui-g-nopad">
-                      <span>{{race.address.phone}}</span>
-                    </div>
-                    <div class="ui-g-12 ui-g-nopad">
-                      <span>{{race.address.notes}}</span>
-                    </div>
-            </div>
-          </div>
-          <div class="ui-g-12 ui-g-nopad">
-            <div class="ui-g-3 label"></div>
-            <div *ngIf="isNotAssigned()" class="ui-g-9">
-              <ijudy-interested [readonly]=true (click)="addMyRace()" [(raceStatus)]=attendingStatus></ijudy-interested>
-            </div>
-          </div>
+</div>
+<div class="p-grid race-details">
+        <div class="p-col-2 p-mt-2"></div>
+        <div class="p-col-2 p-mt-2 label">
+          Web Site
         </div>
-        <div class="ui-g-12 button-panel" style="text-align: center;">
-                    <button iconPos="left" 
-                            (click)="cancel($event)"
-                            pButton type="button" 
-                            icon="fas fa-times-circle" 
-                            class="ui-button-rounded"
-                            style="width:auto;" 
-                            label="Back"></button>
+        <div class="p-col-8 p-mt-2 race-body">
+            <a href="{{race.url}}" target="_blank">{{race.name}}</a>
+        </div>
+
+        <div class="p-col-2"></div>
+        <div class="p-col-2 label">
+            Race Types
+        </div>
+        <div class="p-col-8 race-body">
+          <ul> 
+            <li *ngFor="let raceType of race.raceTypes; let i = index"  title="{{raceType.desc}}">
+              {{ raceType.name }}
+            </li>
+           </ul>
+        </div>
+          
+          <div class="p-col-2"></div>
+          <div class="p-col-2 label">
+                Address&nbsp;<i class="fas fa-map-marker-alt"></i>
           </div>
+          <div class="p-col-8 race-body" >
+              <a href="https://www.google.com/maps/search/?api=1&query={{race.address.location}}" target="_new">
+                {{race.address.location}}
+              </a>
+              <br>
+              <span>{{race.address.street}}</span>
+              <br>
+              <span>{{race.address.city}}, {{race.address.state}} {{race.address.zip}}</span>
+              <br>
+              <span>{{race.address.phone}}</span>
+          </div>
+          
+          <div class="p-col-2"></div>
+          <div class="p-col-2 label">
+                Notes
+          </div>
+          <div class="p-col-8 race-body" >
+              <span>{{race.address.notes}}</span>
+          </div>
+
+          <div class="p-col-4 p-mb-4"></div>
+          <div class="p-col-4 p-text-center p-mb-4">
+              <button pButton type="button" label ="Back"
+                (click)="cancel($event)" style="width:auto;"
+                class="p-button-rounded"></button>
+          </div>
+          <div class="p-col-4 p-mb-4"></div>
     </div>

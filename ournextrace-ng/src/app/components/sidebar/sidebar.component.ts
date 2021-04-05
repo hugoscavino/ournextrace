@@ -56,33 +56,38 @@ export class SidebarComponent implements OnInit {
     this.showSideMenu(false);
     this.router.navigate([IJudyConstants.UPDATE_PROFILE_URI]);
   }
+  
   public routeToAddRace() {
     this.showSideMenu(false);
     this.router.navigate([IJudyConstants.ADD_RACE_URI]);
   }
+
   public SearchForEvents() {
     this.showSideMenu(false);
     this.router.navigate([IJudyConstants.RACES_URI]);
   }
+
   public routeToHomePage() {
     this.routeToRaces();
   }
+
   public routeToRaces() {
     this.showSideMenu(false);
     this.router.navigate([IJudyConstants.RACES_URI]);
   }
+
   public routeToManageRaces() {
     this.showSideMenu(false);
     this.router.navigate([IJudyConstants.RACE_MGR_URI]);
   }
+
   public routeToManageLocations() {
     this.showSideMenu(false);
     this.router.navigate([IJudyConstants.LOCATION_MGR_URI]);
   }
-  public routeToRegistration() {
-    this.showSideMenu(false);
-    this.router.navigate([IJudyConstants.REGISTER_URI]);
-  }
+
+  
+
   public routeToAddLocation() {
     this.showSideMenu(false);
     this.router.navigate([IJudyConstants.LOCATION_URI]);
@@ -92,6 +97,7 @@ export class SidebarComponent implements OnInit {
     this.showSideMenu(false);
     this.router.navigate([IJudyConstants.CONTACT_US_URI]);
   }
+
   public showLoginPanel() {
     this.visible = false;
     this.showLogin = true;
@@ -124,8 +130,5 @@ export class SidebarComponent implements OnInit {
     return this.userLoaded() && (this.user.admin);
   }
 
-  public userNotLoaded(): boolean {
-    return this.userLoaded() === false;
-  }
 
 }

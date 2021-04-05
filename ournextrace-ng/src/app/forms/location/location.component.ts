@@ -46,15 +46,16 @@ export class LocationComponent implements OnInit {
   ngOnInit() {
     this.address = new Address();
     this.selectedRaceId = this.activatedRoute.snapshot.params['raceId'] as number;
-    const value         = this.activatedRoute.snapshot.params[IJudyConstants.EDIT_MODE_KEY] as string;
+    const modeKey       = this.activatedRoute.snapshot.params[IJudyConstants.EDIT_MODE_KEY] as string;
     // console.log('value : ' + value);
-    if (value === RaceMode.STEP) {
+    if (modeKey === RaceMode.STEP) {
       this.mode = RaceMode.STEP;
       this.displaySteps = true;
     } else {
       this.displaySteps = false;
       this.mode = RaceMode.EDIT;
     }
+    
     if (this.selectedRaceId) {
       this.race = new Race();
       this.race.id = this.selectedRaceId;

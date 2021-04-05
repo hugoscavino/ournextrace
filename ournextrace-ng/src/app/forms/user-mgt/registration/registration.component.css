@@ -7,6 +7,7 @@ hr {
     font-weight: bold;
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
 }
+
 .value {
     text-align: left;
     font-size: 16px;
@@ -14,7 +15,7 @@ hr {
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
 }
 
-:host >>> .ui-card-header {
+:host >>> .p-card-header {
     padding-top: 15px;
     font-size: large;
     text-align: center;
@@ -22,15 +23,9 @@ hr {
     font-weight: bold;
 }
 
-:host >>> .ui-card-content {
+:host >>> .p-card-content {
    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
    font-size: large;
    font-weight: normal;
    font-size: 14px;
-}
-
-.center-div
-{
-     margin: 0 auto;
-     max-width: 400px;
 }
