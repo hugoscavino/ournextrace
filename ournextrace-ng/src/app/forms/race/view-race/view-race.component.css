@@ -21,34 +21,29 @@
 .race-name{
     color: black;
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-    font-size: 24px;
+    font-size: 1.75em;
     font-weight: bold;
     text-align: center;
-    border-top: solid 2px #DC0025;
-    border-right: solid 2px #DC0025;
-    border-left: solid 2px #DC0025;
 }
+
 .race-date{
     color: black;
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-    font-size: 22px;
+    font-size: 1.5em;
     font-weight: bold;
     text-align: center;
-    border-right: solid 2px #DC0025;
-    border-left: solid 2px #DC0025;
 }
+
 .race-description {
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-    text-align: left;
-    border-right: solid 2px #DC0025;
-    border-left: solid 2px #DC0025;
-    border-bottom: solid 2px #DC0025;
+    padding: 0em;
 }
 
 .race-details {
-    border-right: solid 2px #DC0025;
-    border-left: solid 2px #DC0025;
-    border-bottom: solid 3px #DC0025;
+    border-top: solid 2px lightgray;
+    border-right: solid 2px lightgray;
+    border-left: solid 2px lightgray;
+    border-bottom: solid 3px lightgray;
 }
 
 .button-panel{

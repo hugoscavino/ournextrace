@@ -14,6 +14,7 @@ import { RaceAppState, RaceStore, moduleKeyName } from 'src/app/ngrx/race.app.st
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/domain/user';
+import { min } from 'underscore';
 
 @Component({
   selector: 'ijudy-contact-us',
@@ -42,7 +43,6 @@ export class ContactUsComponent implements OnInit {
   ngOnInit() {
     this.contactUs = new ContactUs();
     this.contactForm = new FormGroup({
-      email: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)])),
       message: new FormControl(null),
     });
 
@@ -53,8 +53,6 @@ export class ContactUsComponent implements OnInit {
       map(state => {
             this.user = state.user;
             this.contactForm.patchValue({
-              email: this.user.email,
-              // formControlName2: myValue2 (can be omitted)
             });
          }
       )
@@ -63,9 +61,12 @@ export class ContactUsComponent implements OnInit {
   }
 
   public validForm(): boolean {
-    const isValid         = this.contactForm.controls['email'].valid;
-    const notARobot       = (this.captchaResponse && this.captchaResponse.length > 0);
-    return isValid && notARobot;
+    var msgHtml = this.contactForm.value['message'] as string;
+    
+    const validMsg : boolean = msgHtml && msgHtml.length > 23;
+
+    var notARobot = (this.captchaResponse && this.captchaResponse.length > 0);
+    return validMsg && notARobot;
   }
 
   public showResponse(event: any) {
@@ -92,7 +93,6 @@ export class ContactUsComponent implements OnInit {
 
   public onContactUs(event: any) {
 
-    this.contactUs.email   = this.contactForm.value['email'];
     this.contactUs.message = this.contactForm.value['message'];
     this.contactUs.captchaResponse = this.captchaResponse;
 
@@ -105,7 +105,7 @@ export class ContactUsComponent implements OnInit {
     // console.log('contactUs : ' + JSON.stringify(this.contactUs));
 
       this.authService.contactUs(this.contactUs).subscribe(
-        data => {
+        () => {
           this.messageService.add(
             {severity: 'info',
             summary: 'Message',

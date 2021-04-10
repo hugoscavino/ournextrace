@@ -32,7 +32,7 @@ export class ToolbarComponent implements OnInit  {
   public photo: string;
   public user: User;
 
-  public pageTitle = 'Races';
+  public pageTitle = 'Our Next Race';
   public raceStateObs$: Observable<RaceAppState>;
   public raceReducerSubscription: Subscription;
 
@@ -67,20 +67,20 @@ export class ToolbarComponent implements OnInit  {
       }),
       ).subscribe(
         data => {
-          // console.log('Loading header : ' + data.header);
+          //console.log('Loading header : ' + data.header);
           const header = data.header as string;
           switch (header) {
             case Header.WELCOME:
-                this.pageTitle = IJudyConstants.RACE_TITLE;
-                this.photo = IJudyConstants.IMG_ROOT + IJudyConstants.RACE_IMG;
+                this.pageTitle  = IJudyConstants.WELCOME_TITLE;
+                this.photo      = IJudyConstants.IMG_ROOT + IJudyConstants.RACE_IMG;
                 break;
             case Header.ABOUT_US:
-                this.pageTitle = IJudyConstants.ABOUT_US_TITLE;
-                this.photo = IJudyConstants.IMG_ROOT + IJudyConstants.RACE_IMG;
+                this.pageTitle  = IJudyConstants.ABOUT_US_TITLE;
+                this.photo      = IJudyConstants.IMG_ROOT + IJudyConstants.RACE_IMG;
                 break;
             case Header.RACES:
-                this.pageTitle = IJudyConstants.RACE_TITLE;
-                this.photo = IJudyConstants.IMG_ROOT + IJudyConstants.RACE_IMG;
+                this.pageTitle  = IJudyConstants.RACE_TITLE;
+                this.photo      = IJudyConstants.IMG_ROOT + IJudyConstants.RACE_IMG;
                 break;
             case Header.FORGOT:
                 this.pageTitle  = IJudyConstants.FORGOT_TITLE;

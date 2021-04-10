@@ -7,14 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutUsComponent implements OnInit {
 
-  public _showSideMenu: boolean;
-
   constructor() { }
 
   ngOnInit() {
-  }
-  public showSideMenu(value: boolean) {
-    this._showSideMenu = value;
   }
 
 }

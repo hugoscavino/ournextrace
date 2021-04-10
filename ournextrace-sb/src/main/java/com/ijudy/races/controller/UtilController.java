@@ -22,9 +22,6 @@ public class UtilController extends BaseController {
     @Value( "${spring.profiles.active}" )
     private String profile;
 
-    @Autowired
-    public BuildProperties buildProperties;
-
     @GetMapping(value ="/env")
     @ResponseBody
     public Environment getEnvironment() {
@@ -34,11 +31,11 @@ public class UtilController extends BaseController {
     @RequestMapping("/version")
     public Map<String, String> getCommitId() {
         Map<String, String> result = new HashMap<>();
-        result.put("Build Group", buildProperties.getGroup());
-        result.put("Build Name", buildProperties.getName());
-        result.put("Build Artifact", buildProperties.getArtifact());
-        result.put("Build Version", buildProperties.getVersion());
-        result.put("Build Time", buildProperties.getTime().toString());
+        result.put("Build Group", "OurNextRace");
+        result.put("Build Name", "OurNextRace");
+        result.put("Build Artifact", "OurNextRace");
+        result.put("Build Version", "3.0.0");
+        result.put("Build Time", "April 9, 2021");
         return result;
     }
 }

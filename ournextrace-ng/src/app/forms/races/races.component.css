@@ -3,14 +3,22 @@ a {
     text-decoration: #3d3d3d;
 }
 
+ul {
+    padding: 0;
+    margin: 15px;
+    list-style: disc;
+}
+
 .button-left {  
     float: right;
     padding: 10px;
 }
-:host >>> .ui-dataview-emptymessage{
+
+:host >>> .p-dataview-emptymessage{
     display: none;
 }
-:host >>> .ui-dataview .ui-dataview-content {
+
+:host >>> .p-dataview .p-dataview-content {
     padding: 0.5em 0em;
     border: 1px solid white;
 }
@@ -25,14 +33,16 @@ a {
     padding-top: 10px;
     border: 1px solid white;
 }
+
 .race-separator {
     display: block;
     margin: 0.5em 0em 0em 0em ;
     padding: 0; 
 }
 
+
 .col-header {
-    font-size: 14px;
+    font-size: 1em;
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: bold;
@@ -73,28 +83,9 @@ a {
     cursor: pointer;
 }
 
-.li-going {
-    color:green;
-    font-weight: 600;
-    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-    font-size: 14px;
-}
-
-.li-not-going {
-    color:black;
-    font-weight: 600;
-    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-    font-size: 14px;    
-}
-
 
 .filter-icon {
     cursor: grab;
-}
-
-.ticket{
-    font-size: 15px;
-    font-weight: bold;
 }
 
 .race-title {
@@ -105,52 +96,42 @@ a {
     font-weight: bold;
 }
 
-.private-icon {
-    color: midnightblue;
-    text-align: center;
-    line-height: 16px;
-    padding-top: 1em;
-}
-
-.race-location {
-    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-    color: #3d3d3d;
-    line-height: 19px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.paid {
-    padding-top: 5px;
-    text-align: left;
-    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-}
 
 .dayOfWeek {
-    text-align: center;
-    font-size: 18px;
+    padding-left: 0.5em;
+    text-align: left;
+    font-size: 1.25em;
     font-weight: 600;
     line-height: 18px;
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
     color:black;
 }
 .month {
-    text-align: center;
-    font-size: 17px;
+    padding-left: 0.5em;
+    text-align: left;
+    font-size: 1.25em;
     line-height: 20px;
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
     font-weight: bold;
     color:black;
 }
 .date {
-    text-align: center;
-    font-size: 24px;
+    padding-left: 0.5em;
+    text-align: left;
+    font-size: 1.5em;
     line-height: 28px;
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
     font-weight: bold;
     color:#e31837;
+}
+.year {
+    padding-left: 0.5em;
+    text-align: left;
+    font-size: 1em;
+    line-height: 16px;
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color:black;
 }
 
 .cancelled {
@@ -159,19 +140,13 @@ a {
     font-weight: bold;
     color:#e31837;
 }
+
 .hidden_date{
     color:white;
     visibility: hidden;
     font-size: 6px;
 }
 
-.year {
-    text-align: center;
-    font-size: 14px;
-    line-height: 16px;
-    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-    color:black;
-}
 
 .attending-race {
     border: 1px solid lightgray;
@@ -192,49 +167,6 @@ a {
     font-weight: bold;
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
 }
-
-.attending {
-    color: green;
-    padding-top: 10px;
-    padding-right: 10px;
-    text-align: left;
-    font-weight: bold;
-    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-}
-
-.registered {
-    padding-top: 10px;
-    padding-right: 10px;
-    text-align: left;
-    font-weight: bold;
-    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-}
-
-.volunteering {
-    padding-top: 10px;
-    text-align: left;
-    font-weight: bold;
-    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-}
-.hotel {
-    font-weight: bold;
-    padding-top: 10px;
-    text-align: left;
-    font-size: 14px;
-    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-}
-
-.edit-details {
-    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-    font-weight: normal;
-    float: right;
-    font-size: 22px;
-    line-height: 24px;
-    padding-top: 5px;
-    padding-right: 5px;    
-    cursor: pointer;
-}
-
 
 .filteredText {
     padding-top: 5px;

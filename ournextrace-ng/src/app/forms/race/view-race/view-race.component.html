@@ -1,20 +1,21 @@
 <div class="p-grid">
-        <div class="p-col-12 race-name" title="{{race.description}}">
-          {{race.name}}
-        </div>
-        <div class="p-col-12 race-date " >
-            {{race.date | date : 'EEE, LLL d y'}}
-        </div>
-        <div class="p-col-12 race-description">
-          <p-accordion>
-            <p-accordionTab header="Race Details (Click for More...)" [selected]="false">
-              {{race.description}}
-            </p-accordionTab>
-          </p-accordion>
-        </div>
+    <div class="p-col-12 race-name" title="{{race.description}}">
+      {{race.name}}
+    </div>
+    <div class="p-col-12 race-date " >
+        {{race.date | date : 'EEE, LLL d y'}}
+    </div>
+</div>    
+<div class="p-grid">
+    <div class="p-col-12 race-description">
+      <p-accordion>
+        <p-accordionTab header="Race Details (...)" [selected]="false">
+          {{race.description}}
+        </p-accordionTab>
+      </p-accordion>
+    </div>
 </div>
 <div class="p-grid race-details">
-        <div class="p-col-2 p-mt-2"></div>
         <div class="p-col-2 p-mt-2 label">
           Web Site
         </div>

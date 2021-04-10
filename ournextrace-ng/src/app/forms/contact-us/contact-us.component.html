@@ -2,9 +2,6 @@
   <form [formGroup]="contactForm">
     <div class="p-grid">
         <div class="p-col-12 ">
-            <p-message severity="error" text="enter a valid email" *ngIf="!contactForm.controls['email'].valid&&contactForm.controls['email'].dirty"></p-message>
-        </div>
-        <div class="p-col-12 ">
               <p-editor id="message" formControlName="message" [style]="{'height':'180px'}">
                   <p-header>
                       <span class="ql-formats">

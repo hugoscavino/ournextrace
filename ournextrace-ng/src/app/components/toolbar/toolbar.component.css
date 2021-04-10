@@ -1,55 +1,17 @@
-:host >>> .p-menubar {
-    background-color: white; /* Used if the image is unavailable */
-    border: 0px;
-    padding-bottom: 0px;
+.toolbar {
+    color: white;
 }
 
-:host >>> .ui-corner-top {
-    -moz-border-radius-topleft: 70px;
-    -webkit-border-top-left-radius: 70px;
-    border-top-left-radius: 70px;
-    
-    -moz-border-radius-topright: 20px;
-    -webkit-border-top-right-radius: 20px;
-    border-top-right-radius: 20px;
-  }
-
-.page-title-container {
-    text-align: right;
-    padding-bottom: 0px;
-    padding-top: 0px;
-    padding-left: 0px;
-    padding-right: 10px;
+.pageTitle {
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
     color: white;
     font-weight: bold;
+    font-size: 2.75em;
 }
 
-.page-title {
-    font-size: 20px;
-}
-
-.username {
-    font-size: 10px;
-    font-weight: normal;
-}
-
-.hamburger{
+.userName {
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
     color: white;
-    padding-top: 10px;
-    padding-bottom: 0px;
-    padding-left: 10px;
-    padding-right: 0px;
-}
-
-.toolbar {
-    padding-bottom: 0px;
-}
-
-a:hover { 
-    color:#007ad9;
-}
-
-a { 
-    color:white;
+    font-weight: bold;
+    font-size: 1.25em;
 }

@@ -6,6 +6,10 @@ export class IJudyConstants {
     static readonly ISO_DATE_FMT            = 'YYYY-MM-DD';
 
     static readonly IMG_ROOT               = '/assets/img/';
+    
+    static readonly WELCOME_URI            = 'welcome';
+    static readonly WELCOME_TITLE          = 'Our Next Race';
+    static readonly WELCOME_IMG            = 'welcome.jpg';
 
     static readonly CONTACT_US_URI         = 'contact-us';
     static readonly CONTACT_US_TITLE       = 'CONTACT US';
@@ -64,9 +68,7 @@ export class IJudyConstants {
     static readonly REGISTER_TITLE   = 'REGISTRATION';
     static readonly REGISTER_IMG     = 'top_banner.png';
 
-    static readonly WELCOME_URI     = 'welcome';
-    static readonly WELCOME_TITLE   = 'WELCOME';
-    static readonly WELCOME_IMG     = 'welcome.jpg';
+
 
     static readonly ABOUT_US_URI     = 'about-us';
     static readonly ABOUT_US_TITLE   = 'ABOUT US';

@@ -30,23 +30,23 @@
                 </div>
             </div>
             <div class="p-grid" >
-                    <div class="p-col-3 col-header" (click)="onSortDateClicked($event);">
+                    <div class="p-col-2 col-header" (click)="onSortDateClicked($event);">
                         Date
                     </div>
-                    <div class="p-col-3 col-header" (click)="onSortNameClicked($event);">
+                    <div class="p-col-5 col-header" (click)="onSortNameClicked($event);">
                         Name
                     </div>
                     <div  class="p-col-3 col-header"(click)="onSortLocationClicked($event)">
                         Location
                     </div>
-                    <div  class="p-col-3 col-header" (click)="onApplyJustMyRacesFilter($event)">
+                    <div  class="p-col-2 col-header" (click)="onApplyJustMyRacesFilter($event)">
                         Like
                     </div>
                 </div>
         </p-header>                
         <ng-template let-myRace pTemplate="listItem" >
             
-            <div class="p-col-3 " title="{{myRace.race.raceDateDesc}}">
+            <div class="p-col-2 " title="{{myRace.race.raceDateDesc}}">
                 <div class="dayOfWeek">{{myRace.race.date | date : 'EEE'}}</div>
                 <div class="month">{{myRace.race.date | date : 'LLL'}}</div>
                 <div class="date">{{myRace.race.date | date : 'd'}}</div>
@@ -56,12 +56,11 @@
                         Cancelled&nbsp;<i class="fas fa-ban"></i></div>
                 <span class="hidden_date">{{myRace.race.raceDateDesc}}</span>
             </div>
-            <div class="p-col-3 ">
+            <div class="p-col-5 ">
                 <a [routerLink]="['/view-race', myRace.race.id]">
                     {{myRace.race.name}}
                 </a>
                 <ul>
-                    <li><a href="{{myRace.race.url}}" target="_blank">Web Site <i class="fas fa-globe-americas"></i></a></li>
                     <li *ngFor="let raceType of myRace.race.raceTypes; let i = index" title="{{raceType.desc}}">
                         {{raceType.name}}
                     </li>
@@ -72,7 +71,7 @@
                     {{myRace.race.address.location}}
                 </span>
             </div>
-            <div class="p-col-3" (click)=raceLikedClicked(myRace) id="race_id_{myRace.race.id}">
+            <div class="p-col-2" (click)=raceLikedClicked(myRace) id="race_id_{myRace.race.id}">
                 <span *ngIf="myRace.myRaceStatus === 'NOT_ASSIGNED'" class="fa-stack" style="vertical-align: top;font-size: 1rem;color: #007ad9;">
                     <i class="far fa-heart fa-stack-1x"></i>
                 </span>
