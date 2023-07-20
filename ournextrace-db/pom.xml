@@ -13,6 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <db.driver>org.postgresql.Driver</db.driver>
+        <db.driver.version>42.6.0</db.driver.version>
         <db.name>ijudy</db.name>
     </properties>
 
@@ -25,7 +26,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.19</version>
+            <version>${db.driver.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -33,7 +34,7 @@
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
-                <version>4.3.2</version>
+                <version>4.23.0</version>
                 <configuration>
                     <propertyFile>/src/main/resources/liquibase.properties</propertyFile>
                     <changeLogFile>/src/main/resources/db/changelog/changelog-master.xml</changeLogFile>
@@ -51,7 +52,7 @@
                     <dependency>
                         <groupId>org.postgresql</groupId>
                         <artifactId>postgresql</artifactId>
-                        <version>42.2.19</version>
+                        <version>${db.driver.version}</version>
                     </dependency>
                 </dependencies>
                 <executions>
