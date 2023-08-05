@@ -7,7 +7,7 @@ public enum RoleNames {
     USER(1),
 
     /**
-     * User with additional priviliges
+     * User with additional privileges
      * to manage races and meta data
      */
     POWER_USER(2),

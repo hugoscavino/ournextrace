@@ -40,7 +40,7 @@
 		<url>ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/events</url>
 		<connection>SSH</connection>
 		<developerConnection>Hugo Scavino</developerConnection>
-		<tag>MAR-2021-RELEASE</tag>
+		<tag>AUG-2023-RELEASE</tag>
 	</scm>
 	<name>Our Next Race</name>
 	<url>ournextrace.com</url>

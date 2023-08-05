@@ -13,8 +13,8 @@ public interface MyRaceRepository extends CrudRepository<MyRaceEntity, MyRaceCom
      * races
      *
      * @param userId
-     * @return Set of MyRaceEntity objects where MyRaceEntity UserId
-     * is equal to the Logged in User's Id
+     * @return List<MyRaceEntity> Set of MyRaceEntity objects where MyRaceEntity UserId
+     * is equal to the Logged-in User's Id
      */
     List<MyRaceEntity> findByIdUserId(Long userId);
 }
