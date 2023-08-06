@@ -19,7 +19,7 @@ ul {
 }
 
 :host >>> .p-dataview .p-dataview-content {
-    padding: 0.5em 0em;
+    padding: 0.5em 0;
     border: 1px solid white;
 }
 
@@ -31,12 +31,15 @@ ul {
 
 :host >>> .p-dataview.p-dataview-list .p-dataview-content > .p-grid > div {
     padding-top: 10px;
-    border: 1px solid white;
+    border-top: 1px solid white;
+    border-right: 1px solid white;
+    border-left: 1px solid white;    
+    border-bottom: 1px solid lightgray;
 }
 
 .race-separator {
     display: block;
-    margin: 0.5em 0em 0em 0em ;
+    margin: 0.1em 0 0 0 ;
     padding: 0; 
 }
 
@@ -56,15 +59,12 @@ ul {
 }
 
 .race-header {
-    padding-top: 3px;
+    padding-top: 5px;
     height: 38px;
 }
 
 .search-box{
-    padding-top: 3px;
-    padding-bottom: 0px;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding: 3px 5px 0;
 }
 
 .quick-button {

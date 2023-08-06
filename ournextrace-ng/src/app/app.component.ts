@@ -5,12 +5,10 @@ import { Observable, Subscription } from 'rxjs';
 import { RaceAppState, RaceStore, moduleKeyName } from './ngrx/race.app.state';
 import { ResponsiveSizeInfoRx } from 'ngx-responsive';
 import { Store, select } from '@ngrx/store';
-import { Idle, DEFAULT_INTERRUPTSOURCES} from '@ng-idle/core';
 import { SetScreenSize, SetUser, RaceTypeInit } from './ngrx/race.actions';
 import { AuthService } from './service/auth';
 import { RacesService } from './service/races';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { IJudyConstants } from './util/constants';
 
 @Component({
   selector: 'ijudy-root',
@@ -32,7 +30,6 @@ export class AppComponent  implements OnInit, OnDestroy {
   constructor(
               public messageService: MessageService,
               public confirmationService: ConfirmationService,
-              public idle: Idle,
               public router: Router,
               public responsiveSizeInfoRx: ResponsiveSizeInfoRx,
               public authService: AuthService,
@@ -52,37 +49,6 @@ export class AppComponent  implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-      // sets an idle timeout of 5 seconds, for testing purposes.
-      this.idle.setIdle(environment.idle);
-
-      // sets a timeout period of 5 seconds. after 10 seconds of inactivity, the user will be considered timed out.
-      this.idle.setTimeout(environment.timeout);
-
-      // sets the default interrupts, in this case, things like clicks, scrolls, touches to the document
-      this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
-
-      this.idle.onIdleEnd.subscribe(
-          () => this.idleState = 'No longer idle.'
-        );
-
-      this.idle.onTimeout.subscribe(
-        () => {
-                this.idleState = 'Timed out!';
-                this.timedOut = true;
-                this.logout();
-              }
-      );
-
-      this.idle.onIdleStart.subscribe(
-            () => {
-              this.idleState = 'You\'ve gone idle!';
-              this.displayModal = true;
-            }
-        );
-
-      this.idle.onTimeoutWarning.subscribe(
-            (countdown: number) => this.idleState = 'You will time out in ' + countdown + ' seconds!'
-      );
 
     this.reset();
 
@@ -92,7 +58,6 @@ export class AppComponent  implements OnInit, OnDestroy {
 
   reset() {
     this.displayModal = false;
-    this.idle.watch();
     this.idleState = 'Started.';
     this.timedOut = false;
   }
@@ -100,19 +65,6 @@ export class AppComponent  implements OnInit, OnDestroy {
   public logout() {
       // Actual logic to perform a confirmation
       this.displayModal = false;
-      this.authService.logout().subscribe(
-        () => {
-          this.idle.stop();
-          this.messageService.add(
-            {
-              severity: 'success',
-              summary: 'Logoff',
-              detail: 'You have been logged off '
-            });
-            this.router.navigate([IJudyConstants.WELCOME_URI]);
-        }
-      );
-
   }
 
   private _subscribe(): void {

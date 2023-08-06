@@ -22,12 +22,6 @@
                             (keyup)="dv.filter($event.target.value)" 
                             placeholder="Search for a Race" >
                 </div>
-                <div *ngIf=!user class="p-col-1" title="Sign In" (click)="register()">
-                    <div><i class="fas fa-sign-in-alt fa-2x"></i></div>
-                </div>
-                <div *ngIf=user class="p-col-1" title="Sign In" (click)="showSideMenu()">
-                    <div><i class="fas fa-user-cog fa-2x"></i></div>
-                </div>
             </div>
             <div class="p-grid" >
                     <div class="p-col-2 col-header" (click)="onSortDateClicked($event);">
@@ -36,11 +30,8 @@
                     <div class="p-col-5 col-header" (click)="onSortNameClicked($event);">
                         Name
                     </div>
-                    <div  class="p-col-3 col-header"(click)="onSortLocationClicked($event)">
+                    <div  class="p-col-3 col-header" (click)="onSortLocationClicked($event)">
                         Location
-                    </div>
-                    <div  class="p-col-2 col-header" (click)="onApplyJustMyRacesFilter($event)">
-                        Like
                     </div>
                 </div>
         </p-header>                
@@ -66,18 +57,9 @@
                     </li>
                 </ul>
            </div>
-            <div class="p-col-3 ">
+            <div class="p-col-5 ">
                 <span class="race-location">
                     {{myRace.race.address.location}}
-                </span>
-            </div>
-            <div class="p-col-2" (click)=raceLikedClicked(myRace) id="race_id_{myRace.race.id}">
-                <span *ngIf="myRace.myRaceStatus === 'NOT_ASSIGNED'" class="fa-stack" style="vertical-align: top;font-size: 1rem;color: #007ad9;">
-                    <i class="far fa-heart fa-stack-1x"></i>
-                </span>
-                <span *ngIf="myRace.myRaceStatus === 'INTERESTED'" class="fa-stack" style="vertical-align: top;font-size: 1rem;color: #007ad9;">
-                    <i class="far fa-circle fa-stack-2x"></i>
-                    <i class="fas fa-heart fa-stack-1x"></i>
                 </span>
             </div>
         </ng-template>
