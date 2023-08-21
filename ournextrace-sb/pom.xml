@@ -46,12 +46,12 @@
 								</goals>
 								<configuration>
 									<!-- In git Bas Run -->
-									<!-- ssh-keyscan -t rsa 52.21.254.65 >> ~/.ssh/known_hosts -->
+									<!-- ssh-keyscan -t rsa XXXXX >> ~/.ssh/known_hosts -->
 									<target>
 										<!-- keyfile+passphrase or  password, choose one -->
 										<scp localFile="${project.basedir}/target/${project.artifactId}-${project.version}.jar"
-											 remoteToFile="ec2-user@52.21.254.65:/home/ec2-user/sb/ournextrace" verbose="true"
-											 keyfile="C:\pem\scavino-east.ppk"
+											 remoteToFile="ec2-user@XX.XX.XX.XX:/home/ec2-user/sb/ournextrace" verbose="true"
+											 keyfile="C:\XXX.ppk"
 											 passphrase="">
 										</scp>
 									</target>
