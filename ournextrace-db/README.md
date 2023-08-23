@@ -12,6 +12,9 @@ credentials anywhere in these scripts
 ### create schema
     ournextrace owner is ournextraceadmin
 
+    -- DROP SCHEMA IF EXISTS ournextrace;
+    CREATE SCHEMA IF NOT EXISTS ournextrace AUTHORIZATION ournextraceadmin;
+
 ### liquibase.properties example in src/main/resources
 
     changelogFile: ./db/changelog/changelog-master.xml
@@ -21,3 +24,20 @@ credentials anywhere in these scripts
     usern@me: <pg admin usr name>
     pa$$w0rd: <pg admin credentials>
 
+### Maven command
+
+    mvn liquibase:update
+
+### Manually Create Three Users
+
+Need at least one ADMIN (3)
+
+    INSERT INTO ournextrace."user"(
+    id, cred, email, active, name, city, state, country, first_name, last_name, zip, social_provider, last_login, last_updated)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+
+    INSERT INTO ournextrace."user"(
+    id, cred, email, active, name, city, state, country,
+    first_name, last_name, zip)
+    VALUES (3, '', 'admin@ijudy.com', true, 'admin', 'city', 'FL', 'USA', 'FIRST', 'LAST', '33544', '');
