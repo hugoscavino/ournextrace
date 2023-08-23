@@ -7,14 +7,13 @@ import { AuthService} from '../../service/auth';
 import { IJudyConstants } from '../../util/constants';
 import { HttpStatusCode} from '../../service/error-handler/status-codes';
 
-import { Gtag } from 'angular-gtag';
 import { ContactUs } from 'src/app/domain/contact-us';
 import { Observable, Subscription } from 'rxjs';
 import { RaceAppState, RaceStore, moduleKeyName } from 'src/app/ngrx/race.app.state';
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/domain/user';
-import { min } from 'underscore';
+
 
 @Component({
   selector: 'ijudy-contact-us',
@@ -34,8 +33,7 @@ export class ContactUsComponent implements OnInit {
     public store: Store<RaceStore>,
     private router: Router,
     private messageService: MessageService,
-    private authService: AuthService,
-    private gtag: Gtag) {
+    private authService: AuthService) {
     this.raceStateObs$ = store.pipe(select(moduleKeyName));
 
   }
@@ -95,14 +93,6 @@ export class ContactUsComponent implements OnInit {
 
     this.contactUs.message = this.contactForm.value['message'];
     this.contactUs.captchaResponse = this.captchaResponse;
-
-    this.gtag.event('ijudy_contact_us', {
-      method: 'onContactUs',
-      event_category: 'contact_us',
-      event_label: 'User sent us a message'
-    });
-
-    // console.log('contactUs : ' + JSON.stringify(this.contactUs));
 
       this.authService.contactUs(this.contactUs).subscribe(
         () => {

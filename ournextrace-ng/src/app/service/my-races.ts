@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
-import {  MyRace, RaceStatus, IRace, IMyRace } from '../domain/race';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {IMyRace, IRace, MyRace, RaceStatus} from '../domain/race';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
-import { HttpStatusCode } from './error-handler/status-codes';
 import * as moment from 'moment';
 
 
@@ -42,8 +41,7 @@ export class MyRacesService {
                     myRaces.map(
                         (oneMyRace: MyRace) => {
                             if (oneMyRace.race && oneMyRace.race.date) {
-                                const dateStr = this.datePipe.transform(oneMyRace.race.date, 'EEEE MMMM d y');
-                                oneMyRace.race.raceDateDesc = dateStr;
+                                oneMyRace.race.raceDateDesc = this.datePipe.transform(oneMyRace.race.date, 'EEEE MMMM d y');
                                 const momentDateObj = moment(oneMyRace.race.date);
                                 oneMyRace.race.date = momentDateObj.toDate();
                             }
@@ -54,92 +52,8 @@ export class MyRacesService {
             )
           );
     }
-
-    /**
-     * Save My Race
-     * @param myRace
-     */
-    public saveMyRace(myRace: IMyRace): Observable<IMyRace> {
-        return this.http.post<IMyRace>(myRaceRootUrl, myRace);
-    }
-    
     public likeUnLikeRace(myRace: IMyRace): Observable<IMyRace>  {
         // console.log('Updating : ' + JSON.stringify(raceView));
         return this.http.post<IMyRace>(myRaceRootUrl, myRace);
-    }
-
-    /**
-     * Update Race Status for My Race
-     * @param myRace
-     */
-    public updateRaceStatus(raceId: number, raceStatus: RaceStatus): Observable<IMyRace> {
-        const url = '/api/v2/race-status';
-        const race: IRace = {id: raceId}; // Part of the PK of UserId and RaceId
-        const myRace:  IMyRace = {race: race, myRaceStatus: raceStatus};
-        return this.http.patch<IMyRace>(url, myRace);
-    }
-
-    /**
-     * Delete one MyRace
-     * @param raceView
-     */
-    public deleteMyRace(raceId: number): Observable<IMyRace> {
-        // console.log('Deleting : ' + raceId);
-        const url = myRaceRootUrl + '/' + raceId;
-        return this.http.delete<IMyRace>(url);
-    }
-
-    /**
-     * Update one MyRace
-     * @param raceView
-     */
-    public updateMyRace(raceView: MyRace): Observable<MyRace>  {
-        // console.log('Updating : ' + JSON.stringify(raceView));
-        return this.http.put<MyRace>(myRaceRootUrl, raceView);
-    }
-
-
-
-    /**
-     * Get One MyRace given the Primary Key
-     *
-     * @param raceView
-     */
-    public getMyRace(raceId: number): Observable<MyRace>  {
-        const url = myRaceRootUrl + "/" + raceId;
-        return this.http.get<MyRace>(url);
-    }
-
-    public async getMyRaceCheck(raceId: number): Promise<boolean> {
-        const url = myRaceRootUrl + "/" + raceId;
-        const found =  await this.http.get<MyRace>(url).toPromise().then(
-            (myRace: IMyRace) => {
-                // console.log('Found My Race : ' + myRace.race.name);
-                return true;
-            },
-            (error: any) => {
-                if (error instanceof HttpErrorResponse) {
-                  const httpErrorCode = error.status;
-                  switch (httpErrorCode) {
-                      case HttpStatusCode.NOT_FOUND:
-                          console.log('Not Found My Race .. which is OK : ' + raceId);
-                          return false;
-                      default:
-                        return false;
-                  }
-                }
-            }
-        );
-
-        return found;
-    }
-
-     /**
-     * Get One MyRace given email
-     * @param myRace
-     */
-    public getJustMyRaces(): Observable<MyRace[]>  {
-        const url = '/api/justmyraces';
-        return this.http.get<MyRace[]>(url);
     }
 }

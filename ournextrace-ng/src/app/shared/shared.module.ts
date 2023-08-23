@@ -21,7 +21,6 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputMaskModule} from 'primeng/inputmask';
 import {PasswordModule} from 'primeng/password';
 import {EditorModule} from 'primeng/editor';
-import {CaptchaModule} from 'primeng/captcha';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
@@ -33,7 +32,6 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    CaptchaModule,
     DataViewModule,
     PanelModule,
     DialogModule,
@@ -60,7 +58,6 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    CaptchaModule,
     DataViewModule,
     PanelModule,
     DialogModule,

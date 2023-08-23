@@ -1,13 +1,3 @@
-<p-dialog header="Timed Out" [(visible)]="displayModal" 
-    [modal]="true" [style]="" [baseZIndex]="10000"
-    [draggable]="false" [resizable]="false">
-    <p>You have timed out. Would you like to log off?</p>
-    <p>{{idleState}}</p>
-        <p-footer>
-            <button type="button" pButton icon="pi pi-check" (click)="logout()" label="Log Off"></button>
-            <button type="button" pButton icon="pi pi-times" (click)="reset()" label="Remain" class="ui-button-secondary"></button>
-        </p-footer>
-</p-dialog>
 <div class="container">
     <header>
         <div class="p-col-12">

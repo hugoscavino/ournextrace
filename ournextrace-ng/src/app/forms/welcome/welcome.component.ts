@@ -11,6 +11,7 @@ import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/domain/user';
 import { ScreenSizeType, ScreenSizeValues } from 'src/app/domain/screen-size';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'ijudy-welcome',
@@ -53,12 +54,6 @@ export class WelcomeComponent implements OnInit {
   }
 
   public redirectToSearchPage(event: any): void {
-    if (this.selectedRaceTypes) {
-      const filters: ISearchFilters = {
-        selectedRaceTypes: this.selectedRaceTypes
-      };
-      this.store.dispatch(SetRaceFilter({filters: filters}));
-    }
     this.router.navigate([IJudyConstants.RACES_URI]);
   }
 

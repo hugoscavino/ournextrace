@@ -21,28 +21,13 @@ import { DropdownModule} from 'primeng/dropdown';
 import { FieldsetModule} from 'primeng/fieldset';
 import { ConfirmationService, MessageService} from 'primeng/api';
 
-import { AgGridModule } from 'ag-grid-angular';
-import { AgGridPrimengDatepickerEditorComponent} from './grid/ag-grid-primeng-datepicker/ag-grid-primeng-datepicker-editor.component';
-import { AgGridPrimeNgSelectEditorComponent} from './grid/ag-grid-primeng-select/ag-grid-primeng-select-editor.component';
-import { AgGridRaceTypeEditorComponent } from './grid/ag-grid-primeng-race-types/editor/ag-grid-race-type-editor.component';
-import { AgGridRaceTypeRendererComponent } from './grid/ag-grid-primeng-race-types/renderer/ag-grid-race-type-renderer.component';
-import { AgGridPrimengBooleanEditorComponent} from './grid/ag-grid-primeng-boolean/editor/ag-grid-boolean-editor.component';
-import { AgGridBooleanRendererComponent} from './grid/ag-grid-primeng-boolean/renderer/ag-grid-boolean-renderer.component';
-import { AgGridAddressRendererComponent} from './grid/ag-grid-primeng-location/renderer/address-renderer.component';
-import { AgGridAddressEditorComponent} from './grid/ag-grid-primeng-location/editor/address-editor.component';
-import { AgGridPrimeNgUserRendererComponent} from './grid/ag-grid-primeng-user/ag-grid-primeng-user-renderer.component';
-import { AgGridCrudRendererComponent} from './grid/ag-grid-primeng-crud/ag-grid-crud-renderer.component';
 import { RacesService} from '../service/races';
 import { AuthService } from '../service/auth';
+import { OurNextRaceToolbarModule } from './toolbar/toolbar-module';
+import {SelectRacesModule} from "./select-races/select-races-module";
+import {FilterComponentModule} from "./filter/filter-component-module";
+import {FooterComponentModule} from "./footer/footer-module";
 
-import { InterestedComponent } from './interested/interested.component';
-import { OptionsComponent } from './options/options.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { FooterComponent } from './footer/footer.component';
-import { StepsComponent } from './steps/steps.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { LoginComponent } from './login/login.component';
-import { RacesGridComponent } from './grid/races-grid.component';
 
 @NgModule({
 imports: [
@@ -66,18 +51,10 @@ imports: [
     ConfirmDialogModule,
     ReactiveFormsModule,
     FieldsetModule,
-    AgGridModule.withComponents([
-        AgGridPrimengDatepickerEditorComponent,
-        AgGridPrimeNgSelectEditorComponent,
-        AgGridRaceTypeEditorComponent,
-        AgGridPrimengBooleanEditorComponent,
-        AgGridPrimeNgUserRendererComponent,
-        AgGridAddressRendererComponent,
-        AgGridAddressEditorComponent,
-        AgGridCrudRendererComponent,
-        AgGridRaceTypeRendererComponent,
-        AgGridBooleanRendererComponent
-    ]),
+    OurNextRaceToolbarModule,
+    SelectRacesModule,
+    FilterComponentModule,
+    FooterComponentModule
 ],
 providers: [
     RacesService,
@@ -86,34 +63,11 @@ providers: [
     MessageService
 ],
 declarations: [
-    InterestedComponent,
-    OptionsComponent,
-    FooterComponent,
-    StepsComponent,
-    ToolbarComponent,
-    LoginComponent,
-    SidebarComponent,
-    AgGridPrimengDatepickerEditorComponent,
-    AgGridPrimeNgSelectEditorComponent,
-    AgGridRaceTypeEditorComponent,
-    AgGridPrimengBooleanEditorComponent,
-    AgGridPrimeNgUserRendererComponent,
-    AgGridAddressRendererComponent,
-    AgGridAddressEditorComponent,
-    AgGridCrudRendererComponent,
-    AgGridRaceTypeRendererComponent,
-    AgGridBooleanRendererComponent,
-    RacesGridComponent
+
 ],
 exports: [
-        InterestedComponent,
-        OptionsComponent,
-        LoginComponent,
-        FooterComponent,
-        StepsComponent,
-        ToolbarComponent,
-        RacesGridComponent,
-        SidebarComponent,
+
+        OurNextRaceToolbarModule,
         SplitButtonModule,
         ToastModule,
         SplitButtonModule,
@@ -123,6 +77,9 @@ exports: [
         CardModule,
         FieldsetModule,
         SidebarModule,
+        SelectRacesModule,
+        FilterComponentModule,
+        FooterComponentModule
     ]
 })
 

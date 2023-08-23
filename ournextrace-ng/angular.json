@@ -23,16 +23,15 @@
               { "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
-              },
+              }
             ],
             "styles": [
-              "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/nova/theme.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/quill/dist/quill.core.css",
               "node_modules/quill/dist/quill.snow.css",
-              "node_modules/ag-grid-community/dist/styles/ag-grid.css",
-              "node_modules/ag-grid-community/dist/styles/ag-theme-balham.css",
+              "node_modules/@ag-grid-community/all-modules/dist/styles/ag-grid.css",
+              "node_modules/@ag-grid-community/all-modules/dist/styles/ag-theme-balham.css",
               "src/styles.css",
               "node_modules/primeflex/primeflex.css"
             ],
@@ -57,7 +56,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -142,7 +140,6 @@
       }
     }
   },
-  "defaultProject": "ijudy-events-ng",
   "cli": {
     "analytics": false
   }

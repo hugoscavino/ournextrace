@@ -1,8 +1,6 @@
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <p-toast position="bottom-center" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" [baseZIndex]="5000"></p-toast>
-<ijudy-login [visible]=displayLogin></ijudy-login>
 <ijudy-filter [(visible)]=filterVisible></ijudy-filter>
-<ijudy-sidebar [(visible)]="displaySideMenu"></ijudy-sidebar>
 <div *ngIf=racesViews>
     <p-dataView #dv 
                 [value]="racesViews" 

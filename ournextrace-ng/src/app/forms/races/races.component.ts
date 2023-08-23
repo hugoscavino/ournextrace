@@ -11,14 +11,13 @@ import { SelectItem, MessageService, ConfirmationService} from 'primeng/api';
 import { InputText} from 'primeng/inputtext';
 
 import { RaceAppState, RaceStore, moduleKeyName } from '../../ngrx/race.app.state';
-import { SetRedirectUrl, SetFormEditMode } from '../../ngrx/race.actions';
 
 import { MyRacesService } from '../../service/my-races';
 import { RacesService} from '../../service/races';
 import { AppErrorHandler} from '../../service/error-handler/app-error-handler';
 
 import { User} from '../../domain/user';
-import { Race, MyRace, RaceStatus, RaceType, IRaceType, IMyRace, RaceStatusPrettyPrinter} from '../../domain/race';
+import { MyRace, RaceStatus, RaceType} from '../../domain/race';
 import { IJudyConstants} from '../../util/constants';
 import { ISearchFilters } from '../../domain/search-filters';
 import * as _ from 'underscore';

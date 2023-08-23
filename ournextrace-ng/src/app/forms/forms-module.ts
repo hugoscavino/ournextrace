@@ -1,48 +1,38 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {InputSwitchModule} from 'primeng/inputswitch';
-import { AccordionModule} from 'primeng/accordion';
-import { ConfirmDialogModule} from 'primeng/confirmdialog';
-import { CalendarModule} from 'primeng/calendar';
-import { MultiSelectModule} from 'primeng/multiselect';
-import { EditorModule} from 'primeng/editor';
-import { SharedComponentModule} from '../../app/components/shared-components';
-import { EditMyRaceComponent } from '../forms/myRace/edit-myrace/edit-myrace.component';
-import { ViewRaceComponent } from '../forms/race/view-race/view-race.component';
-import { AddMyRaceComponent } from '../forms/myRace/add-myrace/add-myrace.component';
-import {ConfirmationService} from 'primeng/api';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { WelcomeModule } from './welcome/welcome-module';
+import { RacesModule } from './races/races-module';
+import {ViewRaceModule} from "./race/view-race/view-race-module";
+import {LocationModule} from "./location/location-module";
+import {ContactUsModule} from "./contact-us/contact-us-module";
 
 @NgModule({
     imports: [
         CommonModule,
-        SharedComponentModule,
-        ConfirmDialogModule,
-        AccordionModule,
-        FormsModule,
-        MultiSelectModule,
         ReactiveFormsModule,
-        CalendarModule,
-        EditorModule,
-        InputSwitchModule
-
+        HttpClientModule,
+        RouterModule,
+        WelcomeModule,
+        RacesModule,
+        ViewRaceModule,
+        LocationModule,
+        ContactUsModule
     ],
     declarations: [
-        EditMyRaceComponent,
-        AddMyRaceComponent,
-        ViewRaceComponent
     ],
-    providers: [ConfirmationService],
     exports: [
         CommonModule,
-        SharedComponentModule,
-        ConfirmDialogModule,
-        EditMyRaceComponent,
-        AddMyRaceComponent,
-        ViewRaceComponent
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule,
+        WelcomeModule,
+        RacesModule,
+        ViewRaceModule,
+        LocationModule,
+        ContactUsModule
     ]
-    })
-
-    export class AppFormsModule {
-
-    }
+})
+export class OurNextRaceFormsModule {}

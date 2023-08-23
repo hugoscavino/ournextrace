@@ -3,14 +3,14 @@
     <div class="p-grid">
         <div class="p-col-12 ">
               <p-editor id="message" formControlName="message" [style]="{'height':'180px'}">
-                  <p-header>
-                      <span class="ql-formats">
-                           <button class="ql-bold"></button>
-                           <button class="ql-italic"></button>
-                           <button class="ql-underline"></button>
-                      </span>
-                      <span class="btn-label">Tell Us Something</span>
-                  </p-header>
+                  <ng-template pTemplate="header">
+                    <span class="ql-formats">
+                        <button type="button" class="ql-bold" aria-label="Bold"></button>
+                        <button type="button" class="ql-italic" aria-label="Italic"></button>
+                        <button type="button" class="ql-underline" aria-label="Underline"></button>
+                    </span>
+                    <span class="btn-label">Tell Us Something</span>
+                  </ng-template>
               </p-editor>
         </div>
 
@@ -30,7 +30,6 @@
 
         <div class="p-col-12" style="padding: 10px;">
             <div style="margin: 0 auto;width: 300px;">
-                <p-captcha style="width:auto;" siteKey="6LeCLI8UAAAAAA6hQxR-Fx3Bx1CJkgUmAHzX0zxQ" (onResponse)="showResponse($event)"></p-captcha>
             </div>
         </div>
       </div>
