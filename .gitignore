@@ -21,3 +21,5 @@ ournextrace-sb/src/main/webapp/WEB-INF/classes/
 
 ournextrace-db/target/
 ournextrace-db/.idea/
+/package-lock.json
+/ournextrace-db/package-lock.json
