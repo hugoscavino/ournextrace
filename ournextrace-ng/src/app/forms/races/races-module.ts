@@ -10,6 +10,7 @@ import { EditorModule} from 'primeng/editor';
 import { FilterComponentModule } from '../../components/filter/filter-component-module';
 import { RacesComponent } from './races.component';
 import { ConfirmationService} from 'primeng/api';
+import {DataViewModule} from "primeng/dataview";
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { ConfirmationService} from 'primeng/api';
         NgOptimizedImage,
         ToastModule,
         ConfirmDialogModule,
-        FilterComponentModule
+        FilterComponentModule,
+        DataViewModule
     ],
     declarations: [
         RacesComponent

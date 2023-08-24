@@ -108,10 +108,11 @@ public getMyRaces() {
 
     const beginDateStr = moment().format(IJudyConstants.ISO_DATE_FMT);
     const endDateStr = moment().add(1, 'year').format(IJudyConstants.ISO_DATE_FMT);
-
+    //console.log('getMyRaces called');
     this.myRacesService.getMyRaces(beginDateStr, endDateStr).subscribe(
         (races: MyRace[]) => {
-          this.originalRaceViews = races;
+            //console.log('getMyRaces subscribe called' + races.length);
+            this.originalRaceViews = races;
           this.racesViews = races;
         },
         err => {
