@@ -11,6 +11,8 @@ import { FilterComponentModule } from '../../components/filter/filter-component-
 import { RacesComponent } from './races.component';
 import { ConfirmationService} from 'primeng/api';
 import {DataViewModule} from "primeng/dataview";
+import {RouterLink} from "@angular/router";
+import {InputTextModule} from "primeng/inputtext";
 
 @NgModule({
     imports: [
@@ -23,7 +25,9 @@ import {DataViewModule} from "primeng/dataview";
         ToastModule,
         ConfirmDialogModule,
         FilterComponentModule,
-        DataViewModule
+        DataViewModule,
+        RouterLink,
+        InputTextModule
     ],
     declarations: [
         RacesComponent

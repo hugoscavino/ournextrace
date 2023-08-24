@@ -1,28 +1,26 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { LocationStrategy, PathLocationStrategy} from '@angular/common';
-import { Store, select } from '@ngrx/store';
-import { map } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {select, Store} from '@ngrx/store';
+import {map} from 'rxjs/operators';
+import {Observable, Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 import * as moment from 'moment';
 
-import { SelectItem, MessageService, ConfirmationService} from 'primeng/api';
-import { InputText} from 'primeng/inputtext';
+import {ConfirmationService, MessageService, SelectItem} from 'primeng/api';
+import {InputText} from 'primeng/inputtext';
 
-import { RaceAppState, RaceStore, moduleKeyName } from '../../ngrx/race.app.state';
+import {moduleKeyName, RaceAppState, RaceStore} from '../../ngrx/race.app.state';
 
-import { MyRacesService } from '../../service/my-races';
-import { RacesService} from '../../service/races';
-import { AppErrorHandler} from '../../service/error-handler/app-error-handler';
+import {MyRacesService} from '../../service/my-races';
+import {RacesService} from '../../service/races';
+import {AppErrorHandler} from '../../service/error-handler/app-error-handler';
 
-import { User} from '../../domain/user';
-import { MyRace, RaceStatus, RaceType} from '../../domain/race';
-import { IJudyConstants} from '../../util/constants';
-import { ISearchFilters } from '../../domain/search-filters';
+import {User} from '../../domain/user';
+import {MyRace, RaceStatus, RaceType} from '../../domain/race';
+import {IJudyConstants} from '../../util/constants';
+import {ISearchFilters} from '../../domain/search-filters';
 import * as _ from 'underscore';
-import { HttpErrorResponse } from '@angular/common/http';
-import { HttpStatusCode } from 'src/app/service/error-handler/status-codes';
 
 @Component({
   selector: 'ijudy-races',
@@ -74,11 +72,9 @@ export class RacesComponent implements OnInit {
   public raceStateObs$: Observable<RaceAppState>;
   public raceReducerSubscription: Subscription;
 
-  constructor(  public confirmationService: ConfirmationService,
-                public messageService: MessageService,
+  constructor(
                 public errorHandler: AppErrorHandler,
                 public router: Router,
-                public racesService: RacesService,
                 public myRacesService: MyRacesService,
                 public store: Store<RaceStore>) {
                 this.raceStateObs$ = store.pipe(select(moduleKeyName));
@@ -91,11 +87,9 @@ export class RacesComponent implements OnInit {
     this.sortLocationToggle = 'loc';
     this.filterLikeToggle   = 'like';
 
-
     this.raceReducerSubscription = this.raceStateObs$.pipe(
         map((state: RaceAppState) => {
               this.user       = state.user;
-              this.userFound  = state.user !== null;
               this.getMyRaces();
           }
         )
@@ -170,85 +164,4 @@ public onSortNameClicked(event: any) {
     }
   }
 
-  public register() {
-    this.displayLogin = true;
-  }
-
-  public showSideMenu(){
-    this.displaySideMenu = true;
-  }
-
-  public raceLikedClicked(myRace: MyRace) {
-
-    if (this.userNotLoaded() ) {
-      this.displayLogin = true;
-    } else {
-      this.displayLogin = false;
-      if (myRace.myRaceStatus === RaceStatus.INTERESTED){
-        myRace.myRaceStatus = RaceStatus.NOT_ASSIGNED;
-      } else {
-        myRace.myRaceStatus = RaceStatus.INTERESTED;
-      }
-      this.likeUnLikeTheRace(myRace);
-
-    }   
-  }
-
-  private likeUnLikeTheRace(myRace: MyRace){
-    console.info('Setting Like to ' + myRace.myRaceStatus)
-    this.myRacesService.likeUnLikeRace(myRace).subscribe(
-      (myRace) => {
-          this.getMyRaces();
-          var summaryMsg = 'UnLiked a Race';
-          var detailMsg = myRace.race.name + ' unLiked'; 
-          if (myRace.myRaceStatus === RaceStatus.INTERESTED){
-            summaryMsg = 'Liked a Race';
-            detailMsg = myRace.race.name + ' liked'
-          }
-          this.messageService.add(
-            {severity: 'success',
-            summary: summaryMsg,
-            detail: detailMsg});
-      },
-      error => {
-          if (error instanceof HttpErrorResponse) {
-              const httpErrorCode = error.status;
-              switch (httpErrorCode) {
-                  case HttpStatusCode.CONFLICT:
-                  this.messageService.add(
-                      {severity: 'warn',
-                      summary: 'Liked Races',
-                      detail: 'Race likeness not changed'});
-                      this.router.navigate([IJudyConstants.RACES_URI]);
-                      break;
-                  default:
-                      throw error;
-              }
-          }
-      }
-    );
-  }
-
-  public userNotLoaded(): boolean {
-    const userNotFound = this.user === null || this.user === undefined || this.user.user === false;
-    return userNotFound;
-  }
-
-  
-  public onApplyJustMyRacesFilter(event?: any) {
-
-    if (this.filterLikeToggle.indexOf('!') === 0) {
-      this.filterLikeToggle = this.filterLikeToggle.substring(1, this.filterLikeToggle.length);
-      this.racesViews = RacesComponent.filterJustMyRaces(this.originalRaceViews);
-    } else {
-      this.filterLikeToggle = '!' + this.filterLikeToggle;
-      this.racesViews = this.originalRaceViews;
-    }
-
-  }
-
-  public static filterJustMyRaces(racesViews: MyRace[]): MyRace[] {
-    const filtered: MyRace[] = racesViews.filter( OneRace => OneRace.myRaceStatus !== RaceStatus.NOT_ASSIGNED );
-    return filtered;
-  }
 }

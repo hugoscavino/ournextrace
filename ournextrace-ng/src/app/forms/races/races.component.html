@@ -1,6 +1,4 @@
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <p-toast position="bottom-center" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" [baseZIndex]="5000"></p-toast>
-<ijudy-filter [(visible)]=filterVisible></ijudy-filter>
 <div *ngIf=racesViews>
     <p-dataView #dv 
                 [value]="racesViews" 
@@ -18,7 +16,7 @@
                     <input  #filter_input pInputText type="search" 
                             class="input-search" 
                             (keyup)="dv.filter($event.target.value)" 
-                            placeholder="Search for a Race" >
+                            placeholder="Filter Races" >
                 </div>
             </div>
             <div class="grid" >

@@ -1,13 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
-import {IMyRace, IRace, MyRace, RaceStatus} from '../domain/race';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {IMyRace, MyRace} from '../domain/race';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
 import * as moment from 'moment';
-
-
-const CACHE_SIZE = 1;
 const myRacesRootUrl = '/api/v2/myRaces';
 const myRaceRootUrl  = '/api/v2/myRace';
 
@@ -52,8 +49,5 @@ export class MyRacesService {
             )
           );
     }
-    public likeUnLikeRace(myRace: IMyRace): Observable<IMyRace>  {
-        // console.log('Updating : ' + JSON.stringify(raceView));
-        return this.http.post<IMyRace>(myRaceRootUrl, myRace);
-    }
+
 }

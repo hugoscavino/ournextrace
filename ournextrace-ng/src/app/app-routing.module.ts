@@ -16,7 +16,7 @@ import { Header } from './domain/mode';
 
 const routes: Routes = [
   {
-    path: '',  component: WelcomeComponent,
+    path: '',  component: RacesComponent,
     pathMatch: 'full',
     data: {
       header: Header.WELCOME
