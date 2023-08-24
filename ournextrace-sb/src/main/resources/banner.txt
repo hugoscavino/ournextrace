@@ -6,8 +6,8 @@
   .-,_|___|_,-._//    (__) )(    |||_ .-,//|(_  
    \_)-' '-(_/(__)        (__)  (__)_) \_) (__) 
    
-:: Our Next Race :: Release : MAR 2020  ::
-:: CORONA RELEASE  ::
+:: Our Next Race :: Release : AUG 2023  ::
+:: ADELANTO RELEASE  ::
 --------------------------------------------------------------------------
 Application Name : ${application.title} - Ver : ${application.version}
 Application Formatted Version : ${application.formatted-version}

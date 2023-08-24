@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 @SpringBootApplication(scanBasePackages = { "com.ijudy" })
 @EnableWebSecurity
-@PropertySource(ignoreResourceNotFound = true, value = "classpath:db.properties")
 @PropertySource(ignoreResourceNotFound = true, value = "classpath:captcha.properties")
 public class Application extends SpringBootServletInitializer {
 

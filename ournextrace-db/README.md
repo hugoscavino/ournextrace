@@ -46,3 +46,8 @@ Need at least one ADMIN (3)
     id, cred, email, active, name, city, state, country,
     first_name, last_name, zip)
     VALUES (0, '', 'anonymous@ijudy.com', true, 'anonymous', 'city', 'FL', 'USA', 'FIRST', 'LAST', '33544');
+
+### Remote PostgreSQL
+Update roles so that Java client can login
+
+    ALTER ROLE "asunotest" WITH LOGIN;
