@@ -22,7 +22,6 @@ h4 {
 
 .container
 {
-     display: flex;
      align-items: center;
      justify-content: center;
 }
@@ -54,7 +53,7 @@ h4 {
 
 .frontSubTitle {
     font-size: 1rem;
-    color:black;
+    color:whitesmoke;
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
     text-align: center;
     font-weight: bold;
@@ -125,14 +124,12 @@ h4 {
  .headShotTitle{
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
     font-size: 16px;
-    font-weight: bold; 
-    text-align: left;
-    text-align: center;
+    font-weight: bold;
+     text-align: center;
 }
 .headShotTileText {
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
     font-size: 16px;
-    text-align: left;
     text-align: center;
 }
 

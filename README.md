@@ -20,11 +20,11 @@ Liquibase project was created to understand how this utility could be used eithe
 with Spring JPA. My employer is using this tool. Had it not been for that I would have just used
 data.sql and schema.sql in JPA.
 
-![Rrapidly manage database schema changes](site/liquibase.png)
+![Rapidly manage database schema changes](site/liquibase.png)
 
 ## ournextrace-ng
 The Angular project with the UI to connect to the RESTFUL Spring Boot application. This project is not
-complete. The UX became too complicated and I am reevaluating how to make the experience simpler and
+complete. The UX became too complicated, and I am reevaluating how to make the experience simpler and
 just expose a curated list of races where a user can save their "liked" races.
 
 The project contains service, ngrx for state management, custom components, PrimeNg components and an 
@@ -35,17 +35,20 @@ experience with it.
 Spring Boot REST API to obtain user and race information after being authenticated using OAUTH 2.0 API 
 connecting through to FaceBook and Google
 
-There are a suite of tests testing all the layers. 
+There are a suite of tests that test all the layers. 
 
     All the passwords and credentials have been removed
+
+### db.properties
+Update the properties files with the db credentials to connect to and start the db
 
 ## Overall Design
 ![overall design Angular to Spring Boot](site/design.png)
 
 OurNextRace is an easy-to-use Angular/Bootstrap UI that can find and save race information
 for the race going enthusiast. The Angular front-end communicates over REST to the Spring Boot 
-application located in the same JAR on an small EC2 instance. Previously the PostgreSQL database 
-was hosted on RDS but after the pandemic it was more cost effective to mothball the database and host 
+application located in the same JAR on a small EC2 instance. Previously the PostgresSQL database 
+was hosted on RDS but after the pandemic it was more cost-effective to mothball the database and host 
 PostgreSQL on the same server.
 
 There is no load balancer even though that would be a good place to store the HTTPS certificates.

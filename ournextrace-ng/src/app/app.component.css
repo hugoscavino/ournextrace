@@ -1,12 +1,10 @@
 .container {
-  display: flex;
   flex-direction: column;
   top: 0;
   border: 5px solid white;
 }
   
 header {
-    display: flex;
     align-items: center;
     height: 50px;
 }

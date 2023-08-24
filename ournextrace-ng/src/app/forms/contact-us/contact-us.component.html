@@ -1,7 +1,7 @@
 <p-toast position="bottom-center"></p-toast>
   <form [formGroup]="contactForm">
-    <div class="p-grid">
-        <div class="p-col-12 ">
+    <div class="grid">
+        <div class="col-12 ">
               <p-editor id="message" formControlName="message" [style]="{'height':'180px'}">
                   <ng-template pTemplate="header">
                     <span class="ql-formats">
@@ -14,21 +14,21 @@
               </p-editor>
         </div>
 
-        <div class="p-col-1"></div>
-        <div class="p-col-4 p-text-center">
+        <div class="col-1"></div>
+        <div class="col-4 text-center">
             <button pButton type="button" class="ui-button-secondary" label="Cancel" 
                     (click)="cancel($event)" ></button>
         </div>
-        <div class="p-col-1"></div>
+        <div class="col-1"></div>
 
-        <div class="p-col-1"></div>
-        <div class="p-col-4 p-text-center">
+        <div class="col-1"></div>
+        <div class="col-4 text-center">
             <button pButton type="button" label="Send" style="width:auto;" 
                     (click)="onContactUs($event)" [disabled]="!validForm()"></button>
         </div>
-        <div class="p-col-1"></div>
+        <div class="col-1"></div>
 
-        <div class="p-col-12" style="padding: 10px;">
+        <div class="col-12" style="padding: 10px;">
             <div style="margin: 0 auto;width: 300px;">
             </div>
         </div>

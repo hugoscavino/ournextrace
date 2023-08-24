@@ -10,32 +10,32 @@
                 [style]="{'border': '1px solid white'}"
                 >
         <p-header >
-            <div class="p-grid" >
-                <div class="p-col-1">
+            <div class="grid" >
+                <div class="col-1">
                     <i class="fas fa-search" style="line-height: 1.25;"></i>
                 </div>
-                <div class="p-col-10 ">
+                <div class="col-10 ">
                     <input  #filter_input pInputText type="search" 
                             class="input-search" 
                             (keyup)="dv.filter($event.target.value)" 
                             placeholder="Search for a Race" >
                 </div>
             </div>
-            <div class="p-grid" >
-                    <div class="p-col-2 col-header" (click)="onSortDateClicked($event);">
+            <div class="grid" >
+                    <div class="col-2 col-header" (click)="onSortDateClicked($event);">
                         Date
                     </div>
-                    <div class="p-col-5 col-header" (click)="onSortNameClicked($event);">
+                    <div class="col-5 col-header" (click)="onSortNameClicked($event);">
                         Name
                     </div>
-                    <div  class="p-col-3 col-header" (click)="onSortLocationClicked($event)">
+                    <div  class="col-3 col-header" (click)="onSortLocationClicked($event)">
                         Location
                     </div>
                 </div>
         </p-header>                
         <ng-template let-myRace pTemplate="listItem" >
             
-            <div class="p-col-2 " title="{{myRace.race.raceDateDesc}}">
+            <div class="col-2 " title="{{myRace.race.raceDateDesc}}">
                 <div class="dayOfWeek">{{myRace.race.date | date : 'EEE'}}</div>
                 <div class="month">{{myRace.race.date | date : 'LLL'}}</div>
                 <div class="date">{{myRace.race.date | date : 'd'}}</div>
@@ -45,7 +45,7 @@
                         Cancelled&nbsp;<i class="fas fa-ban"></i></div>
                 <span class="hidden_date">{{myRace.race.raceDateDesc}}</span>
             </div>
-            <div class="p-col-5 ">
+            <div class="col-5 ">
                 <a [routerLink]="['/view-race', myRace.race.id]">
                     {{myRace.race.name}}
                 </a>
@@ -55,7 +55,7 @@
                     </li>
                 </ul>
            </div>
-            <div class="p-col-5 ">
+            <div class="col-5 ">
                 <span class="race-location">
                     {{myRace.race.address.location}}
                 </span>
