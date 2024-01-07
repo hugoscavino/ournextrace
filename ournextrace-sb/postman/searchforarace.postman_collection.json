@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "a09afe25-e37f-45f3-bffc-f02726ae14f7",
+		"name": "searchforarace",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3624252"
+	},
+	"item": [
+		{
+			"name": "addresses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}{{api-context}}/addresses",
+					"host": [
+						"{{host}}{{api-context}}"
+					],
+					"path": [
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "races",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}{{api-context}}/races",
+					"host": [
+						"{{host}}{{api-context}}"
+					],
+					"path": [
+						"races"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "raceById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}{{api-context}}/race/4",
+					"host": [
+						"{{host}}{{api-context}}"
+					],
+					"path": [
+						"race",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "myRaces",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}{{api-context}}/myRaces",
+					"host": [
+						"{{host}}{{api-context}}"
+					],
+					"path": [
+						"myRaces"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "myRacesDates",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}{{api-context}}/myRaces?beginDate=2023-01-01&endDate=2025-01-01",
+					"host": [
+						"{{host}}{{api-context}}"
+					],
+					"path": [
+						"myRaces"
+					],
+					"query": [
+						{
+							"key": "beginDate",
+							"value": "2023-01-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2025-01-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}{{api-context}}/users",
+					"host": [
+						"{{host}}{{api-context}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "api-context",
+			"value": "/api/v2",
+			"type": "string"
+		}
+	]
+}
