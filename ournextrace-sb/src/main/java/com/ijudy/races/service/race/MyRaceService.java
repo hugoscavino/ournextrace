@@ -10,26 +10,12 @@ import java.util.Optional;
 public interface MyRaceService {
 
     /**
-     * Save and Update MyRace
-     *
-     * @param dto MyRaceDTO has registration information for the User's race
-     * @return The saved or updated MyRace
-     */
-    MyRaceDTO saveMyRace(MyRaceDTO dto);
-
-    /**
-     * Delete the MyRace from the list of registered races
-     * @param dto
-     */
-    void deleteMyRace(MyRaceDTO dto);
-
-    /**
      * Retrieve a list of all the users registered races. Will take the information from the
      * Principal's object.
      *
      * @see java.security.Principal
      *
-     * @Param userId Long the User's ID
+     * @param userId Long the User's ID
      * @return List of MyRaces
      */
     List<MyRaceDTO> getMyRaces(final Long userId);

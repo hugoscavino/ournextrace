@@ -3,7 +3,6 @@ package com.ijudy.races.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ijudy.races.dto.*;
 import com.ijudy.races.enums.MyRaceStatus;
-import com.ijudy.races.enums.SocialProvider;
 import com.ijudy.races.service.race.AddressService;
 import com.ijudy.races.service.race.MyRaceService;
 import com.ijudy.races.service.race.RaceService;
@@ -21,7 +20,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
@@ -35,7 +33,6 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-//@WebMvcTest(value = RacesController.class, useDefaultFilters = false)
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = {RacesController.class})
 @WebMvcTest
@@ -58,38 +55,27 @@ class RaceControllerTest  {
     @MockBean
     AddressService addressService;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
     private RaceDTO raceDTO = null;
     private UserDTO userDTO = null;
 
-    private RaceTypeDTO raceTypeDTO = null;
-    private Set<RaceTypeDTO> raceTypeDTOSet = new HashSet<>(3);
-    private List<RaceTypeDTO> raceTypeList = new ArrayList<>(3);
+    private final Set<RaceTypeDTO> raceTypeDTOSet = new HashSet<>(3);
+    private final List<RaceTypeDTO> raceTypeList = new ArrayList<>(3);
 
     private final Long RACE_ID = 1L;
     private final Long USER_ID = 1L;
     private final Long ADDRESS_ID = 1L;
     private final String HOTEL_NAME = "Some Hotel";
     private final String USER_NAME = "Test User";
-    private final String raceName = "Marathon Race";
-    private final String desc = "This Race is Great";
     private final LocalDate now = LocalDate.now();
-    private final String url = "www.google.com";
 
     /**
-     * https://stackoverflow.com/questions/21495296/spring-mvc-controller-test-print-the-result-json-string
+     * <a href="https://stackoverflow.com/questions/21495296/spring-mvc-controller-test-print-the-result-json-string">...</a>
      */
     @BeforeEach
     public void setUp() {
 
-        /*
-        mockMvc = MockMvcBuilders
-                .webAppContextSetup(context)
-                .alwaysDo(MockMvcResultHandlers.print())
-                .apply(springSecurity())
-                .build();
-        */
-        raceTypeDTO = RaceTypeDTO.builder().id(40L).desc("ironman").shortDesc("140.6").name("Ironman 140.6").build();
+        RaceTypeDTO raceTypeDTO = RaceTypeDTO.builder().id(40L).desc("ironman").shortDesc("140.6").name("Ironman 140.6").build();
         raceTypeDTOSet.add(raceTypeDTO);
         raceTypeList.add(raceTypeDTO);
         userDTO = UserDTO.builder()
@@ -101,6 +87,9 @@ class RaceControllerTest  {
 
         List<MyRaceDTO> set = new ArrayList<>(1);
         List<MyRaceDTO> list = new ArrayList<>(1);
+        String url = "www.google.com";
+        String desc = "This Race is Great";
+        String raceName = "Marathon Race";
         raceDTO = RaceDTO.builder()
                     .id(RACE_ID)
                     .name(raceName)
@@ -128,17 +117,12 @@ class RaceControllerTest  {
         set.add(myRaceDTO);
         list.add(myRaceDTO);
 
-        // User Service
-        Mockito.when(userService.findByEmailAndSocialProvider(any(), SocialProvider.ijudy.toString())).thenReturn(Optional.of(userDTO));
-
         // Race Service
         Mockito.when(raceService.getPublicRaces()).thenReturn(list);
         Mockito.when(raceService.findById(any())).thenReturn(Optional.of(raceDTO));
-        Mockito.when(raceService.updateRaceLocation(any(), any())).thenReturn(raceDTO);
         Mockito.when(raceService.getAllRaceTypes()).thenReturn(raceTypeList);
 
         // MyRace Service
-        Mockito.when(myRaceService.saveMyRace(any())).thenReturn(myRaceDTO);
         Mockito.when(myRaceService.getPublicAndMyRacesRaces(RACE_ID)).thenReturn(set);
         Mockito.when(myRaceService.getMyRace(any())).thenReturn(Optional.of(myRaceDTO));
 
@@ -177,7 +161,7 @@ class RaceControllerTest  {
     @Test
     void getAllRaceTypes() throws Exception {
 
-        ResultActions actions = mockMvc.perform(
+        mockMvc.perform(
                 get("/api/v2/racetypes")
                         .contentType(MediaType.APPLICATION_JSON))
                         .andDo(MockMvcResultHandlers.print())
@@ -190,7 +174,7 @@ class RaceControllerTest  {
     @Test
     void getOneRace() throws Exception {
 
-        ResultActions actions = mockMvc.perform(
+        mockMvc.perform(
                         get("/api/v2/race/{raceId}", RACE_ID)
                         .contentType(MediaType.APPLICATION_JSON))
                         .andDo(MockMvcResultHandlers.print())
@@ -202,7 +186,7 @@ class RaceControllerTest  {
     @Test
     void updateRaceLocation() throws Exception {
 
-        MvcResult mvcResult = mockMvc.perform(
+        mockMvc.perform(
                 put("/api/v2/race/{raceId}/{addressId}", RACE_ID, ADDRESS_ID)
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)

@@ -1,10 +1,11 @@
 package com.ijudy.races.entity;
 
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 
@@ -17,6 +18,7 @@ import java.io.Serializable;
 @Embeddable
 public class MyRaceCompKey implements Serializable {
 
+    public final static Long DEFAULT_USER = 0L;
     /**
      * Create a key with USER_ID and RACE_ID
      *

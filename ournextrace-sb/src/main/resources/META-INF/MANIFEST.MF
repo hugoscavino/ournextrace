@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
-Implementation-Title: Our Next Race
-Implementation-Version: 2.0.1-RELEASE
-Implementation-Vendor-Id: com.ournextrace
-Implementation-Vendor: Hugo Scavino
-Name: Our Next Race
-Specification-Title: OUr Next Race
-Specification-Version:  2.0.1-RELEASE
+Implementation-Title: Search for a Race
+Implementation-Version: 3.0.0-RELEASE
+Implementation-Vendor-Id: com.ijudy
+Implementation-Vendor: IJudy
+Name: Search for a Race
+Specification-Title: Search for a Race
+Specification-Version:  3.0.0-RELEASE
 

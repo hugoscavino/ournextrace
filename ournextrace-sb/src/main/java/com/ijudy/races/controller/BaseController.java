@@ -6,20 +6,15 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.ijudy.races.dto.UserDTO;
-import com.ijudy.races.security.UserUtils;
 import com.ijudy.races.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.security.Principal;
-import java.util.Optional;
 
 public abstract class BaseController {
 
 	@Autowired
 	protected UserService userService;
 
-	private ObjectMapper mapper =  new ObjectMapper();
+	private final ObjectMapper mapper =  new ObjectMapper();
 
 	protected ObjectMapper getMapper() {
 	    
@@ -41,9 +36,5 @@ public abstract class BaseController {
 		return mapper;
 	}
 
-	protected Optional<UserDTO> getUserDTO(Principal principal) {
-		return userService.findByEmailAndSocialProvider(UserUtils.getSocialUserKey(principal));
-	}
-	
 
 }

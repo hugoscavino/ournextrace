@@ -1,14 +1,14 @@
 package com.ijudy.races.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "role", schema = DatabaseMetadata.SCHEMA_NAME)
+@Table(name = "role")
 @Data
 public class RoleEntity {
 

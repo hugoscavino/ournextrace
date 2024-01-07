@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,8 +44,6 @@ class RaceServiceTest extends BaseIntegrationTest{
     @Autowired
     private MyRaceService myRaceService;
 
-    private static final Long ADDRESS_ID = 0L;
-    private static final Long AUTHOR_ID = 1L;
     private final String LOCATION = "Some Location";
     private final String raceName = "Marthon Race";
     private final String desc = "This Race is Great";
@@ -113,16 +111,6 @@ class RaceServiceTest extends BaseIntegrationTest{
     }
 
     @Test
-    void cloneRace() {
-        Long raceId = mockRaceEntity.getId();
-        LocalDate nextYearDate = LocalDate.now().plusYears(1);
-        RaceDTO dto = raceService.clone(raceId);
-        assertEquals(nextYearDate, dto.getDate());
-        RaceDTO raceDTO = raceService.findById(dto.getId()).get();
-        assertEquals(nextYearDate, raceDTO.getDate());
-    }
-
-    @Test
     void getOneRaceTest(){
         Long raceId = mockRaceEntity.getId();
         assertTrue(mockRaceEntity.getId() > 0);
@@ -140,20 +128,6 @@ class RaceServiceTest extends BaseIntegrationTest{
         assertNotNull(raceDTO.getAddress());
         assertEquals(LOCATION, raceDTO.getAddress().getLocation());
 
-        assertNotNull(mockRaceEntity.getRaceTypeEntities());
-        assertEquals(raceTypeEntities.size(), mockRaceEntity.getRaceTypeEntities().size());
-        assertEquals(raceTypeEntities.size(), raceDTO.getRaceTypes().size());
-    }
-
-    @Test
-    void updateRaceLocation(){
-        Long raceId = mockRaceEntity.getId();
-        final RaceDTO raceDTO = raceService.updateRaceLocation(raceId, ADDRESS_ID);
-        final Optional<AddressEntity> optionalAddressEntity = addressRepository.findById(ADDRESS_ID);
-        final AddressEntity addressEntity = optionalAddressEntity.get();
-
-        assertEquals(addressEntity.getLocation(), raceDTO.getAddress().getLocation());
-        assertEquals(addressEntity.getId(), raceDTO.getAddress().getId());
         assertNotNull(mockRaceEntity.getRaceTypeEntities());
         assertEquals(raceTypeEntities.size(), mockRaceEntity.getRaceTypeEntities().size());
         assertEquals(raceTypeEntities.size(), raceDTO.getRaceTypes().size());
@@ -179,17 +153,18 @@ class RaceServiceTest extends BaseIntegrationTest{
                                         .name("RaceType100")
                                         .description("Description for Race 100").build();
 
-        final RaceTypeEntity save = raceTypeRepository.save(raceTypeEntity);
+        raceTypeRepository.save(raceTypeEntity);
 
         List<RaceTypeDTO> allRaceTypes = raceService.getAllRaceTypes();
 
         assertNotNull(allRaceTypes);
-        assertTrue(allRaceTypes.size() > 0);
+        assertFalse(allRaceTypes.isEmpty());
 
         boolean found = false;
         for (RaceTypeDTO raceTypeDTO : allRaceTypes) {
-            if (raceTypeDTO.getId() == RaceTypeID) {
+            if (Objects.equals(raceTypeDTO.getId(), RaceTypeID)) {
                 found = true;
+                break;
             }
         }
 

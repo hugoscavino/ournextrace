@@ -1,0 +1,32 @@
+cors:
+    url: '*'
+logging:
+    level:
+        org:
+            springframework:
+                boot:
+                    autoconfigure: ERROR
+            hibernate: ERROR
+            hibernate.SQL: ERROR
+        root: ERROR
+        sql: ERROR
+        web: ERROR
+server:
+    address: localhost
+    port: 8080
+    servlet:
+        contextPath: /
+spring:
+    datasource:
+        url: jdbc:sqlite:searchforarace.db
+        driver-class-name: org.sqlite.JDBC
+    jpa:
+        database-platform: org.hibernate.community.dialect.SQLiteDialect
+        open-in-view: true
+        properties:
+            hibernate:
+                format_sql: true
+                show_sql: true
+                temp:
+                    use_jdbc_metadata_defaults: false
+        show-sql: true

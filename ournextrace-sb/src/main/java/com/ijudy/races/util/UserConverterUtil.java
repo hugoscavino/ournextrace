@@ -1,8 +1,6 @@
 package com.ijudy.races.util;
 
-import com.ijudy.races.dto.PasswordResetTokenDTO;
 import com.ijudy.races.dto.UserDTO;
-import com.ijudy.races.entity.PasswordResetTokenEntity;
 import com.ijudy.races.entity.RoleEntity;
 import com.ijudy.races.entity.UserEntity;
 import com.ijudy.races.enums.RoleNames;
@@ -89,23 +87,5 @@ public final class UserConverterUtil {
 
         return entityBuilder.build();
     }
-
-
-    /**
-     * Convert an PasswordResetTokenEntity Entity to a DTO
-     * @param entity
-     * @return PasswordResetTokenDTO
-     */
-    public static PasswordResetTokenDTO toDTO(PasswordResetTokenEntity entity){
-        if (entity != null) {
-            return PasswordResetTokenDTO.builder()
-                    .id(entity.getId())
-                    .userId(entity.getUserId())
-                    .token(entity.getToken())
-                    .expiryDate(entity.getExpiryDate())
-                    .build();
-        } else {
-            return null;
-        }
-    }
+    
 }

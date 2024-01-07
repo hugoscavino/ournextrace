@@ -6,7 +6,7 @@
   .-,_|___|_,-._//    (__) )(    |||_ .-,//|(_  
    \_)-' '-(_/(__)        (__)  (__)_) \_) (__) 
    
-:: Our Next Race :: Release : AUG 2023  ::
+:: Our Next Race :: Release : JAN 2024  ::
 :: ADELANTO RELEASE  ::
 --------------------------------------------------------------------------
 Application Name : ${application.title} - Ver : ${application.version}

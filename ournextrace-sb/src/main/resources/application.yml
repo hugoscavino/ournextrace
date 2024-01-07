@@ -1,0 +1,14 @@
+logging:
+    level:
+        org:
+            springframework:
+                boot:
+                    autoconfigure: ERROR
+search:
+    days:
+        back: 7
+spring:
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+    profiles:
+        active: local

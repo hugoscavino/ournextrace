@@ -6,16 +6,13 @@ import com.ijudy.races.dto.RaceTypeDTO;
 import com.ijudy.races.dto.UserDTO;
 import com.ijudy.races.entity.MyRaceCompKey;
 import com.ijudy.races.entity.MyRaceEntity;
-import com.ijudy.races.entity.RaceEntity;
 import com.ijudy.races.entity.RaceTypeEntity;
 import com.ijudy.races.repository.MyRaceRepository;
-import com.ijudy.races.repository.RaceRepository;
 import com.ijudy.races.service.race.MyRaceService;
 import com.ijudy.races.service.race.RaceService;
 import com.ijudy.races.service.user.UserService;
 import com.ijudy.races.util.RaceConverterUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -28,51 +25,20 @@ public class MyRaceServiceImpl implements MyRaceService {
     public static final Long ANONYMOUS_USER_ID = 0L;
 
     private final MyRaceRepository myRaceRepository;
-    private final RaceRepository raceRepository;
     private final RaceService raceService;
     private final UserService userService;
 
-    public MyRaceServiceImpl(MyRaceRepository myRaceRepository, RaceRepository raceRepository, RaceService raceService, UserService userService) {
+    public MyRaceServiceImpl(MyRaceRepository myRaceRepository, RaceService raceService, UserService userService) {
         this.myRaceRepository = myRaceRepository;
-        this.raceRepository = raceRepository;
         this.raceService = raceService;
         this.userService = userService;
     }
 
-    @Override
-    public MyRaceDTO saveMyRace(final MyRaceDTO dto) {
-
-        MyRaceEntity entity = RaceConverterUtil.toEntity(dto);
-        MyRaceEntity savedEntity = myRaceRepository.save(entity);
-
-        // Set the RaceTypes from the Saved Entity
-        dto.setRaceTypes(RaceConverterUtil.toDTO(savedEntity.getRaceTypeEntities()));
-
-        // Set Race
-        // TODO Find a way for JPA to get this relationship
-        Optional<RaceEntity> raceEntity = raceRepository.findById(savedEntity.getId().getRaceId());
-        raceEntity.ifPresent(
-                foundRaceEntity -> {
-                    RaceDTO raceDTO = RaceConverterUtil.toDTO(foundRaceEntity);
-                    dto.setRaceDTO(raceDTO);
-                }
-        );
-        log.info("Saved " + dto.getRaceDTO().getId() + " for the user's list ");
-        return dto;
-    }
-
-    @Override
-    public void deleteMyRace(MyRaceDTO dto) {
-        // MyRaceCompKey(Long userId, Long raceId){
-        MyRaceCompKey pk = new MyRaceCompKey(dto.getUserDTO().getId(), dto.getRaceDTO().getId());
-        myRaceRepository.deleteById(pk);
-        log.info("deleted " + dto.getRaceDTO().getId() + " from the user's list ");
-    }
 
     @Override
     public List<MyRaceDTO> getMyRaces(final Long userId) {
 
-        if (userId != ANONYMOUS_USER_ID) {
+        if (!Objects.equals(userId, ANONYMOUS_USER_ID)) {
             List<MyRaceEntity> myRaceEntities = myRaceRepository.findByIdUserId(userId);
             log.info("Found " + myRaceEntities.size() + " race entities");
             Optional<UserDTO> user = userService.findById(userId);
@@ -100,7 +66,7 @@ public class MyRaceServiceImpl implements MyRaceService {
 
         } else {
             log.info("No My Race Loaded for Anonymous User");
-            return new ArrayList<MyRaceDTO>();
+            return new ArrayList<>();
         }
 
     }
@@ -164,7 +130,7 @@ public class MyRaceServiceImpl implements MyRaceService {
 
                     if (mergeThisRace){
                         boolean isPublic     = dto.isPublic();
-                        boolean iAmTheAuthor = dto.getAuthor().getId() == userId;
+                        boolean iAmTheAuthor = Objects.equals(dto.getAuthor().getId(), userId);
                         if (isPublic) {
                             mergedRaces.add(aPublicRace);
                         } else if (iAmTheAuthor){
@@ -184,8 +150,7 @@ public class MyRaceServiceImpl implements MyRaceService {
         Optional<MyRaceEntity> optionalMyRaceEntity = myRaceRepository.findById(pk);
 
         if (optionalMyRaceEntity.isPresent()){
-            Optional<MyRaceDTO> dto = toDTO(optionalMyRaceEntity.get());
-            return dto;
+            return toDTO(optionalMyRaceEntity.get());
         } else {
             log.warn("There was no myRace for pk : " + pk);
             return Optional.empty();
@@ -208,21 +173,17 @@ public class MyRaceServiceImpl implements MyRaceService {
         Long raceId = myRaceEntity.getId().getRaceId();
         Optional<RaceDTO> raceDTO = raceService.findById(raceId);
 
-        if (raceDTO.isEmpty()){
-            return Optional.empty();
-        } else {
-            return Optional.of(MyRaceDTO.builder()
-                    .raceTypes(raceTypesSet)
-                    .modifiedDate(myRaceEntity.getModifiedDate())
-                    .cost(myRaceEntity.getCost())
-                    .hotelName(myRaceEntity.getHotelName())
-                    .isPaid(myRaceEntity.isPaid())
-                    .notes(myRaceEntity.getNotes())
-                    .registrationDate(myRaceEntity.getRegistrationDate().atStartOfDay())
-                    .myRaceStatus(myRaceEntity.getMyRaceStatus())
-                    .raceDTO(raceDTO.get())
-                    .userDTO(userDTO.get())
-                    .build());
-        }
+        return raceDTO.map(dto -> MyRaceDTO.builder()
+                .raceTypes(raceTypesSet)
+                .modifiedDate(myRaceEntity.getModifiedDate())
+                .cost(myRaceEntity.getCost())
+                .hotelName(myRaceEntity.getHotelName())
+                .isPaid(myRaceEntity.isPaid())
+                .notes(myRaceEntity.getNotes())
+                .registrationDate(myRaceEntity.getRegistrationDate().atStartOfDay())
+                .myRaceStatus(myRaceEntity.getMyRaceStatus())
+                .raceDTO(dto)
+                .userDTO(userDTO.get())
+                .build());
     }
 }

@@ -2,7 +2,6 @@ package com.ijudy.races.service.race.impl;
 
 import com.ijudy.races.dto.AddressDTO;
 import com.ijudy.races.entity.AddressEntity;
-import com.ijudy.races.exception.NotFoundException;
 import com.ijudy.races.repository.AddressRepository;
 import com.ijudy.races.service.race.AddressService;
 import com.ijudy.races.util.RaceConverterUtil;
@@ -49,12 +48,7 @@ public class AddressServiceImpl implements AddressService {
     public AddressDTO getAddress(long addressId) {
 
         Optional<AddressEntity> addressEntityOptional = addressRepository.findById(addressId);
-
         AddressEntity entity = addressEntityOptional.get();
-        if (entity == null){
-            throw new NotFoundException("Address with id " + addressId + " was not found");
-        }
-
         return RaceConverterUtil.toDTO(entity);
     }
 }

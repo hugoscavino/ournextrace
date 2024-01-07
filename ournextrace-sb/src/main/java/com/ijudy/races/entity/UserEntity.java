@@ -1,16 +1,16 @@
 package com.ijudy.races.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "user", schema = DatabaseMetadata.SCHEMA_NAME)
+@Table(name = "user")
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,7 +18,7 @@ import java.util.Set;
 public class UserEntity {
 
     @Id()
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String cred;
     private String email;
@@ -46,7 +46,7 @@ public class UserEntity {
     private LocalDateTime lastUpdated;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="user_role", schema = DatabaseMetadata.SCHEMA_NAME,
+    @JoinTable(name="user_role",
             joinColumns         = @JoinColumn(name = "user_id"),
             inverseJoinColumns  = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roleEntities;

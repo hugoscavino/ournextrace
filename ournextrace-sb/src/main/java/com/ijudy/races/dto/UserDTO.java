@@ -1,6 +1,5 @@
 package com.ijudy.races.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -15,7 +14,6 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -25,10 +23,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class UserDTO implements Serializable{
+public class UserDTO {
 
-	@JsonIgnore
-	private static final long serialVersionUID = -9113537015115689711L;
 
 	private Long id;
 

@@ -20,12 +20,6 @@ public interface RaceService {
      */
     List<MyRaceDTO> getPublicRaces();
 
-    /**
-     * Get Races in this range
-     * @param startDate
-     * @param endDate
-     * @return
-     */
     List<MyRaceDTO> getPublicRaces(LocalDate startDate, LocalDate endDate);
     
     /**
@@ -50,12 +44,6 @@ public interface RaceService {
      */
     RaceDTO save(RaceDTO raceDTO);
 
-    /**
-     * Clone a race for the next year
-     * @param raceId
-     * @return newly cloned and saved Race
-     */
-    RaceDTO clone(long raceId );
 
     /**
      * List of all the Race Types
@@ -63,14 +51,4 @@ public interface RaceService {
      */
     List<RaceTypeDTO> getAllRaceTypes();
 
-    /**
-     * Update the location of the Race
-     * @param raceId The Race Id
-     * @param addressId The Address Id
-     * @return RaceDTO The updated RaceDTO
-     */
-    RaceDTO updateRaceLocation(Long raceId, Long addressId);
-
-
-    RaceDTO delete(Long raceId);
 }

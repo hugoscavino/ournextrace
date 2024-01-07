@@ -1,16 +1,16 @@
 package com.ijudy.races.entity;
 
 import com.ijudy.races.enums.MyRaceStatus;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "my_race", schema = DatabaseMetadata.SCHEMA_NAME)
+@Table(name = "my_race")
 @Data
 @NoArgsConstructor
 public class MyRaceEntity {
@@ -39,8 +39,8 @@ public class MyRaceEntity {
      */
     @OneToMany
     @JoinTable
-        (name="my_race_race_type", schema = DatabaseMetadata.SCHEMA_NAME,
-        joinColumns         = {
+        (name="my_race_race_type",
+                joinColumns         = {
                 @JoinColumn(name = "user_id"),
                 @JoinColumn(name = "race_id"),
         },

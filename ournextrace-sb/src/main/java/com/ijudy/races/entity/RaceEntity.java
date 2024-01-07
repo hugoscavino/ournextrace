@@ -1,18 +1,17 @@
 package com.ijudy.races.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "races", schema = DatabaseMetadata.SCHEMA_NAME)
+@Table(name = "races")
 @Data
 @Builder
 @NoArgsConstructor
@@ -52,7 +51,7 @@ public class RaceEntity {
     private AddressEntity address;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="race_race_type", schema = DatabaseMetadata.SCHEMA_NAME,
+    @JoinTable(name="race_race_type",
             joinColumns         = @JoinColumn(name = "race_id"),
             inverseJoinColumns  = @JoinColumn(name = "race_type_id"))
     private Set<RaceTypeEntity> raceTypeEntities;
@@ -73,14 +72,5 @@ public class RaceEntity {
         clone.setAddress(raceEntity.getAddress());
         return clone;
     }
-
-    public static Set<RaceTypeEntity> cloneRaceTypes(Set<RaceTypeEntity> set){
-        Set<RaceTypeEntity> clone = new HashSet<>(set.size());
-        for (RaceTypeEntity entity: set) {
-            clone.add(RaceTypeEntity.clone(entity));
-        }
-        return clone;
-    }
-
 
 }
