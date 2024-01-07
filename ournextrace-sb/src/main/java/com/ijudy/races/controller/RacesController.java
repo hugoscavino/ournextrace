@@ -20,7 +20,7 @@ import java.util.Optional;
 @Slf4j
 public class RacesController extends BaseController{
 
-    static final Long anonymousUserId = 0L;
+    static final Long ANONYMOUS_USER_ID = 0L;
 
     public RacesController(RaceService raceService,MyRaceService myRaceService) {
         this.raceService = raceService;
@@ -39,7 +39,7 @@ public class RacesController extends BaseController{
 
     @GetMapping("/race/{raceId}")
     @ResponseBody
-    public Optional<RaceDTO> getRaceById(@PathVariable Long raceId) {
+    public Optional<RaceDTO> getRaceById(@PathVariable("raceId") Long raceId) {
         return raceService.findById(raceId);
     }
 
@@ -52,17 +52,16 @@ public class RacesController extends BaseController{
      */
     @GetMapping("/myRaces")
     @ResponseBody
-    public List<MyRaceDTO> publicAndMyRaces(@RequestParam("beginDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate beginDate,
-                                            @RequestParam("endDate")   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+    public List<MyRaceDTO> publicRaces(@RequestParam(name = "beginDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate beginDate,
+                                            @RequestParam(name = "endDate", required = false)   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
         boolean hasDates = beginDate != null  && endDate != null;
         List<MyRaceDTO> races;
-        Long userIdToSearchWIth = anonymousUserId;
 
         if (hasDates){
-            races = myRaceService.getPublicAndMyRacesRaces(beginDate, endDate, userIdToSearchWIth );
+            races = myRaceService.getPublicAndMyRacesRaces(beginDate, endDate, ANONYMOUS_USER_ID );
         } else {
-            races = myRaceService.getPublicAndMyRacesRaces(userIdToSearchWIth);
+            races = myRaceService.getPublicAndMyRacesRaces(ANONYMOUS_USER_ID);
         }
 
         return races;

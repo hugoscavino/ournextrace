@@ -38,14 +38,6 @@ public interface RaceService {
     Optional<RaceDTO> findById(Long raceId);
 
     /**
-     * Save ( or update) one RaceDTO to the repository
-     * @param raceDTO The Race to save or update
-     * @return RaceDTO The saved/updated Race
-     */
-    RaceDTO save(RaceDTO raceDTO);
-
-
-    /**
      * List of all the Race Types
      * @return List<RaceTypeDTO>
      */

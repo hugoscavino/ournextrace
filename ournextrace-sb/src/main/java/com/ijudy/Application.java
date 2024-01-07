@@ -6,10 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.ApplicationPidFileWriter;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
 
 @SpringBootApplication(scanBasePackages = { "com.ijudy" })
-@EnableWebSecurity
 public class Application extends SpringBootServletInitializer {
 
 	@Override

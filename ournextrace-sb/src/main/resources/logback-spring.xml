@@ -77,18 +77,6 @@
 		</logger>
 	</springProfile>
 
-	<springProfile name="prod">
-		<logger name="org.springframework.security" level="info" additivity="false">
-				<appender-ref ref="RollingFile" />
-		</logger>
-	</springProfile>
-
-	<springProfile name="local | ng">
-	    <logger name="org.springframework.security" level="info" additivity="false">
-	        	<appender-ref ref="Console" />
-	    </logger>
-	</springProfile>  
-
 	<springProfile name="local | ng">
 	    <logger name="com.fasterxml.jackson" level="error" additivity="false">
 	        	<appender-ref ref="Console" />

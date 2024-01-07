@@ -1,6 +1,5 @@
 package com.ijudy.races.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ijudy.races.dto.*;
 import com.ijudy.races.enums.MyRaceStatus;
 import com.ijudy.races.service.race.AddressService;
@@ -16,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,14 +27,12 @@ import java.util.*;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = {RacesController.class})
 @WebMvcTest
-@WithMockUser(username = "hugo@scavino.org", authorities={"ADMIN"})
 @ActiveProfiles("local")
 class RaceControllerTest  {
 
@@ -54,10 +50,6 @@ class RaceControllerTest  {
 
     @MockBean
     AddressService addressService;
-
-    private final ObjectMapper objectMapper = new ObjectMapper();
-    private RaceDTO raceDTO = null;
-    private UserDTO userDTO = null;
 
     private final Set<RaceTypeDTO> raceTypeDTOSet = new HashSet<>(3);
     private final List<RaceTypeDTO> raceTypeList = new ArrayList<>(3);
@@ -78,7 +70,7 @@ class RaceControllerTest  {
         RaceTypeDTO raceTypeDTO = RaceTypeDTO.builder().id(40L).desc("ironman").shortDesc("140.6").name("Ironman 140.6").build();
         raceTypeDTOSet.add(raceTypeDTO);
         raceTypeList.add(raceTypeDTO);
-        userDTO = UserDTO.builder()
+        UserDTO userDTO = UserDTO.builder()
                 .id(USER_ID)
                 .name(USER_NAME)
                 .firstName("Test")
@@ -90,13 +82,13 @@ class RaceControllerTest  {
         String url = "www.google.com";
         String desc = "This Race is Great";
         String raceName = "Marathon Race";
-        raceDTO = RaceDTO.builder()
-                    .id(RACE_ID)
-                    .name(raceName)
-                    .date(now)
-                    .description(desc)
-                    .isPublic(true)
-                    .url(url).build();
+        RaceDTO raceDTO = RaceDTO.builder()
+                .id(RACE_ID)
+                .name(raceName)
+                .date(now)
+                .description(desc)
+                .isPublic(true)
+                .url(url).build();
 
         AddressDTO addressDTO = AddressDTO.builder().id(ADDRESS_ID).location("Some Location").build();
         raceDTO.setAddress(addressDTO);
@@ -184,22 +176,6 @@ class RaceControllerTest  {
     }
 
     @Test
-    void updateRaceLocation() throws Exception {
-
-        mockMvc.perform(
-                put("/api/v2/race/{raceId}/{addressId}", RACE_ID, ADDRESS_ID)
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.address.id", CoreMatchers.is(ADDRESS_ID.intValue())))
-                .andExpect(jsonPath("$.id", CoreMatchers.is(RACE_ID.intValue())))
-                .andReturn();
-    }
-
-    @Test
     void getOneMyRace() throws Exception {
 
         ResultActions actions = mockMvc.perform(
@@ -216,100 +192,4 @@ class RaceControllerTest  {
 
     }
 
-    @Test
-    @WithMockUser(username = "hugo@scavino.org", authorities={"USER"})
-    void saveMyRace() throws Exception {
-        MyRaceDTO myRaceDTO = MyRaceDTO.builder()
-                .raceDTO(raceDTO)
-                .userDTO(userDTO)
-                .myRaceStatus(MyRaceStatus.INTERESTED)
-                .cost(300F)
-                .isPaid(true)
-                .notes("Saved Notes")
-                .registrationDate(LocalDateTime.now())
-                .hotelName("Saved Hotel")
-                .raceTypes(raceTypeDTOSet)
-                .build();
-
-        String json = objectMapper.writeValueAsString(myRaceDTO);
-
-        ResultActions actions = mockMvc.perform(
-                post("/api/v2/myrace")
-                        .content(json)
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-                        );
-
-        actions.andExpect(
-                status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.race.id", CoreMatchers.is(RACE_ID.intValue())))
-                .andExpect(jsonPath("$.race.address.id", CoreMatchers.is(ADDRESS_ID.intValue())))
-                .andExpect(jsonPath("$.user.id", CoreMatchers.is(USER_ID.intValue())))
-                .andExpect(jsonPath("$.user.name", CoreMatchers.is(USER_NAME)));
-    }
-
-    @Test
-    @WithMockUser(username = "hugo@scavino.org", authorities={"USER"})
-    void deleteMyRace() throws Exception {
-        MyRaceDTO myRaceDTO = MyRaceDTO.builder()
-                .raceDTO(raceDTO)
-                .userDTO(userDTO)
-                .myRaceStatus(MyRaceStatus.INTERESTED)
-                .cost(300F)
-                .isPaid(true)
-                .notes("Saved Notes")
-                .registrationDate(LocalDateTime.now())
-                .hotelName("Saved Hotel")
-                .raceTypes(raceTypeDTOSet)
-                .build();
-
-        // String json = objectMapper.writeValueAsString(myRaceDTO);
-
-        ResultActions actions = mockMvc.perform(
-                delete("/api/v2/myrace/" + myRaceDTO.getRaceDTO().getId())
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-        );
-
-        actions.andExpect(status().isOk());
-    }
-
-
-    @Test
-    @WithMockUser(username = "hugo@scavino.org", authorities={"USER"})
-    void saveRace() throws Exception {
-
-        final String RACE_NAME = "Some Race Name";
-        final String RACE_DESC = "Some Race Description";
-        RaceDTO raceDTO = RaceDTO.builder()
-                .id(RACE_ID)
-                .name(RACE_NAME)
-                .description(RACE_DESC)
-                .date(now)
-                .raceTypes(raceTypeDTOSet)
-                .build();
-
-        Mockito.when(raceService.save(any())).thenReturn(raceDTO);
-
-        String json = objectMapper.writeValueAsString(raceDTO);
-
-        ResultActions actions = mockMvc.perform(
-                post("/api/v2/race")
-                        .content(json)
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-        );
-
-        actions.andExpect(
-                status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.name", CoreMatchers.is(RACE_NAME)))
-                .andExpect(jsonPath("$.id", CoreMatchers.notNullValue()))
-                .andExpect(jsonPath("$.id", CoreMatchers.is(RACE_ID.intValue())));
-
-    }
 }

@@ -75,14 +75,6 @@ public class RaceServiceImpl implements RaceService {
         return optionalRaceEntity.map(RaceConverterUtil::toDTO);
     }
 
-    @Override
-    public RaceDTO save(RaceDTO raceDTO) {
-        RaceEntity raceEntity = RaceConverterUtil.toEntity(raceDTO);
-        RaceEntity saved  = raceRepository.save(raceEntity);
-        raceDTO.setId(saved.getId());
-        return raceDTO;
-    }
-
 
     @Override
     public List<RaceTypeDTO> getAllRaceTypes(){

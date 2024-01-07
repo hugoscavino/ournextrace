@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -16,12 +15,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(value = UsersController.class, useDefaultFilters = false)
-@WithMockUser(username = "hugo@scavino.org", authorities={"ADMIN"})
 public class UserControllerTest extends ControllerBaseTest {
 
     /**
@@ -32,7 +29,6 @@ public class UserControllerTest extends ControllerBaseTest {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .alwaysDo(MockMvcResultHandlers.print())
-                .apply(springSecurity())
                 .build();
 
         raceTypeDTO = RaceTypeDTO.builder().id(40L).build();

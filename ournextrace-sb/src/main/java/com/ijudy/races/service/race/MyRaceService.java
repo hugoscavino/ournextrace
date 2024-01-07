@@ -13,8 +13,6 @@ public interface MyRaceService {
      * Retrieve a list of all the users registered races. Will take the information from the
      * Principal's object.
      *
-     * @see java.security.Principal
-     *
      * @param userId Long the User's ID
      * @return List of MyRaces
      */

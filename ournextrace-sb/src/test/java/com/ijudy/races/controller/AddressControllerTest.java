@@ -10,23 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(value = AddressController.class, useDefaultFilters = false)
-@WithMockUser(username = "hugo@scavino.org", authorities={"ADMIN"})
 public class AddressControllerTest {
 
 
@@ -46,11 +43,10 @@ public class AddressControllerTest {
             mockMvc = MockMvcBuilders
                     .webAppContextSetup(context)
                     .alwaysDo(MockMvcResultHandlers.print())
-                    .apply(springSecurity())
                     .build();
 
        AddressDTO addressDTO = AddressDTO.builder().id(ADDRESS_ID).location(LOCATION).build();
-       List<AddressDTO> list = Arrays.asList(addressDTO);
+       List<AddressDTO> list = Collections.singletonList(addressDTO);
 
        // Address Service
        Mockito.when(addressService.getAllAddresses()).thenReturn(list);

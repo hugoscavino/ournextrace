@@ -6,11 +6,16 @@ logging:
             springframework:
                 boot:
                     autoconfigure: ERROR
-            hibernate: DEBUG
-            hibernate.SQL: DEBUG
-        root: DEBUG
-        sql: DEBUG
-        web: DEBUG
+                sql: DEBUG
+                web: DEBUG
+            hibernate:
+                stat: DEBUG
+                SQL: DEBUG
+                SQL_SLOW: INFO
+                cache: DEBUG
+                orm.jdbc.bind: trace
+                type.descriptor.sql.BasicBinder: TRACE
+
 server:
     address: localhost
     port: 8080
@@ -18,7 +23,7 @@ server:
         contextPath: /
 spring:
     datasource:
-        url: jdbc:sqlite:/Users/hugoscavino/Development/sqlite-tools-osx-x64-3440200/searchforarace.db
+        url: jdbc:sqlite:/Users/hugoscavino/Development/sqlite-tools-osx-x64-3440200/searchforarace.db?date_class=TEXT
         driver-class-name: org.sqlite.JDBC
     jpa:
         database-platform: org.hibernate.community.dialect.SQLiteDialect
@@ -26,7 +31,6 @@ spring:
         properties:
             hibernate:
                 format_sql: true
-                show_sql: true
-                temp:
-                    use_jdbc_metadata_defaults: false
+                connection:
+                    date_class: TEXT
         show-sql: true
