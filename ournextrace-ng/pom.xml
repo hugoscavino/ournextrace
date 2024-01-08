@@ -10,7 +10,7 @@
 	</parent>
 	<artifactId>ournextrace-ng</artifactId>
 	<packaging>jar</packaging>
-	<name>Our Next Race Angular</name>
+	<name>Search for a Race Angular</name>
 	<properties>
 		<frontend-maven-plugin.version>1.9.1</frontend-maven-plugin.version>
 		<node.version>v18.17.1</node.version>

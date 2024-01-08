@@ -8,7 +8,6 @@ import { User} from '../../domain/user';
 import { Header } from '../../domain/mode';
 import { IJudyConstants} from '../../util/constants';
 import { RaceStore, RaceAppState, moduleKeyName } from '../../ngrx/race.app.state';
-import { LogoutUser} from '../../ngrx/race.actions';
 import { AuthService } from 'src/app/service/auth';
 
 @Component({
@@ -32,7 +31,7 @@ export class ToolbarComponent implements OnInit  {
   public photo: string;
   public user: User;
 
-  public pageTitle = 'Our Next Race';
+  public pageTitle = 'Search for a Race';
   public raceStateObs$: Observable<RaceAppState>;
   public raceReducerSubscription: Subscription;
 
@@ -67,7 +66,7 @@ export class ToolbarComponent implements OnInit  {
       }),
       ).subscribe(
         data => {
-          //console.log('Loading header : ' + data.header);
+          // console.log('Loading header : ' + data.header);
           const header = data.header as string;
           switch (header) {
             case Header.WELCOME:
@@ -104,48 +103,7 @@ export class ToolbarComponent implements OnInit  {
           });
 
   }
-
-  private getMenuItem(array: any, label: string): any {
-    return array.find((item: { label: string; }) => item.label === label);
-  }
-
-  public closeItem(event: any, index: number) {
-    if (event) {
-      event.preventDefault();
-    }
-  }
-
-  public userLoaded(): boolean {
-    return (this.user !== null) && (this.user.user);
-  }
-
-  public adminLoaded(): boolean {
-    return this.userLoaded() && (this.user.admin);
-  }
-
-  public userNotLoaded(): boolean {
-    return this.userLoaded() === false;
-  }
-
-  public logon() {
-    this.showLoginValue = true;
-  }
-
-  public logoff() {
-        this.store.dispatch(LogoutUser());
-        this.router.navigate(['welcome']);
-        this.authService.logout().subscribe(
-          (result) => {
-            this.messageService.add({severity: 'success', summary: 'Logged off', detail: 'You Are Logged off'});
-          },
-          (error) => {
-            console.error(error);
-            this.messageService.add({severity: 'error', summary: 'Not Logged off', detail: 'You Are Not Logged off. Exit Browser'});
-          }
-        );
-  }
-
-  public routeToUpdateProfile() {
+    public routeToUpdateProfile() {
     this.router.navigate([IJudyConstants.UPDATE_PROFILE_URI]);
   }
   public routeToAddRace() {

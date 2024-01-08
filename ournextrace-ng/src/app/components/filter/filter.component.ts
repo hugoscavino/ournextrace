@@ -8,7 +8,7 @@ import { RaceAppState, RaceStore, moduleKeyName } from '../../ngrx/race.app.stat
 import { SetRaceFilter } from '../../ngrx/race.actions';
 
 import { ISearchFilters, initialFilter } from '../../domain/search-filters';
-import { RaceType } from '../..//domain/race';
+import { RaceType } from '../../domain/race';
 import { User } from '../../domain/user';
 import { IJudyConstants } from '../../util/constants';
 
@@ -20,7 +20,7 @@ import { IJudyConstants } from '../../util/constants';
 export class FilterComponent implements OnInit {
 
   private visibleVal = false;
-  @Output() visibleChange = new EventEmitter<boolean>();
+  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Input()
   public get visible() {
@@ -34,7 +34,6 @@ export class FilterComponent implements OnInit {
   public nativeMinDate: Date;
   public nativeMaxDate: Date;
   public searchFilters: ISearchFilters;
-  public allPastRaces: boolean;
   public selectedRaceTypes: RaceType[];
   public user: User;
 
@@ -58,7 +57,7 @@ export class FilterComponent implements OnInit {
     ).subscribe();
   }
 
-  public onApplyFilter(event: any) {
+  public onApplyFilter(event: any): void {
     const filters: ISearchFilters = {
       minDate: moment(this.nativeMinDate).format(IJudyConstants.ISO_DATE_FMT),
       maxDate: moment(this.nativeMaxDate).format(IJudyConstants.ISO_DATE_FMT),
@@ -69,19 +68,19 @@ export class FilterComponent implements OnInit {
     this.store.dispatch(SetRaceFilter({filters: filters}));
   }
 
-  public filtersChanged(event: any) {
+  public filtersChanged(event: any): void {
     this.onApplyFilter(event);
     this.visible = true;
   }
 
-  public onReset(event: any) {
+  public onReset(event: any): void {
     this.store.dispatch(SetRaceFilter({filters: initialFilter}));
     this.selectedRaceTypes = [];
     this.visible = false;
 
   }
 
-  public onHide(event: any) {
+  public onHide(event: any): void {
     this.onApplyFilter(event);
     this.visible = false;
   }
@@ -92,7 +91,7 @@ export class FilterComponent implements OnInit {
    * @param $event
    * @param minDate are we adjusting the Min Date otherwise the Max Date
    */
-  public yearMonthChanged($event: any, minDate: boolean) {
+  public yearMonthChanged($event: any, minDate: boolean): void {
     const newDate = moment($event.year + '-' + $event.month + '-' + 1, 'YYYY-MM-DD');
     if (minDate) {
       this.nativeMinDate = newDate.toDate();
@@ -103,5 +102,4 @@ export class FilterComponent implements OnInit {
     this.visible = true;
 
   }
-
 }

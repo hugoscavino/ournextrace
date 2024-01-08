@@ -13,7 +13,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import { EditorModule} from 'primeng/editor';
 import { FilterComponent } from './filter.component';
 import { ConfirmationService} from 'primeng/api';
-import {SelectRacesModule} from "../select-races/select-races-module";
+import {SelectRacesModule} from '../select-races/select-races-module';
 
 @NgModule({
     imports: [
