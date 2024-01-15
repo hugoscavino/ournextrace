@@ -28,7 +28,12 @@ public class AddressController extends BaseController {
     @PostMapping(value = "/address")
     @ResponseBody
     public AddressDTO save(@RequestBody AddressDTO dto) {
+        return this.addressService.save(dto);
+    }
 
+    @PutMapping(value = "/address")
+    @ResponseBody
+    public AddressDTO update(@RequestBody AddressDTO dto) {
         return this.addressService.save(dto);
     }
 

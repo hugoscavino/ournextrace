@@ -1,6 +1,3 @@
 logs
 *.iml
 /target
-/src/main/resources/captcha.properties
-/src/main/resources/db.properties
-/src/test/resources/db.properties

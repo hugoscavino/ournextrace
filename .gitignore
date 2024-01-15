@@ -24,3 +24,5 @@ ournextrace-db/.idea/
 /package-lock.json
 /ournextrace-db/package-lock.json
 /searchforarace.db
+/searchforarace-db/target/*
+/pojos/target/*
