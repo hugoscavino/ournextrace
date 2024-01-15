@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 
+    <property name="LOGS" value="./logs/admin" />
+     <appender name="Console"
+        class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+				%d{HH:mm:ss} %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+ 
+    <appender name="RollingFile"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/admin.log</file>
+        <encoder
+            class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+ 
+        <rollingPolicy
+            class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/apps/events/events-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+     
+    <root level="info">
+    	<springProfile name="prod">
+        	<appender-ref ref="RollingFile" />
+        </springProfile>
+    </root>
+    
+	<logger name="com.ijudy" level="info" additivity="false">
+		<appender-ref ref="RollingFile" />
+	</logger>
+
+	<logger name="org.springframework" level="error" additivity="false">
+		<appender-ref ref="RollingFile" />
+    </logger>
+
+	<logger name="com.ijudy" level="debug" additivity="false">
+		<appender-ref ref="Console" />
+	</logger>
+
+	<logger name="org.springframework.dao" level="debug" additivity="false">
+		<appender-ref ref="Console" />
+	</logger>
+
+	<logger name="org.springframework.jdbc" level="warn" additivity="false">
+		<appender-ref ref="Console" />
+	</logger>
+
+	<logger name="org.hibernate" level="warn" additivity="false">
+		<appender-ref ref="Console" />
+	</logger>
+
+	<logger name="org.springframework" level="error" additivity="false">
+		<appender-ref ref="Console" />
+	</logger>
+
+	<logger name="com.fasterxml.jackson" level="error" additivity="false">
+			<appender-ref ref="Console" />
+	</logger>
+
+</configuration>

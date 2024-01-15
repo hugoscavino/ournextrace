@@ -3,7 +3,7 @@ package com.ijudy.races.util;
 import com.ijudy.races.dto.UserDTO;
 import com.ijudy.races.entity.RoleEntity;
 import com.ijudy.races.entity.UserEntity;
-import com.ijudy.races.enums.RoleNames;
+import com.ijudy.races.RoleNames;
 import lombok.experimental.UtilityClass;
 
 import java.util.HashSet;

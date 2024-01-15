@@ -17,7 +17,7 @@ public enum RoleNames {
      */
     ADMIN(3);
 
-    private int roleId;
+    private final int roleId;
 
     /**
      * Int value of the Role

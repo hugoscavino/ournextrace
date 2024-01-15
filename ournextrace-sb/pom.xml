@@ -4,13 +4,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.ournextrace</groupId>
+		<groupId>com.ijudy</groupId>
 		<artifactId>parent</artifactId>
 		<version>1.4.1</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>ournextrace-sb</artifactId>
-	<name>Our Next Race SpringBoot</name>
+	<name>Our Next Race SB</name>
 
 	<properties>
 		<skipTests>true</skipTests>
@@ -165,8 +165,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.ournextrace</groupId>
-			<artifactId>ournextrace-ng</artifactId>
+			<groupId>com.ijudy</groupId>
+			<artifactId>ng</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

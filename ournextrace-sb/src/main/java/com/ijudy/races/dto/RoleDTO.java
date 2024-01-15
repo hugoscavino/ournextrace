@@ -1,6 +1,6 @@
 package com.ijudy.races.dto;
 
-import com.ijudy.races.enums.RoleNames;
+import com.ijudy.races.RoleNames;
 import lombok.*;
 
 @Data

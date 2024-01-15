@@ -1,7 +1,7 @@
 package com.ijudy.races.respository;
 
 import com.ijudy.races.entity.*;
-import com.ijudy.races.enums.MyRaceStatus;
+import com.ijudy.races.MyRaceStatus;
 import com.ijudy.races.repository.MyRaceRepository;
 import com.ijudy.races.repository.RaceRepository;
 import org.junit.jupiter.api.DisplayName;

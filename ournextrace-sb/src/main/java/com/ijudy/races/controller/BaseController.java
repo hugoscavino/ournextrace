@@ -27,7 +27,7 @@ public abstract class BaseController {
 	    mapper.setDefaultPropertyInclusion(JsonInclude.Value.construct(Include.ALWAYS, Include.NON_NULL));
 	    mapper.setSerializationInclusion(Include.NON_NULL);
 	    
-	    // Write times as a String instead of a Long so its human readable.
+	    // Write times as a String instead of a Long so its human-readable.
 	    mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 	    mapper.registerModule(new JavaTimeModule());
 	    

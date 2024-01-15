@@ -1,0 +1,11 @@
+logging:
+    level:
+        org:
+            springframework:
+                boot:
+                    autoconfigure: DEBUG
+spring:
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+    profiles:
+        active: local

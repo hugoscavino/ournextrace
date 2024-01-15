@@ -45,7 +45,7 @@ public class RacesController extends BaseController{
 
 
     /**
-     * Today's Local date : 2014-01-14
+     * Today's Local date: 2014-01-14
      *<br>
      * beginDate in ISO format
      * endDate in ISO format

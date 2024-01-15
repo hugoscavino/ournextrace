@@ -5,7 +5,7 @@ import com.ijudy.races.dto.RaceDTO;
 import com.ijudy.races.dto.RaceTypeDTO;
 import com.ijudy.races.dto.UserDTO;
 import com.ijudy.races.entity.RaceEntity;
-import com.ijudy.races.enums.MyRaceStatus;
+import com.ijudy.races.MyRaceStatus;
 import com.ijudy.races.repository.RaceRepository;
 import com.ijudy.races.repository.RaceTypeRepository;
 import com.ijudy.races.service.race.RaceService;

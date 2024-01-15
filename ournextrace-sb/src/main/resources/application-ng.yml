@@ -18,7 +18,7 @@ server:
         contextPath: /
 spring:
     datasource:
-        url: jdbc:sqlite:/Users/hugoscavino/Development/sqlite-tools-osx-x64-3440200/searchforarace.db
+        url: jdbc:sqlite:/Users/hugoscavino/Development/sqlite-tools-osx-x64-3440200/searchforarace.db?date_class=TEXT
         driver-class-name: org.sqlite.JDBC
     jpa:
         database-platform: org.hibernate.community.dialect.SQLiteDialect

@@ -4,13 +4,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.ournextrace</groupId>
+		<groupId>com.ijudy</groupId>
 		<artifactId>parent</artifactId>
 		<version>1.4.1</version>
 	</parent>
-	<artifactId>ournextrace-ng</artifactId>
+	<artifactId>ng</artifactId>
 	<packaging>jar</packaging>
-	<name>Search for a Race Angular</name>
+	<name>Angular</name>
 	<properties>
 		<frontend-maven-plugin.version>1.9.1</frontend-maven-plugin.version>
 		<node.version>v18.17.1</node.version>

@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.ournextrace</groupId>
+	<groupId>com.ijudy</groupId>
 	<artifactId>parent</artifactId>
 	<version>1.4.1</version>
 	<packaging>pom</packaging>
@@ -27,15 +27,17 @@
 		<maven-jar-plugin>3.1.0</maven-jar-plugin>
 	</properties>
 	<modules>
-		<module>ournextrace-ng</module>
+		<module>pojos</module>
+		<module>admin</module>
 		<module>ournextrace-sb</module>
+		<module>ournextrace-ng</module>
 	</modules>
 	<organization>
 		<name>ijudy.com</name>
 		<url>www.ijudy.com</url>
 	</organization>
 	<name>Search For a Race</name>
-	<url>ournextrace.com</url>
+	<url>www.searchforarace.com</url>
 	<build>
 		<plugins>
 			<plugin>

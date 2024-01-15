@@ -1,7 +1,7 @@
 package com.ijudy.races.controller;
 
 import com.ijudy.races.dto.*;
-import com.ijudy.races.enums.MyRaceStatus;
+import com.ijudy.races.MyRaceStatus;
 import com.ijudy.races.service.race.AddressService;
 import com.ijudy.races.service.race.MyRaceService;
 import com.ijudy.races.service.race.RaceService;

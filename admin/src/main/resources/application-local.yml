@@ -1,0 +1,38 @@
+cors:
+    url: '*'
+logging:
+    level:
+        org:
+            springframework:
+                boot:
+                    autoconfigure: ERROR
+                sql: DEBUG
+                web: DEBUG
+            hibernate:
+                stat: DEBUG
+                SQL: DEBUG
+                SQL_SLOW: INFO
+                cache: DEBUG
+                orm.jdbc.bind: trace
+                type.descriptor.sql.BasicBinder: TRACE
+
+server:
+    address: localhost
+    port: 8090
+    servlet:
+        contextPath: /
+spring:
+    datasource:
+        url: jdbc:sqlite:/Users/hugoscavino/Development/sqlite-tools-osx-x64-3440200/searchforarace.db?date_class=TEXT
+        driver-class-name: org.sqlite.JDBC
+    jpa:
+        database-platform: org.hibernate.community.dialect.SQLiteDialect
+        open-in-view: true
+        properties:
+            hibernate:
+                format_sql: true
+                connection:
+                    date_class: TEXT
+                jdbc:
+                    use_get_generated_keys: false
+        show-sql: true

@@ -1,6 +1,6 @@
 package com.ijudy.races.entity;
 
-import com.ijudy.races.enums.MyRaceStatus;
+import com.ijudy.races.MyRaceStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

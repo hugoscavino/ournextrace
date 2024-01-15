@@ -2,8 +2,8 @@ package com.ijudy.races.respository;
 
 import com.ijudy.races.entity.RoleEntity;
 import com.ijudy.races.entity.UserEntity;
-import com.ijudy.races.enums.RoleNames;
-import com.ijudy.races.enums.SocialProvider;
+import com.ijudy.races.RoleNames;
+import com.ijudy.races.SocialProvider;
 import com.ijudy.races.repository.RoleRepository;
 import com.ijudy.races.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
